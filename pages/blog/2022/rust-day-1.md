@@ -8,11 +8,7 @@ author: Aelpxy
 
 Everything was fine, until I realised I want to build something in Rust.
 
-Have I learn't something today?
+What have you learned today?
+I've about variables and some more stuff today.
 
-Yes, Today I've learned variables and some more stuff in rust.
-
-I will look further into the borrow checker and try to understand how it works
-.
-
-That's all for Rust day 1.
+Looking towards the rust borrow checker.
