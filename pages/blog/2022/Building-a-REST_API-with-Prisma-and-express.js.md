@@ -7,6 +7,4 @@ author: Aelpxy
 ---
 
 
-### Building a REST API with Prisma and express.js.
-
-work in progress come back next week
+work in progress come back next week. 
