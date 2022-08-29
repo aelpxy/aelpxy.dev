@@ -1,0 +1,26 @@
+{
+  "name": "@aelpxy/site",
+  "private": true,
+  "scripts": {
+    "dev": "next",
+    "build": "node ./scripts/gen-rss.js && next build",
+    "start": "next start",
+    "format": "prettier --write ./"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "next": "latest",
+    "nextra": "^2.0.0-beta.5",
+    "nextra-theme-blog": "^2.0.0-beta.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rss": "^1.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.13",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "typescript": "^4.8.2",
+    "prettier": "^2.7.1"
+  }
+}
