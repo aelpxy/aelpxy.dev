@@ -1,7 +1,5 @@
 ---
 type: posts
-title: blog
+title: Blog
 date: 2022-01-01
 ---
-
-# blog
