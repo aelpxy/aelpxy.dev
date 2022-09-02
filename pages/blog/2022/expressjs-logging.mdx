@@ -1,0 +1,52 @@
+---
+title: Production ready logging
+date: 2022/09/02
+description: Production ready logging in Node.js applications
+tag: javascript, node.js
+author: Aelpxy
+---
+
+I've seen a lot of projects using `console.log` in production node.js applications.
+
+This might seem simple to use, and we're already familiar with it. But, this isn't best for production.
+
+Here's why,
+
+> In general, there are two reasons for logging from your app: For debugging and for logging app activity (essentially, everything else). Using console.log() or console.error() to print log messages to the terminal is common practice in development. But these functions are synchronous when the destination is a terminal or a file, so they are not suitable for production, unless you pipe the output to another program.
+
+[http://expressjs.com/en/advanced/best-practice-performance.html#do-logging-correctly](http://expressjs.com/en/advanced/best-practice-performance.html#do-logging-correctly)
+
+So, what to do now?
+
+Instead of logging with `console.log` use a logging library like `winston` or `pino`.
+
+Simple solution:
+
+```
+npm i pino dayjs
+```
+
+and create a file called `logger.ts`.
+
+```ts
+import logger from "pino";
+import dayjs from "dayjs";
+
+const log = logger({
+  base: {
+    pid: false,
+  },
+  timestamp: () => `,"time":"${dayjs().format()}"`,
+});
+
+export default log;
+```
+
+Now, you can use it.
+
+```ts
+import log from "./util/logger.ts";
+
+log.error("Error");
+log.info("Some information";
+```
