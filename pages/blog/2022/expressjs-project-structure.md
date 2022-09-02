@@ -10,13 +10,29 @@ Express is a Node.js web framework that provides a set of robust features for ba
 
 This is the structure I tend follow for any express application.
 
-```sh
-src/
-   ├── controllers
-   ├── index.ts
-   ├── middlewares
-   ├── routes
-   ├── schema
-   ├── __tests__
-   └── utils
+```
+./src
+├── configs
+│   └── config.ts
+├── controllers
+│   ├── account.controller.ts
+│   └── auth.controller.ts
+├── index.ts
+├── middlewares
+│   ├── auth.middleware.ts
+│   └── validate.middleware.ts
+├── models
+│   └── account.model.ts
+├── routes
+│   └── router.ts
+├── services
+│   └── account.service.ts
+└── utils
+    ├── db.util.ts
+    ├── hash.util.ts
+    ├── jwt.util.ts
+    ├── logger.util.ts
+    └── server.util.ts
+
+7 directories, 14 files
 ```
