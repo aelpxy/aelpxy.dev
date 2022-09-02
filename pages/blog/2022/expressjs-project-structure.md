@@ -10,7 +10,7 @@ Express is a Node.js web framework that provides a set of robust features for ba
 
 This is the structure I tend follow for any express application.
 
-```
+```sh
 ./src
 ├── configs
 │   └── config.ts
