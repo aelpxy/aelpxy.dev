@@ -26,7 +26,7 @@ export default {
           content={meta.image || "https://aelpxy.space/logo.png"}
         /> */}
       </>
-    )
+    );
   },
   footer: (
     <div>
@@ -34,13 +34,13 @@ export default {
       <a href="https://twitter.com/aelpxy" target="_blank">
         Twitter
       </a>
-      · {" "}
+      ·{" "}
       <a href="https://github.com/aelpxy" target="_blank">
         GitHub
       </a>
-      · {" "}
+      ·{" "}
       <a href="mailto:hello@aelpxy.space" target="_blank">
-      hello@aelpxy.space
+        hello@aelpxy.space
       </a>
       <small style={{ display: "block", marginTop: "8rem" }}>
         <time>{YEAR}</time> © Aelpxy.
