@@ -1,12 +1,27 @@
 ---
 title: Image blur with Next.js image component
 date: 2022/09/12
-description: Let's make images blurry on load with Next.js image component.
+description: Blurry images on load with Next.js
 tag: javascript, typescript, next.js
 author: Aelpxy
 ---
 
+```tsx
+import Image from "next/image";
 
-> TIP: Next.js starter template: https://next-starter-ts.vercel.app/
-
-Writings coming soon.
+export default function Page() {
+  return (
+    <>
+      <Image
+        placeholder="blur"
+        src=""
+        blurDataURL=""
+        loading="lazy"
+        alt="Picture"
+        width={900}
+        height={1000}
+      />
+    </>
+  )
+}
+```
