@@ -5,7 +5,7 @@ const withNextra = require("nextra")({
   unstable_staticImage: true,
 });
 
-// Next.js configurations 
+// Next.js configurations
 const nextConfig = {};
 
 module.exports = withNextra(nextConfig);
