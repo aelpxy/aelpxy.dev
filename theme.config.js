@@ -38,6 +38,7 @@ export default {
       <a href="https://github.com/aelpxy" rel="noreferrer noopener" target="_blank">
         GitHub
       </a>
+      ·{" "}
       <a href="https://www.patreon.com/aelpxy" rel="noreferrer noopener" target="_blank">
         Patreon
       </a>
