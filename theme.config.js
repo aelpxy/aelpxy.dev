@@ -31,15 +31,18 @@ export default {
   footer: (
     <div>
       <hr />
-      <a href="https://twitter.com/aelpxy" target="_blank">
+      <a href="https://twitter.com/aelpxy" rel="noreferrer noopener" target="_blank">
         Twitter
       </a>
       ·{" "}
-      <a href="https://github.com/aelpxy" target="_blank">
+      <a href="https://github.com/aelpxy" rel="noreferrer noopener" target="_blank">
         GitHub
       </a>
+      <a href="https://www.patreon.com/aelpxy" rel="noreferrer noopener" target="_blank">
+        Patreon
+      </a>
       ·{" "}
-      <a href="mailto:hello@aelpxy.space" target="_blank">
+      <a href="mailto:hello@aelpxy.space" rel="noreferrer noopener" target="_blank">
         hello@aelpxy.space
       </a>
       <small style={{ display: "block", marginTop: "8rem" }}>
