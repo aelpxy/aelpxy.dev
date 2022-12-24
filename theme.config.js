@@ -46,6 +46,7 @@ export default {
       <a href="https://reddit.com/u/aelpxy" rel="noreferrer noopener" target="_blank">
         Reddit
       </a>
+      ·{" "}
       <a href="mailto:hello@aelpxy.space" rel="noreferrer noopener" target="_blank">
         hello@aelpxy.space
       </a>
