@@ -42,6 +42,10 @@ export default {
       <a href="https://www.patreon.com/aelpxy" rel="noreferrer noopener" target="_blank">
         Patreon
       </a>
+      ·{" "}
+      <a href="https://reddit.com/u/aelpxy" rel="noreferrer noopener" target="_blank">
+        Reddit
+      </a>
       <a href="mailto:hello@aelpxy.space" rel="noreferrer noopener" target="_blank">
         hello@aelpxy.space
       </a>
