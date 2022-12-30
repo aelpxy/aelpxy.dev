@@ -1,0 +1,124 @@
+---
+title: NGINX Deployment with SSL cert as reverse proxy
+date: 2022/12/30
+description: Deploying NGINX as a reverse proxy with Let's Encrypt SSL cert and a custom domain.
+tag: nginx, go
+author: Aelpxy
+---
+
+## Introduction
+
+Nginx is a free and open-source web server used to host websites and applications. It also works as a load balancer, HTTP cache, reverse proxy.
+
+### Step 1 - Installing NGINX
+
+I'm using Debian 11 today.
+
+First upgrade the packages
+
+```sh
+sudo apt update && sudo apt upgrade
+```
+
+Once it's finished, install NGINX
+
+```sh
+sudo apt install nginx
+```
+
+### Step 2 - Firewall Setup
+
+```sh
+sudo apt install ufw # If UFW isn't installed.
+
+# Allow OpenSSH & NGINX Full
+sudo ufw allow "OpenSSH"
+sudo ufw allow "Nginx Full"
+```
+
+#### Note
+
+- `NGINX Full` (Port 80 & 443)
+- `NGINX HTTPS` (Port 443)
+- `NGINX HTTP` (Port 80)
+
+Run `sudo ufw app list` to list all the profiles.
+
+Now, let's enable ufw
+
+```sh
+sudo ufw enable
+```
+
+Check the status as well
+
+```sh
+sudo ufw status
+```
+
+### Step 3 - Make sure it's running
+
+Run 
+```sh
+ip addr show eth0 | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
+```
+to get your public IP address then visit to see if it's running if it is running everything is good.
+
+Then copy it, and create an `A` record in your DNS provider's dashboard pointing to your server's IP address. (Very Important)
+
+If you're using Cloudflare then turn off the orange cloud to avoid proxying the IP or you won't be able to issue a Let's Encrypt cert.
+
+### Step 4 - Create Server Configuration File
+
+```sh
+sudo nano /etc/nginx/sites-available/api.aelpxy.space.conf
+```
+
+Replace the file name with yours. You can name it anything you want, but I recommend naming it as the domain to avoid confusion.
+
+Then, paste this and change to your values
+
+```conf
+server {
+    server_name api.aelpxy.space;
+
+    location / {
+        proxy_pass http://0.0.0.0:3000; # The address it should proxy
+        proxy_http_version 1.1;
+        proxy_buffering off;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header X-Forwarded-For $remote_addr;
+
+        client_max_body_size 1M; # Client body size
+    }
+}
+```
+
+Now, enable the config.
+
+```sh
+sudo ln -s /etc/nginx/sites-available/api.aelpxy.space.conf /etc/nginx/sites-enabled/
+```
+
+Then, save it and make sure it's valid.
+
+```
+sudo nginx -t
+```
+
+### Step 5 - Generating Let's Encrypt Certificate
+
+Installing Certbot
+
+```sh
+sudo apt install certbot python3-certbot-nginx
+```
+
+Now, to obtain a SSL certificate
+
+```sh
+sudo certbot --nginx -d api.aelpxy.space
+```
+
+It's finished now enjoy.
