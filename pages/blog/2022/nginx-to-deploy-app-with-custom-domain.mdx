@@ -38,9 +38,10 @@ sudo ufw allow "Nginx Full"
 
 #### Note
 
-- `NGINX Full` (Port 80 & 443)
-- `NGINX HTTPS` (Port 443)
-- `NGINX HTTP` (Port 80)
+- `NGINX Full` (Opens port 80 & 443)
+- `NGINX HTTPS` (Opens port 443)
+- `NGINX HTTP` (Opens port 80)
+- Change `api.aelpxy.dev` to your desired domain.
 
 Run `sudo ufw app list` to list all the profiles.
 
@@ -66,7 +67,7 @@ to get your public IP address then visit to see if it's running if it is running
 
 Then copy it, and create an `A` record in your DNS provider's dashboard pointing to your server's IP address. (Very Important)
 
-If you're using Cloudflare then turn off the orange cloud to avoid proxying the IP or you won't be able to issue a Let's Encrypt cert.
+> If you're using Cloudflare then turn off the orange cloud to avoid proxying the IP or you won't be able to issue a Let's Encrypt cert.
 
 ### Step 4 - Create Server Configuration File
 
@@ -119,6 +120,12 @@ Now, to obtain a SSL certificate
 
 ```sh
 sudo certbot --nginx -d api.aelpxy.space
+```
+
+Then,
+
+```sh
+sudo nginx -t && sudo systemctl restart nginx
 ```
 
 It's finished now enjoy.
