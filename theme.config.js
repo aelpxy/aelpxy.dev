@@ -39,8 +39,8 @@ export default {
         GitHub
       </a>
       {" "}
-      <a href="https://www.patreon.com/aelpxy" rel="noreferrer noopener" target="_blank">
-        Patreon
+      <a href="https://buymeacoffee.com/aelpxy" rel="noreferrer noopener" target="_blank">
+        Donate
       </a>
       {" "}
       <a href="https://reddit.com/u/aelpxy" rel="noreferrer noopener" target="_blank">
