@@ -31,24 +31,16 @@ export default {
   footer: (
     <div>
       <hr />
-      <a href="https://twitter.com/aelpxy" rel="noreferrer noopener" target="_blank">
-        Twitter
-      </a>
-      {" "}
       <a href="https://github.com/aelpxy" rel="noreferrer noopener" target="_blank">
         GitHub
       </a>
       {" "}
+      <a href="mailto:hello@aelpxy.space" rel="noreferrer noopener" target="_blank">
+        Email
+      </a>
+      {" "}
       <a href="https://buymeacoffee.com/aelpxy" rel="noreferrer noopener" target="_blank">
         Donate
-      </a>
-      {" "}
-      <a href="https://reddit.com/u/aelpxy" rel="noreferrer noopener" target="_blank">
-        Reddit
-      </a>
-      {" "}
-      <a href="mailto:hello@aelpxy.space" rel="noreferrer noopener" target="_blank">
-        hello@aelpxy.space
       </a>
       <small style={{ display: "block", marginTop: "8rem" }}>
         <time>{YEAR}</time> © Aelpxy.
