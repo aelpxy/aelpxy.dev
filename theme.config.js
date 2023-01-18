@@ -39,7 +39,7 @@ export default {
         Email
       </a>
       {" "}
-      <a href="https://buymeacoffee.com/aelpxy" rel="noreferrer noopener" target="_blank">
+      <a href="https://patreon.com/aelpxy" rel="noreferrer noopener" target="_blank">
         Donate
       </a>
       <small style={{ display: "block", marginTop: "8rem" }}>
