@@ -8,12 +8,12 @@ author: Aelpxy
 
 Merge sort is a popular and efficient sorting algorithm that is widely used in computer science. It works by dividing the unsorted list into smaller sub-lists, sorting those sub-lists, and then merging them back together into a sorted list. In this blog post, we will explore how to implement Merge sort in Rust, a modern programming language that is known for its performance and memory safety.
 
-# Step 1: Understanding Merge sort
+### Step 1: Understanding Merge sort
 Before we dive into the implementation, let's first understand how Merge sort works. Merge sort is a recursive algorithm that follows the Divide and Conquer paradigm. It works by repeatedly dividing the unsorted list into two halves until each sub-list contains only one element. Then, it merges those sub-lists back together in a sorted order.
 
 The merge operation is the key to Merge sort's efficiency. It involves comparing the first elements of each sub-list and placing the smaller one into the sorted list. Then, the next smallest element is compared, and the process continues until all the elements are merged.
 
-# Step 2: Defining the Merge function
+### Step 2: Defining the Merge function
 
 Now that we understand how Merge sort works let's define the merge function. The merge function takes two sorted sub-lists as input and merges them into a single sorted list.
 
@@ -48,7 +48,7 @@ fn merge(left: &[i32], right: &[i32]) -> Vec<i32> {
 
 The merge function takes two slices of integers `left` and `right` as input and returns a new vector `merged` containing the sorted elements.
 
-# Step 3: Defining the Merge Sort function
+### Step 3: Defining the Merge Sort function
 
 Now that we have defined the merge function let's move onto the main Merge sort function. The Merge sort function is a recursive function that repeatedly divides the unsorted list into two halves until each sub-list contains only one element. Then, it merges those sub-lists back together in a sorted order using the merge function we defined earlier.
 
@@ -70,7 +70,7 @@ The `merge_sort` function takes a slice of integers `arr` as input and returns a
 
 Otherwise, it calculates the mid-point of the slice and divides the slice into two halves, left and right. It then recursively calls merge_sort on each half, which will continue until each sub-list contains only one element. Finally, it merges the two sorted sub-lists using the merge function we defined earlier and returns the sorted vector.
 
-# Step 4: Testing the Merge Sort function
+### Step 4: Testing the Merge Sort function
 
 Now that we have defined both the merge and Merge sort functions, let's test them using some sample inputs.
 Let's try a sample input of `[4, 3, 2, 1]` and see if our Merge sort implementation sorts it correctly.
@@ -85,6 +85,6 @@ fn main() {
 
 As expected, the sorted vector contains `[1, 2, 3, 4]`.
 
-# Step 5: Conclusion
+### Step 5: Conclusion
 
 Rust's strong focus on memory safety and performance makes it an excellent choice for implementing algorithms like Merge sort, which require efficient memory management and high performance. By understanding and implementing Merge sort in Rust, we have demonstrated Rust's capabilities and shown how it can be used to write fast and efficient code.
