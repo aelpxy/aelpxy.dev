@@ -35,7 +35,7 @@ export default {
         GitHub
       </a>
       {" "}
-      <a href="mailto:hello@aelpxy.space" rel="noreferrer noopener" target="_blank">
+      <a href="mailto:aelpxy@velta.dev" rel="noreferrer noopener" target="_blank">
         Email
       </a>
       {" "}
