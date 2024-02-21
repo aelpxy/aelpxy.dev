@@ -9,18 +9,18 @@
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
-    "next": "latest",
-    "nextra": "^2.2.15",
-    "nextra-theme-blog": "^2.2.15",
+    "next": "^14.1.0",
+    "nextra": "^2.13.3",
+    "nextra-theme-blog": "^2.13.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rss": "^1.2.2"
   },
   "devDependencies": {
-    "@types/node": "^18.14.0",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
-    "typescript": "^4.9.5",
-    "prettier": "^2.8.4"
+    "@types/node": "^20.11.19",
+    "@types/react": "^18.2.57",
+    "@types/react-dom": "^18.2.19",
+    "prettier": "^3.2.5",
+    "typescript": "^5.3.3"
   }
 }
