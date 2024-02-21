@@ -4,52 +4,65 @@ export default {
   head: ({ meta }) => {
     return (
       <>
+        <title>Aelpxy - {meta.title}</title>
+        <meta name="robots" content="index, follow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="canonical" href="https://aelpxy.dev" />
         <meta name="author" content="Aelpxy" />
-        <link rel="canonical" href="https://aelpxy.space" />
         <meta name="title" content={meta.title} />
         <meta property="description" content={meta.description} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={meta.title} />
         <meta property="og:description" content={meta.description} />
-        <meta property="og:url" content="https://aelpxy.space" />
-        {/* <meta
+        <meta
           property="og:image"
-          content={meta.image || "https://aelpxy.space/logo.png"}
-        /> */}
+          name="og:image"
+          content="https://avatars.githubusercontent.com/u/84912564"
+        />
+        <meta property="og:url" content="https://aelpxy.dev" />
         <meta property="twitter:card" content="summary" />
         <meta property="twitter:site" content="@aelpxy" />
         <meta property="twitter:title" content={meta.title} />
         <meta property="twitter:description" content={meta.description} />
-        <meta property="twitter:url" content="https://aelpxy.space" />
-        {/* <meta
-          property="twitter:image"
-          content={meta.image || "https://aelpxy.space/logo.png"}
-        /> */}
+        <meta property="twitter:url" content="https://aelpxy.dev" />
       </>
     );
   },
   footer: (
-    <div>
-      <hr />
-      <a href="https://github.com/aelpxy" rel="noreferrer noopener" target="_blank">
-        GitHub
-      </a>
-      {" "}
-      <a href="mailto:aelpxy@velta.dev" rel="noreferrer noopener" target="_blank">
-        Email
-      </a>
-      {" "}
-      <a href="https://patreon.com/aelpxy" rel="noreferrer noopener" target="_blank">
-        Donate
-      </a>
-      <small style={{ display: "block", marginTop: "8rem" }}>
-        <time>{YEAR}</time> © Aelpxy.
+    <div style={{ display: "flex", alignItems: "center", paddingTop: "50px" }}>
+      <small style={{ marginRight: "0" }}>
+        © <time>{YEAR}</time> Aelpxy
         <style jsx>{`
           a {
-            float: right;
+            margin-left: 1rem;
           }
         `}</style>
       </small>
+      <a
+        href="https://github.com/aelpxy"
+        rel="noreferrer noopener"
+        target="_blank"
+        style={{ marginLeft: "auto" }}
+      >
+        github
+      </a>
+      <a
+        href="https://x.com/aelpxy"
+        rel="noreferrer noopener"
+        target="_blank"
+        style={{ marginLeft: "5px" }}
+      >
+        twitter
+      </a>
+      <a
+        href="mailto:aelpxy@velta.dev"
+        rel="noreferrer noopener"
+        target="_blank"
+        style={{ marginLeft: "5px" }}
+      >
+        email
+      </a>
     </div>
   ),
   readMore: "Read More →",

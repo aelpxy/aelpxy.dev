@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
 @font-face {
-  font-family: "Inter var";
+  font-family: "Inter var" !important;
   font-style: normal;
   font-weight: 100 900;
   font-display: block;
@@ -12,13 +13,63 @@ html.dark body {
   background-color: #18181a;
 }
 
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.light-theme ::-webkit-scrollbar {
+  width: 12px;
+}
+
+.light-theme ::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 6px;
+}
+
+.light-theme ::-webkit-scrollbar-thumb:hover {
+  background-color: #bbb;
+}
+
+.dark-theme {
+  background-color: #0e0e0e;
+  color: #a5a1a1;
+}
+
+.light-theme {
+  background-color: #fff;
+  color: #191919;
+}
+
+.content {
+  height: 200px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
 body {
-  font-family: "Inter var", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Inter", sans-serif !important;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
   -webkit-font-smoothing: subpixel-antialiased;
-  font-feature-settings: "case" 1, "cpsp" 1, "dlig" 1, "cv01" 1, "cv02",
-    "cv03" 1, "cv04" 1;
+  font-feature-settings:
+    "case" 1,
+    "cpsp" 1,
+    "dlig" 1,
+    "cv01" 1,
+    "cv02",
+    "cv03" 1,
+    "cv04" 1;
   font-variation-settings: "wght" 450;
   font-variant: common-ligatures contextual;
   /* letter-spacing: 0.015em; */
@@ -26,7 +77,7 @@ body {
 }
 
 code {
-  font-family: 'Fira Code', monospace !important;
+  font-family: "Fira Code", monospace !important;
 }
 
 *::selection {
@@ -37,14 +88,14 @@ a,
 .prose a {
   text-underline-position: from-font;
   text-decoration-skip-ink: all;
-  text-decoration-color: #a5adb1;
+  text-decoration-color: #c1c5c7;
   text-decoration-line: underline;
   text-decoration-thickness: from-font;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.3s ease;
 }
 
 a:hover {
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 b,
@@ -69,8 +120,16 @@ strong {
   font-variation-settings: "wght" 500;
 }
 .date {
-  font-feature-settings: "case" 1, "cpsp" 1, "dlig" 1, "cv01" 1, "cv02",
-    "cv03" 1, "cv04" 1, "tnum" 1, "calt" 1;
+  font-feature-settings:
+    "case" 1,
+    "cpsp" 1,
+    "dlig" 1,
+    "cv01" 1,
+    "cv02",
+    "cv03" 1,
+    "cv04" 1,
+    "tnum" 1,
+    "calt" 1;
   color: rgb(156, 163, 175);
 }
 
