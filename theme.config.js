@@ -4,16 +4,21 @@ export default {
   head: ({ meta }) => {
     return (
       <>
-        <title>Aelpxy - {meta.title}</title>
+        <title>Aelpxy</title>
         <meta name="robots" content="index, follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link rel="canonical" href="https://aelpxy.dev" />
+
         <meta name="author" content="Aelpxy" />
         <meta name="title" content={meta.title} />
         <meta property="description" content={meta.description} />
-        <meta property="og:type" content="website" />
+
         <meta property="og:title" content={meta.title} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`https://aelpxy.dev`} />
+
+        <meta property="og:site_name" content={`Aelpxy`} />
         <meta property="og:description" content={meta.description} />
         <meta
           property="og:image"
@@ -21,6 +26,7 @@ export default {
           content="https://avatars.githubusercontent.com/u/84912564"
         />
         <meta property="og:url" content="https://aelpxy.dev" />
+
         <meta property="twitter:card" content="summary" />
         <meta property="twitter:site" content="@aelpxy" />
         <meta property="twitter:title" content={meta.title} />

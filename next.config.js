@@ -1,11 +1,16 @@
 /** @type {import('next').NextConfig} */
+
 const withNextra = require("nextra")({
   theme: "nextra-theme-blog",
   themeConfig: "./theme.config.js",
-  unstable_staticImage: true,
 });
 
 // Next.js configurations
-const nextConfig = {};
+const nextConfig = {
+  output: "export",
+  images: {
+    unoptimized: true,
+  },
+};
 
 module.exports = withNextra(nextConfig);
