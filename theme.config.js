@@ -1,3 +1,7 @@
+import { FaGithub, FaInstagram } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { MdAlternateEmail } from "react-icons/md";
+
 const YEAR = new Date().getFullYear();
 
 export default {
@@ -38,36 +42,48 @@ export default {
   footer: (
     <div style={{ display: "flex", alignItems: "center", paddingTop: "50px" }}>
       <small style={{ marginRight: "0" }}>
-        © <time>{YEAR}</time> Aelpxy
+        CC BY-SA © <time>{YEAR}</time> Aelpxy
         <style jsx>{`
           a {
             margin-left: 1rem;
           }
         `}</style>
       </small>
+
       <a
         href="https://github.com/aelpxy"
         rel="noreferrer noopener"
         target="_blank"
         style={{ marginLeft: "auto" }}
       >
-        github
+        <FaGithub />
       </a>
+
       <a
-        href="https://x.com/aelpxy"
+        href="https://instagram.com/aelpxy"
         rel="noreferrer noopener"
         target="_blank"
         style={{ marginLeft: "5px" }}
       >
-        twitter
+        <FaInstagram />
       </a>
+
+      <a
+        href="https://twitter.com/aelpxy"
+        rel="noreferrer noopener"
+        target="_blank"
+        style={{ marginLeft: "5px" }}
+      >
+        <FaXTwitter />
+      </a>
+
       <a
         href="mailto:aelpxy@velta.dev"
         rel="noreferrer noopener"
         target="_blank"
         style={{ marginLeft: "5px" }}
       >
-        email
+        <MdAlternateEmail />
       </a>
     </div>
   ),
