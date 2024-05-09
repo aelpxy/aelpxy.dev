@@ -1,4 +1,4 @@
-name: Deploy to Cloudflare Pages
+name: Publish to Cloudflare Pages
 
 on:
   push:
@@ -15,14 +15,23 @@ jobs:
       contents: read
       deployments: write
 
-    steps:
-      - uses: actions/checkout@v2
+    strategy:
+      matrix:
+        node-version: [20.x]
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
         with:
-          node-version: 'lts'
-          cache: 'pnpm'
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9.1.0
 
       - name: Install dependencies
         run: pnpm install
