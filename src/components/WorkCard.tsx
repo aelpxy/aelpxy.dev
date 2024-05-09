@@ -36,11 +36,11 @@ const WorkCard: React.FC<WorkProps> = ({
             transition={{ duration: 0.3, ease: 'easeInOut', delay: 0.1 }}
           >
             <Link href={link} target='_blank' rel='noreferrer noopener'>
-              {title} <code>({link})</code>
+              {title}
             </Link>
           </motion.h3>
           <motion.p
-            className='text-neutral-300 text-sm sm:text-base py-1'
+            className='text-neutral-300 text-sm sm:text-base py-1 text-wrap'
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
