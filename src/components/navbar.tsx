@@ -5,12 +5,12 @@ import { usePathname } from 'next/navigation'
 
 const navData = [
   {
-    name: 'about',
-    href: '/',
-  },
-  {
     name: 'work',
     href: '/work',
+  },
+  {
+    name: 'blog',
+    href: '/blog',
   },
   {
     name: 'music',
