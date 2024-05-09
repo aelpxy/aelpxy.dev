@@ -29,7 +29,7 @@ export default function Home() {
           <h3 className='py-6 text-xl sm:text-2xl lg:text-3xl'>hey! 👋</h3>
           <p className='text-base sm:text-lg lg:text-xl'>
             I&apos;m a software developer proficient in TypeScript and Go with
-            over five years of experience, currently serving as the CTO at{' '}
+            over four years of experience, currently serving as the CTO at{' '}
             <Link
               href='https://pandabase.io'
               target='_blank'
@@ -38,16 +38,15 @@ export default function Home() {
             >
               Pandabase
             </Link>
-            . I also have occasional experience in Rust. I enjoy building data
-            driven solutions. While my primary focus is on backend engineering,
-            where I have the most experience, I occasionally do frontend
-            development.
+            . I enjoy building data driven solutions. While my primary focus is
+            on backend engineering, where I have the most experience, I
+            occasionally do frontend development.
           </p>
 
           <p className='py-4 sm:py-8 text-base sm:text-lg lg:text-xl'>
             I consider software development to be a creative art rather than
-            just work. I prioritize performance and security as my primary
-            focuses when building something.
+            just work. I prioritize performance and security when building
+            something.
           </p>
         </section>
       </Content>

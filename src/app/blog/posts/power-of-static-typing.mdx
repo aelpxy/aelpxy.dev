@@ -11,8 +11,8 @@ The developers who write dynamic languages always argue how easy it is to get
 started. However, once they start using statically typed languages, it's
 actually hard for them get back into dynamic languages. Languages like
 JavaScript, Python (Python has Typehints for typesafety), and many others don't
-care about type safety and thus throw really bad runtime errors if not handled
-correctly.
+care about type safety and thus can throw really bad runtime errors if not
+handled correctly.
 
 While TypeScript is indeed a superset of JavaScript, it does type checking
 during compile time, which in fact reduces the chances of a runtime error.
@@ -27,9 +27,15 @@ having to debug in production?
 
 ## Preventing errors
 
-Surely, the dynamic language advocates are thinking, 'I don't care.' But see the
-benefits yourself, and once you get into static languages, I can bet you won't
-want to go back to dynamic languages.
+One of the benefits of static typing is its ability to catch errors during the
+development time, rather than at runtime. In dynamically typed languages, it's
+possible to write code that compiles and runs without any issues, only to
+encounter unexpected errors at runtime due to type mismatches or other issues.
+This can lead to frustrating debugging sessions and costly production issues.
+With static typing, the compiler can perform type checking during the
+compilation, identifying and reporting these types of errors before the code is
+even executed. This allows to address problems early in the development process,
+saving time and reducing the risk of bugs making it to production.
 
 The problem:
 
@@ -40,9 +46,8 @@ console.log(user)
 ```
 
 Everything looks fine, right? So, where's the issue? The issue is that you don't
-know what the `getUser()` function returns. This may not be an issue in small
-projects, but once you dive deeper into larger projects, this will become a
-headache.
+know what the function returns. This may not be an issue in small projects, but
+once you dive deeper into larger projects, this will become a headache.
 
 The solution:
 
@@ -91,6 +96,14 @@ async function getUser(id: string): Promise<User | Error> {
 Perhaps that looks like a lot but if you trust me it will save you a lot of time
 and headache in the future. Plus, you'll enjoy free autocompletion provided by
 the language server.
+
+## Improved Code Quality and Maintainability
+
+Static typing contributes to better code quality and maintainability. By
+enforcing a clear and consistent type system, static typing helps us write more
+robust and reliable code. The type annotations provide valuable documentation,
+making it easier for other team members to understand and work with the
+codebase.
 
 ## Conclusion
 
