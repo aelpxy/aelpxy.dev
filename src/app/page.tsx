@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
+import Content from '@/components/Content'
 
 export const metadata: Metadata = {
   title: 'aelpxy',
@@ -23,10 +24,7 @@ export default function Home() {
         <div className='absolute inset-0 bg-gradient-conic from-[#171111] via-[#000000] blur-2xl' />
         <div className='absolute inset-0 bg-gradient-to-br from-[#000000] via-[#0d0d0d] to-[#151515] opacity-50' />
       </div>
-      <div className='mx-auto max-w-7xl px-6 sm:px-12 lg:px-32 py-12 sm:py-16 lg:py-20'>
-        <h1 className='text-2xl sm:text-3xl lg:text-4xl'>
-          <code>~/about</code>
-        </h1>
+      <Content title='about'>
         <section className='px-0 sm:px-28 py-6 sm:py-12'>
           <h3 className='py-6 text-xl sm:text-2xl lg:text-3xl'>hey! 👋</h3>
           <p className='text-base sm:text-lg lg:text-xl'>
@@ -52,7 +50,7 @@ export default function Home() {
             focuses when building something.
           </p>
         </section>
-      </div>
+      </Content>
       <Footer />
     </main>
   )

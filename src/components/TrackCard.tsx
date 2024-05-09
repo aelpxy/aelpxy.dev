@@ -1,7 +1,9 @@
 'use client'
 
+import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { motion, useInView } from 'framer-motion'
 
 interface TrackCardProps {
   track: {
@@ -28,8 +30,17 @@ interface TrackCardProps {
 }
 
 const TrackCard: React.FC<TrackCardProps> = ({ track }) => {
+  const ref = React.useRef(null)
+  const isInView = useInView(ref, { once: true })
+
   return (
-    <div className='flex flex-row items-center space-x-4 border py-5 px-6 border-neutral-800'>
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: isInView ? 1 : 0 }}
+      transition={{ duration: 0.5 }}
+      className='flex flex-row items-center space-x-4 border py-5 px-6 border-neutral-800'
+    >
       <Image
         src={track.data.albumOfTrack.coverArt.sources[0].url}
         alt={track.data.name}
@@ -52,7 +63,7 @@ const TrackCard: React.FC<TrackCardProps> = ({ track }) => {
         </p>
         <p>{track.data.albumOfTrack.name}</p>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

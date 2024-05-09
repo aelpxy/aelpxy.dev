@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
             href='https://github.com/aelpxy'
             rel='noreferrer noopener'
             target='_blank'
-            className='hover:bg-neutral-950 hover:text-neutral-300 transition-all duration-300 ease-in-out p-2 rounded-xl border border-neutral-800'
+            className='hover:bg-neutral-800 hover:text-neutral-300 transition-all duration-300 ease-in-out p-2 rounded-xl border border-neutral-800'
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
             href='https://instagram.com/aelpxy'
             rel='noreferrer noopener'
             target='_blank'
-            className='hover:bg-neutral-950 hover:text-neutral-300 transition-all duration-300 ease-in-out p-2 rounded-xl border border-neutral-800'
+            className='hover:bg-neutral-800 hover:text-neutral-300 transition-all duration-300 ease-in-out p-2 rounded-xl border border-neutral-800'
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -50,7 +50,7 @@ const Footer: React.FC = () => {
             href='https://twitter.com/aelpxy'
             rel='noreferrer noopener'
             target='_blank'
-            className='hover:bg-neutral-950 hover:text-neutral-300 transition-all duration-300 ease-in-out p-2 rounded-xl border border-neutral-800'
+            className='hover:bg-neutral-800 hover:text-neutral-300 transition-all duration-300 ease-in-out p-2 rounded-xl border border-neutral-800'
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
             href='mailto:aelpxy@velta.dev'
             rel='noreferrer noopener'
             target='_blank'
-            className='hover:bg-neutral-950 hover:text-neutral-300 transition-all duration-300 ease-in-out p-2 rounded-xl border border-neutral-800'
+            className='hover:bg-neutral-800 hover:text-neutral-300 transition-all duration-300 ease-in-out p-2 rounded-xl border border-neutral-800'
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
