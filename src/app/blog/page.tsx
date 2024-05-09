@@ -5,8 +5,13 @@ import Footer from '@/components/footer'
 import Content from '@/components/Content'
 
 export const metadata = {
-  title: 'aelpxy',
+  title: 'aelpxy - blog',
   description: 'blog',
+  openGraph: {
+    title: 'aelpxy',
+    description: 'blog',
+    images: 'https://avatars.githubusercontent.com/u/84912564',
+  },
 }
 
 export default function Blog() {

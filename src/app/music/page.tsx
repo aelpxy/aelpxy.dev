@@ -3,10 +3,10 @@ import type { Metadata } from 'next'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import TrackCard from '@/components/TrackCard'
+import Content from '@/components/Content'
 import ArtistCard from '@/components/ArtistCard'
 
-import { artists, tracks } from '@/data'
-import Content from '@/components/Content'
+import { getTopTracks, getTopArtists } from '@/lib/spotify'
 
 export const metadata: Metadata = {
   title: 'aelpxy - music',
@@ -18,7 +18,10 @@ export const metadata: Metadata = {
   },
 }
 
-export default function Music() {
+export default async function Music() {
+  let tracks = await getTopTracks()
+  let artists = await getTopArtists()
+
   return (
     <main>
       <Navbar />
@@ -32,8 +35,15 @@ export default function Music() {
         <h1 className='text-2xl py-6 font-semibold'>Top tracks this month</h1>
         <section className='py-4 px-6'>
           <div className='flex flex-col gap-y-4'>
-            {tracks.data.me.profile.topTracks.items.map((track, index) => (
-              <TrackCard key={index} track={track} />
+            {tracks.map((track, index) => (
+              <TrackCard
+                key={index}
+                artists={track.artists}
+                songUrl={track.songUrl}
+                title={track.title}
+                album={track.album}
+                image={track.image}
+              />
             ))}
           </div>
         </section>
@@ -41,8 +51,14 @@ export default function Music() {
         <h1 className='text-2xl py-6 font-semibold'>Top artists this month</h1>
         <section className='py-4 px-6'>
           <div className='flex flex-col gap-y-4'>
-            {artists.data.me.profile.topArtists.items.map((artist, index) => (
-              <ArtistCard key={index} artist={artist} />
+            {artists.map((artist, index) => (
+              <ArtistCard
+                key={index}
+                name={artist.name}
+                url={artist.url}
+                image={artist.image}
+                followers={artist.followers}
+              />
             ))}
           </div>
         </section>
