@@ -1,6 +1,5 @@
 'use client'
 import { motion } from 'framer-motion'
-import Link from 'next/link'
 
 interface PostCardProps {
   title: string
@@ -17,7 +16,7 @@ const PostCard: React.FC<PostCardProps> = ({
 }) => {
   return (
     <motion.div
-      className='flex flex-col border border-neutral-800 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out'
+      className='flex flex-col border border-neutral-800 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out '
       initial={{ opacity: 0, y: -50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}

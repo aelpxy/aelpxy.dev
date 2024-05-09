@@ -31,7 +31,7 @@ const TrackCard: React.FC<TrackCardProps> = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: isInView ? 1 : 0 }}
       transition={{ duration: 0.5 }}
-      className='flex flex-row items-center space-x-4 border py-5 px-6 border-neutral-800 ease-in-out transition-colors hover:border-neutral-700'
+      className='flex flex-row items-center space-x-4 border py-5 px-6 border-neutral-800 ease-in-out transition-colors hover:border-neutral-600'
     >
       <Image
         src={image}

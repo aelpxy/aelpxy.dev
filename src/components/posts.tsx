@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { getBlogPosts } from '@/lib/utils'
+
 import PostCard from './PostCard'
 
 export function BlogPosts() {

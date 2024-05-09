@@ -20,7 +20,7 @@ const WorkCard: React.FC<WorkProps> = ({
 }) => {
   return (
     <motion.div
-      className='flex items-center border border-neutral-800 overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out'
+      className='flex items-center border border-neutral-800 overflow-hidden transition-colors ease-in-out hover:border-neutral-600'
       initial={{ opacity: 0, y: -50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}

@@ -1,0 +1,101 @@
+---
+title: 'Exploring the power of Static Typing in Programming'
+publishedAt: '2022-06-07'
+author: 'Aelpxy'
+summary: 'There's a long debate about static dynamic typing in the world of software. Let's explore why static typing is superior.'
+---
+
+## Why should you care?
+
+The developers who write dynamic languages always argue how easy it is to get
+started. However, once they turn into statically typed languages, it's actually
+hard for them into dynamic languages. Languages like JavaScript, Python, and
+many others don't care about type safety and thus throw really bad runtime
+errors if not handled correctly.
+
+While TypeScript is indeed a superset of JavaScript, it does type checking
+during compile time, which in fact reduces the chances of a runtime error.
+Modern languages like Rust and Go focus strictly on type safety (PS. Go isn't as
+strict as Rust).
+
+If you want to build solid software, static languages should be considered.
+While many may argue that a lot of companies are using dynamic languages, and I
+agree with them, they in fact do, but why would you want to waste time debugging
+instead of just catching it during development? Doesn't it save more time than
+having to debug in production?
+
+## Preventing errors
+
+Surely, the dynamic language advocates are thinking, 'I don't care.' But see the
+benefits yourself, and once you get into static languages, I can bet you won't
+want to go back to dynamic languages.
+
+The problem:
+
+```javascript
+const id = 'acc_xxx'
+
+const user = await getUser(id)
+
+console.log(user)
+```
+
+Everything looks fine, right? So, where's the issue? The issue is that you don't
+know what the getUser() function returns. This may not be an issue in small
+projects, but once you dive deeper into larger projects, this will become a
+headache.
+
+The solution:
+
+```typescript
+type UserType = 'user' | 'admin'
+
+interface User {
+  name: string
+  email: string
+  type: UserType
+  isActive?: boolean
+}
+
+interface Error {
+  message: string
+  code: number
+}
+
+async function getUser(id: string): Promise<User | Error> {
+  try {
+    // perform the operation to fetch the user
+    const userData = await fetchUserFromDatabase(id)
+
+    if (!userData) {
+      return {
+        message: 'user was not foound',
+        code: 404,
+      }
+    }
+
+    return {
+      name: userData.name,
+      email: userData.email,
+      type: userData.type,
+      isActive: userData.isActive,
+    }
+  } catch (error) {
+    return {
+      message: 'failed to fetch user',
+      code: 500,
+    }
+  }
+}
+```
+
+Perhaps that looks like a lot but if you trust me that will save you a lot of
+time and headache. Plus, you'll endjoy free autocompletion provided by the
+language server.
+
+## Conclusion
+
+Initially, the setup may look like a lot of work, but once you get used to it,
+it's an investment that will definitely pay off in the long run. You will thank
+yourself in the future for taking the time to get this right. (Not joking - I'm
+myself a victim of this.)
