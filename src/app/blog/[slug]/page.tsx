@@ -43,7 +43,7 @@ export default function Post({ params }) {
         </h1>
 
         <div className='flex justify-between items-center mb-8 text-sm'>
-          <p className='text-sm text-neutral-600 dark:text-neutral-400'>
+          <p className='text-sm text-neutral-400'>
             {formatDate(post.metadata.publishedAt)} by {post.metadata.author}
           </p>
         </div>
