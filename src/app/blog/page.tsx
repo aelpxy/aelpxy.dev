@@ -1,7 +1,5 @@
 import { BlogPosts } from '@/components/posts'
 
-import Navbar from '@/components/navbar'
-import Footer from '@/components/footer'
 import Content from '@/components/Content'
 
 export const metadata = {
@@ -17,7 +15,6 @@ export const metadata = {
 export default function Blog() {
   return (
     <main>
-      <Navbar />
       <Content title='blog'>
         <h1 className='text-2xl py-6 font-semibold'>Things I wrote</h1>
         <section className='py-4 px-6'>
@@ -26,7 +23,6 @@ export default function Blog() {
           </div>
         </section>
       </Content>
-      <Footer />
     </main>
   )
 }

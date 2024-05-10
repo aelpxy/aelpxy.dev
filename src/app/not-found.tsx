@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
-import Navbar from '@/components/navbar'
-import Footer from '@/components/footer'
 import Content from '@/components/Content'
 
 export const metadata: Metadata = {
@@ -18,7 +16,6 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <>
-      <Navbar />
       <Content title='404'>
         <div>
           <h1 className='text-2xl py-6 font-semibold'>
@@ -33,7 +30,6 @@ export default function NotFound() {
           </Link>
         </div>
       </Content>
-      <Footer />
     </>
   )
 }

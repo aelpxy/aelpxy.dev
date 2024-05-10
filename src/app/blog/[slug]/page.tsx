@@ -3,8 +3,6 @@ import { CustomMDX } from '@/components/mdx'
 import { formatDate, getBlogPosts } from '@/lib/utils'
 import { baseUrl } from '@/lib/sitemap'
 
-import Footer from '@/components/footer'
-import Navbar from '@/components/navbar'
 import Content from '@/components/Content'
 
 // @ts-ignore
@@ -17,7 +15,6 @@ export default function Post({ params }) {
 
   return (
     <main>
-      <Navbar />
       <Content title={`blog/${post.slug}`}>
         <script
           type='application/ld+json'
@@ -55,7 +52,6 @@ export default function Post({ params }) {
           <CustomMDX source={post.content} />
         </article>
       </Content>
-      <Footer />
     </main>
   )
 }

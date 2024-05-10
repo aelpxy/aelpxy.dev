@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
-import Navbar from '@/components/navbar'
-import Footer from '@/components/footer'
 import Content from '@/components/Content'
 
 export const metadata: Metadata = {
@@ -18,7 +16,6 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main>
-      <Navbar />
       <div className='fixed inset-0 z-[-1] pointer-events-none'>
         <div className='absolute inset-0 bg-gradient-radial from-[#6871a3] via-[#020506] to-transparent blur-2xl' />
         <div className='absolute inset-0 bg-gradient-conic from-[#171111] via-[#000000] blur-2xl' />
@@ -50,7 +47,6 @@ export default function Home() {
           </p>
         </section>
       </Content>
-      <Footer />
     </main>
   )
 }

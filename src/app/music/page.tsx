@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
 
-import Navbar from '@/components/navbar'
-import Footer from '@/components/footer'
 import TrackCard from '@/components/TrackCard'
 import Content from '@/components/Content'
 import ArtistCard from '@/components/ArtistCard'
@@ -24,7 +22,6 @@ export default async function Music() {
 
   return (
     <main>
-      <Navbar />
       <div className='fixed inset-0 z-[-1] pointer-events-none'>
         <div className='absolute inset-0 bg-gradient-radial from-[#000000] to-transparent blur-2xl' />
         <div className='absolute inset-0 bg-gradient-conic from-[#222222] via-[#000000] blur-2xl' />
@@ -63,7 +60,6 @@ export default async function Music() {
           </div>
         </section>
       </Content>
-      <Footer />
     </main>
   )
 }

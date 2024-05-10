@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
 
-import Navbar from '@/components/navbar'
-import Footer from '@/components/footer'
 import WorkCard from '@/components/WorkCard'
 import Content from '@/components/Content'
 
@@ -65,7 +63,6 @@ const jobs = [
 export default function Work() {
   return (
     <main>
-      <Navbar />
       <Content title='work'>
         <h1 className='text-2xl py-6 font-semibold'>Things I have built</h1>
         <div className='py-4'>
@@ -83,7 +80,6 @@ export default function Work() {
           </div>
         </div>
       </Content>
-      <Footer />
     </main>
   )
 }
