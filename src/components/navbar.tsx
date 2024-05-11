@@ -49,7 +49,7 @@ const Navbar = () => {
                   <span className='sr-only'>Aelpxy</span>
                   <Image
                     className='h-12 w-auto rounded-md border-neutral-600'
-                    src={'https://aelpxy.dev/image.png'}
+                    src={'/image.png'}
                     alt='Aelpxy'
                     width={256}
                     height={256}
