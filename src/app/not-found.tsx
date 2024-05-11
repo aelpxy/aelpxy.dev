@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'aelpxy',
     description: 'not found',
-    images: 'https://avatars.githubusercontent.com/u/84912564',
+    images: 'https://aelpxy.dev/image.png',
   },
 }
 
