@@ -50,7 +50,7 @@ const Navbar = () => {
                   <Image
                     className='h-12 w-auto rounded-md border-neutral-600'
                     src={'/image.png'}
-                    alt='Aelpxy'
+                    alt='Icon'
                     width={256}
                     height={256}
                   />
