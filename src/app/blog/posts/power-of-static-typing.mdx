@@ -68,12 +68,12 @@ interface Error {
 
 async function getUser(id: string): Promise<User | Error> {
   try {
-    // perform the operation to fetch the user
-    const userData = await fetchUserFromDatabase(id)
+    // fetch the user
+    const userData = await fetchUserFromDatabase(id as string)
 
     if (!userData) {
       return {
-        message: 'user was not foound',
+        message: 'not_found',
         code: 404,
       }
     }
@@ -86,7 +86,7 @@ async function getUser(id: string): Promise<User | Error> {
     }
   } catch (error) {
     return {
-      message: 'failed to fetch user',
+      message: 'internal_server_error',
       code: 500,
     }
   }

@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en_US'>
+    <html lang='en'>
       <body
         className={`${inter.className} ${mono.variable} selection:text-neutral-900 selection:bg-neutral-100 min-h-screen antialiased`}
       >

@@ -26,7 +26,7 @@ const jobs = [
     jobTitle: 'Co-founder & CTO',
     link: 'https://velta.dev',
     year: `2022 - Current`,
-    description: 'Run your worloads with scale.',
+    description: 'Run your workloads with scale.',
   },
   {
     title: 'Flow',
