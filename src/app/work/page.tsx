@@ -29,12 +29,11 @@ const jobs = [
     description: 'Run your workloads with scale.',
   },
   {
-    title: 'Flow',
+    title: 'dbctl',
     jobTitle: 'Core Maintainer',
-    link: 'https://github.com/zotehq/flow',
-    year: `2024 - Current`,
-    description:
-      'A fault-tolerant messaging and queue system built for scalability.',
+    link: 'https://github.com/aelpxy/dbctl',
+    year: `2022 - Current`,
+    description: 'A CLI built to help you manage your development databases.',
   },
   {
     title: 'Void',
