@@ -35,8 +35,7 @@ export default function Home() {
             .
           </p>
           <p className='mt-4 text-base sm:text-lg lg:text-xl'>
-            I enjoy <b>backend development</b>, <b>system design</b>, and{' '}
-            <b>low-level programming</b>.
+            I enjoy <b>backend development</b> and <b>system design</b>.
           </p>
         </section>
       </Content>
