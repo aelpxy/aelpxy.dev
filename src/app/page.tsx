@@ -22,8 +22,8 @@ export default function Home() {
         <section className='px-0 sm:px-28 py-6 sm:py-12'>
           <h2 className='py-6 text-xl sm:text-2xl lg:text-3xl'>hey! 👋</h2>
           <p className='text-base sm:text-lg lg:text-xl'>
-            I'm a software developer proficient in TypeScript and Go with over
-            five years of experience, currently serving as the CTO at{' '}
+            I&apos;m a software developer proficient in TypeScript and Go with
+            over five years of experience, currently serving as the CTO at{' '}
             <Link
               href='https://pandabase.io'
               target='_blank'
