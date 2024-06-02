@@ -16,17 +16,14 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main>
-      <div className='fixed inset-0 z-[-1] pointer-events-none'>
-        <div className='absolute inset-0 bg-gradient-radial from-[#6871a3] via-[#020506] to-transparent blur-2xl' />
-        <div className='absolute inset-0 bg-gradient-conic from-[#171111] via-[#000000] blur-2xl' />
-        <div className='absolute inset-0 bg-gradient-to-br from-[#000000] via-[#0d0d0d] to-[#151515] opacity-50' />
-      </div>
+      <div className='fixed inset-0 z-[-1] pointer-events-none bg-gradient-radial from-[#371818] via-[#020506] to-transparent blur-2xl animate-gradient-move' />
+
       <Content title='about'>
         <section className='px-0 sm:px-28 py-6 sm:py-12'>
           <h2 className='py-6 text-xl sm:text-2xl lg:text-3xl'>hey! 👋</h2>
           <p className='text-base sm:text-lg lg:text-xl'>
-            I&apos;m a software developer proficient in TypeScript and Go with
-            over four years of experience, currently serving as the CTO at{' '}
+            I'm a software developer proficient in TypeScript and Go with over
+            five years of experience, currently serving as the CTO at{' '}
             <Link
               href='https://pandabase.io'
               target='_blank'
@@ -35,15 +32,11 @@ export default function Home() {
             >
               Pandabase
             </Link>
-            . I enjoy building data driven solutions. While my primary focus is
-            on backend engineering, where I have the most experience, I
-            occasionally do frontend development.
+            .
           </p>
-
-          <p className='py-4 sm:py-8 text-base sm:text-lg lg:text-xl'>
-            I consider software development to be a creative art rather than
-            just work. I prioritize performance and security when building
-            something.
+          <p className='mt-4 text-base sm:text-lg lg:text-xl'>
+            I enjoy <b>backend development</b>, <b>system design</b>, and{' '}
+            <b>low-level programming</b>.
           </p>
         </section>
       </Content>
