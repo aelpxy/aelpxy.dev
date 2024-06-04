@@ -35,6 +35,7 @@ function Table({ data }: { data: TableData }) {
   let headers = data.headers.map((header, index) => (
     <th key={index}>{header}</th>
   ))
+
   let rows = data.rows.map((row, index) => (
     <tr key={index}>
       {row.map((cell, cellIndex) => (
@@ -69,7 +70,7 @@ function CustomLink(props: CustomLinkProps) {
     return <a {...props} />
   }
 
-  return <a target='_blank' rel='noopener noreferrer' {...props} />
+  return <Link target='_blank' rel='noopener noreferrer' {...props} />
 }
 
 function RoundedImage(props: RoundedImageProps) {

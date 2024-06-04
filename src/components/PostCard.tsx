@@ -16,7 +16,7 @@ const PostCard: React.FC<PostCardProps> = ({
 }) => {
   return (
     <motion.div
-      className='flex flex-col border border-neutral-800 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out '
+      className='group: flex flex-col overflow-hidden border border-neutral-800 ease-in-out transition-colors hover:border-neutral-600'
       initial={{ opacity: 0, y: -50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
