@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 const jobs = [
   {
     title: 'Pandabase',
-    jobTitle: 'Senior Software Engineer',
+    jobTitle: 'CTO',
     link: 'https://pandabase.io',
     year: `2022 - Current`,
     description: 'Digital e-commerce platform for the internet.',

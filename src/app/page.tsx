@@ -23,7 +23,7 @@ export default function Home() {
           <h2 className='py-6 text-xl sm:text-2xl lg:text-3xl'>hey! 👋</h2>
           <p className='text-base sm:text-lg lg:text-xl'>
             I&apos;m a software developer proficient in TypeScript and Go with
-            over five years of experience, currently serving as the Lead of Software Development at{' '}
+            over five years of experience, currently serving as the CTO of{' '}
             <Link
               href='https://pandabase.io'
               target='_blank'
