@@ -13,7 +13,15 @@ export const metadata: Metadata = {
   },
 }
 
-const jobs = [
+type Job = {
+  title: string
+  jobTitle: string
+  link: string
+  year: string
+  description: string
+}
+
+const jobs: Job[] = [
   {
     title: 'Pandabase',
     jobTitle: 'CTO',
