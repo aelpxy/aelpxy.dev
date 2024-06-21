@@ -1,0 +1,100 @@
+---
+title: 'My developer setup for 2024'
+publishedAt: '2024-06-21'
+author: 'Aelpxy'
+summary: 'This is the developer setup I've used for most of this year, and I plan to continue using it next year as well.'
+---
+
+# Is it really that important?
+
+In my personal opinion, having a good setup is necessary because it just gives you that fresh vibes which is truly satisfying (possibly productive too), and I personally love the idea of having a clean, organized workspace.
+
+# Hardware
+
+## Desktop (main)
+
+I currently use my desktop as my primary workstation for most of my work, and I find it more comfortable than any other setup. It's a fairly decent machine capable of handling most workloads. Since I mainly write backend codebases, I don't need a very beefy machine, and my current specifications serve me well.
+
+On the hardware side, I currently have an Intel i7-10700F (8C/16T) processor, which meets my needs well. I have 32GB of RAM along with 1TB of NVME SSD storage, which I plan to upgrade soon. For graphical workloads, I use the RTX4070 12GB, which is adequate for my needs.
+
+For software side, I currently use i3 with Arch Linux as my preferred window manager and distribution because I love the efficiency of tiling window managers. When I need to edit code quickly, neovim is what is rely on. tmux is another tool I heavily use throughout my daily workflow for managing terminal sessions.
+
+My preferred terminal emulator is Alacritty due to its amazing performance and simplicity. For browsing, I use Chromium.
+
+Some screenshots of my developer environment:
+
+![Desktop](https://s3.velta.dev/aelpxy-bucket/aelpxy.dev/desktop-main.png)
+
+![Alacritty and Neovim](https://s3.velta.dev/aelpxy-bucket/aelpxy.dev/desktop-nvim-2.png)
+
+I'm currently using a variety of useful tools, all listed in my [dotfiles](https://github.com/aelpxy/.dotfiles) reponsitory inside the [packages.txt](https://github.com/aelpxy/.dotfiles/blob/main/linux/packages.txt) file. To make my Linux environment setup faster, I've created a setup.sh script. This script is extremely useful as it quickly sets up my development environment in just 2 or 3 minutes, which ensures I have a fully configured workspace ready for working.
+
+Although it might seem like I'm using neovim as my main editor, that's not the case at all. VSCode still remains strong as my primary editor, I have customized it with a lot of custom keybindings and other useful extensions. I have no plans to replace it with neovim (truly, no editor is as customizable as neovim).
+
+## Laptop (travel)
+
+I'm currently using the base M1 Air, which is sufficient for my travel needs. I've been using Zed editor on it, which consumes less energy and is more efficient than VSCode. Frankly speaking, it has replaced VSCode for me on the Mac. I'll definitely switch to it on desktop once it's production-ready on Linux. Apart from this, I don't really have a fancy macOS setup; I just have a really basic setup with Alacritty and tmux.
+
+I do plan to eventually move to a tiling window manager on macOS. The best one without any question is [yabai](https://github.com/koekeishiya/yabai/), and I really do plan to use it very soon along with my preferred tools.
+
+As for why the M1, it serves me and my workload very well, although when the M4 chips come out, I'll definitely look forward to the M4 Air with 16GB of memory.
+
+# Software
+
+I love open-source tools that make my life easier. I've discovered many fancy CLI applications and even made one myself called [dbctl](https://github.com/aelpxy/dbctl), which I wrote in Go to make deployment of dev databases easier. It has received positive feedback from my friends.
+
+I've come across [zoxide](https://github.com/ajeetdsouza/zoxide), a replacement for cd, which honestly has made my life faster and more convenient to navigate across directories. I've also replaced ls with [lsd](https://github.com/lsd-rs/lsd) as it seems fancier to me.
+
+### WM
+
+- i3
+
+### Shell
+
+- Fish
+- Starship
+
+### Terminal Emulator
+
+- Alacritty
+- Terminal (macOS stock)
+
+### Code Editor
+
+- VSCode
+- Zed
+- Neovim
+
+### Project Tracking and Note Taking
+
+- Notion
+- Excalidraw
+
+### Brower
+
+- Chromium
+- Arc
+
+### Commuication
+
+Discord and Signal remain my top choices for online communication.
+
+### Music
+
+- Spotify
+
+### Miscellaneous
+
+- zoxide
+- tmux
+- flameshot
+- btop
+- fzf
+- jq
+- ripgrep
+
+and [much more (?)](https://github.com/aelpxy/.dotfiles/blob/main/linux/packages.txt).
+
+# Conclusion
+
+I love having an organized setup and I enjoyed writing this post.  It includes pretty much everything you might need to know about my setup. See you next time (probably a decade later???)
