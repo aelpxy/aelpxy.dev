@@ -10,7 +10,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache"
   },
   "dependencies": {
-    "@headlessui/react": "^2.1.0",
+    "@headlessui/react": "^2.1.1",
     "@heroicons/react": "^2.1.4",
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
