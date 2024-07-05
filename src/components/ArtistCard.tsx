@@ -44,6 +44,7 @@ const ArtistCard: React.FC<ArtistCardProps> = ({
         >
           <h3 className='font-semibold text-neutral-100'>{name}</h3>
         </Link>
+        {/* @ts-ignore */}
         <p>{followers} followers</p>
       </div>
     </motion.div>
