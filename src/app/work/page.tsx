@@ -24,24 +24,17 @@ type Job = {
 const jobs: Job[] = [
   {
     title: 'Pandabase',
-    jobTitle: 'Chief software architect',
+    jobTitle: 'CTO',
     link: 'https://pandabase.io',
     year: `2022 - Current`,
     description: 'Digital e-commerce platform for the internet.',
   },
   {
     title: 'Velta',
-    jobTitle: 'CTO',
+    jobTitle: 'CTO and Co-founder',
     link: 'https://velta.dev',
     year: `2022 - Current`,
     description: 'Run your workloads with scale.',
-  },
-  {
-    title: 'ttyDreams',
-    jobTitle: 'Core Maintainer',
-    link: 'https://github.com/ttyDreams',
-    year: `2024 - Current`,
-    description: 'Social media for nerds and nostalgic people.',
   },
   {
     title: 'dbctl',

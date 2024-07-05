@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main>
-      <div className='fixed inset-0 z-[-1] pointer-events-none bg-gradient-radial from-[#371818] via-[#020506] to-transparent blur-2xl animate-gradient-move' />
+      <div className='fixed inset-0 z-[-1] pointer-events-none bg-gradient-radial from-[#381119] via-[#020506] to-transparent blur-2xl animate-gradient-move' />
 
       <Content title='about'>
         <section className='px-0 sm:px-28 py-6 sm:py-12'>
@@ -35,7 +35,8 @@ export default function Home() {
             .
           </p>
           <p className='mt-4 text-base sm:text-lg lg:text-xl'>
-            I enjoy <b>backend engineering</b> and <b>system design</b>.
+            I enjoy <b>web development</b> (fullstack) and{' '}
+            <b>devops engineering</b>.
           </p>
         </section>
       </Content>

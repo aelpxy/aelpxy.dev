@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
     >
       <div className='flex flex-col items-center justify-between pt-6 sm:pt-10 space-y-4 sm:space-y-0 sm:flex-row sm:space-x-4'>
         <motion.code className='mr-0 transition-transform duration-300 ease-in-out text-sm sm:text-base'>
-          CC BY-SA © <time>2024</time> Aelpxy.
+          CC BY-SA © <time>{new Date().getFullYear()}</time> aelpxy.
         </motion.code>
 
         <div className='flex items-center space-x-4'>

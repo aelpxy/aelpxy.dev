@@ -1,8 +1,8 @@
+import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote/rsc'
-import { getHighlighter } from 'shiki'
-import React from 'react'
+import { createHighlighter } from 'shiki'
 
 interface TableData {
   headers: string[]
@@ -86,7 +86,7 @@ interface CodeProps extends React.HTMLAttributes<HTMLElement> {
 async function Code({ children, ...props }: CodeProps) {
   const lang = props.className?.replace('language-', '') || 'typescript'
 
-  const highlighter = await getHighlighter({
+  const highlighter = await createHighlighter({
     themes: ['vitesse-dark'],
     langs: ['javascript', 'typescript', 'go', 'rust'],
   })
@@ -148,6 +148,7 @@ let components = {
 
 export function CustomMDX(props: CustomMDXProps) {
   return (
+    // @ts-ignore
     <MDXRemote
       {...props}
       // @ts-ignore
