@@ -65,7 +65,7 @@ export default function Home() {
     <main>
       <Content title='about'>
         <section className='px-0 sm:px-6 py-6 sm:py-12 text-md'>
-          <IconItem Icon={MapPinIcon}>192.168.0.1</IconItem>
+          <IconItem Icon={MapPinIcon}>::1</IconItem>
           <IconItem Icon={BriefcaseBusinessIcon}>
             Co-founder and CTO @{' '}
             <Link
