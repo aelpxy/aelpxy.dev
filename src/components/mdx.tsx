@@ -62,6 +62,7 @@ function CustomLink(props: CustomLinkProps) {
     return (
       // @ts-ignore
       <Link href={href} {...props}>
+        {/* @ts-ignore */}
         {props.children}
       </Link>
     )

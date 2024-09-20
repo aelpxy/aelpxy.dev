@@ -1,7 +1,5 @@
-'use client'
-
-import { formatDate } from '@/lib/utils'
 import Link from 'next/link'
+import { formatDate } from '@/lib/utils'
 
 const BlogPostLink = ({ post }: { post: any }) => (
   <Link
