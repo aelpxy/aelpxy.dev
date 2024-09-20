@@ -27,9 +27,6 @@ export default function Post({ params }) {
               datePublished: post.metadata.publishedAt,
               dateModified: post.metadata.publishedAt,
               description: post.metadata.summary,
-              // image: post.metadata.image
-              //   ? `${baseUrl}${post.metadata.image}`
-              //   : `/og?title=${encodeURIComponent(post.metadata.title)}`,
               url: `${baseUrl}/blog/${post.slug}`,
               author: {
                 '@type': 'Person',
