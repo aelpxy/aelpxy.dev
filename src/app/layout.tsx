@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
+import { Gowun_Dodum, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 
-const inter = Inter({ subsets: ['latin'] })
-const mono = JetBrains_Mono({
+const primaryFont = Gowun_Dodum({ weight: ['400'], subsets: ['vietnamese'] })
+const monoFont = JetBrains_Mono({
   weight: ['400'],
   subsets: ['latin'],
   variable: '--font-mono',
@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${inter.className} ${mono.variable} selection:text-neutral-900 selection:bg-neutral-100 min-h-screen antialiased`}
+        className={`${primaryFont.className} ${monoFont.variable} selection:text-neutral-900 selection:bg-neutral-100 min-h-screen antialiased`}
       >
         <Navbar />
         {children}

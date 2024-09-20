@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote/rsc'
 import { createHighlighter } from 'shiki'
+import { motion } from 'framer-motion'
 
 interface TableData {
   headers: string[]
@@ -74,8 +75,24 @@ function CustomLink(props: CustomLinkProps) {
 }
 
 function RoundedImage(props: RoundedImageProps) {
-  // @ts-ignore
-  return <Image alt={props.alt} className='rounded-lg' {...props} />
+  const [isLoaded, setIsLoaded] = React.useState(false)
+
+  return (
+    <motion.div
+      initial={{ filter: 'blur(10px)' }}
+      animate={{ filter: isLoaded ? 'blur(0px)' : 'blur(10px)' }}
+      transition={{ duration: 1, ease: 'easeOut' }}
+    >
+      {/* @ts-ignore */}
+      <Image
+        // @ts-ignore
+        alt={props.alt}
+        className='rounded-lg'
+        {...props}
+        onLoadingComplete={() => setIsLoaded(true)}
+      />
+    </motion.div>
+  )
 }
 
 interface CodeProps extends React.HTMLAttributes<HTMLElement> {
@@ -87,13 +104,13 @@ async function Code({ children, ...props }: CodeProps) {
   const lang = props.className?.replace('language-', '') || 'typescript'
 
   const highlighter = await createHighlighter({
-    themes: ['vitesse-dark'],
+    themes: ['dark-plus'],
     langs: ['javascript', 'typescript', 'go', 'rust'],
   })
 
   const html = highlighter.codeToHtml(children, {
     lang: lang,
-    theme: 'vitesse-dark',
+    theme: 'dark-plus',
   })
 
   return <code dangerouslySetInnerHTML={{ __html: html }} {...props} />

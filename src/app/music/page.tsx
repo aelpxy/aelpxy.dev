@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
-import TrackCard from '@/components/TrackCard'
-import Content from '@/components/Content'
-import ArtistCard from '@/components/ArtistCard'
+import Content from '@/components/content'
+import TrackCard from '@/components/track-card'
+import ArtistCard from '@/components/artist-card'
 
 import { getTopTracks, getTopArtists } from '@/lib/spotify'
 
@@ -21,7 +21,7 @@ export default async function Music() {
   let artists = await getTopArtists()
 
   return (
-    <main>
+    <div>
       <div className='fixed inset-0 z-[-1] pointer-events-none'>
         <div className='absolute inset-0 bg-gradient-radial from-[#000000] to-transparent blur-2xl' />
         <div className='absolute inset-0 bg-gradient-conic from-[#222222] via-[#000000] blur-2xl' />
@@ -29,7 +29,9 @@ export default async function Music() {
       </div>
 
       <Content title='music'>
-        <h1 className='text-2xl py-6 font-semibold'>Top tracks this month</h1>
+        <h1 className='text-2xl py-6 font-semibold text-neutral-300'>
+          top tracks this month
+        </h1>
         <section className='py-4 px-6'>
           <div className='flex flex-col gap-y-4'>
             {tracks.map((track, index) => (
@@ -45,7 +47,9 @@ export default async function Music() {
           </div>
         </section>
 
-        <h1 className='text-2xl py-6 font-semibold'>Top artists this month</h1>
+        <h1 className='text-2xl py-6 font-semibold text-neutral-300'>
+          top artists this month
+        </h1>
         <section className='py-4 px-6'>
           <div className='flex flex-col gap-y-4'>
             {artists.map((artist, index) => (
@@ -60,6 +64,6 @@ export default async function Music() {
           </div>
         </section>
       </Content>
-    </main>
+    </div>
   )
 }

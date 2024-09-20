@@ -1,6 +1,6 @@
 import { BlogPosts } from '@/components/posts'
 
-import Content from '@/components/Content'
+import Content from '@/components/content'
 
 export const metadata = {
   title: 'aelpxy - blog',
@@ -16,8 +16,10 @@ export default function Blog() {
   return (
     <main>
       <Content title='blog'>
-        <h1 className='text-2xl py-6 font-semibold'>Things I wrote</h1>
-        <section className='py-4 px-6'>
+        <h1 className='text-2xl py-6 font-semibold text-neutral-300'>
+          words i've written
+        </h1>
+        <section className='py-4'>
           <div className='flex flex-col gap-y-4'>
             <BlogPosts />
           </div>

@@ -3,9 +3,9 @@ import { CustomMDX } from '@/components/mdx'
 import { formatDate, getBlogPosts } from '@/lib/utils'
 import { baseUrl } from '@/lib/sitemap'
 
-import Content from '@/components/Content'
+import Content from '@/components/content'
 
-// @ts-ignore
+// @ts-ignore - A result of laziness
 export default function Post({ params }) {
   let post = getBlogPosts().find((post) => post.slug === params.slug)
 
@@ -33,18 +33,18 @@ export default function Post({ params }) {
               url: `${baseUrl}/blog/${post.slug}`,
               author: {
                 '@type': 'Person',
-                name: 'Aelpxy',
+                name: 'aelpxy',
               },
             }),
           }}
         />
-        <h1 className='text-2xl py-6 font-semibold tracking-tighter'>
+        <h1 className='text-2xl py-6 tracking-tighter text-neutral-100'>
           {post.metadata.title}
         </h1>
 
         <div className='flex justify-between items-center mb-8 text-sm'>
           <p className='text-sm text-neutral-400'>
-            {formatDate(post.metadata.publishedAt)} by {post.metadata.author}
+            {formatDate(post.metadata.publishedAt)}
           </p>
         </div>
         <article className='prose'>

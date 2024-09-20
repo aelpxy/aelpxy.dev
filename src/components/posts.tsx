@@ -1,7 +1,9 @@
+'use client'
+
 import Link from 'next/link'
 import { getBlogPosts } from '@/lib/utils'
 
-import PostCard from './PostCard'
+import PostCard from './post-card'
 
 export function BlogPosts() {
   let allBlogs = getBlogPosts()
