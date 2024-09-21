@@ -1,23 +1,18 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { formatDate } from '@/lib/date'
 
 interface PostCardProps {
   title: string
   publishedAt: string
   summary: string
-  author: string
 }
 
-const PostCard: React.FC<PostCardProps> = ({
-  title,
-  publishedAt,
-  summary,
-  author,
-}) => {
+const PostCard: React.FC<PostCardProps> = ({ title, publishedAt, summary }) => {
   return (
     <motion.div
-      className='group: flex flex-col overflow-hidden ease-in-out transition-colors hover:border-neutral-600'
+      className='group flex flex-col overflow-hidden ease-in-out transition-colors hover:border-neutral-600'
       initial={{ opacity: 0, y: -50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -52,11 +47,12 @@ const PostCard: React.FC<PostCardProps> = ({
             viewport={{ once: true }}
             transition={{ duration: 0.3, ease: 'easeInOut', delay: 0.4 }}
           >
-            {publishedAt}
+            {formatDate(publishedAt)}
           </motion.p>
         </div>
       </div>
     </motion.div>
   )
 }
+
 export default PostCard

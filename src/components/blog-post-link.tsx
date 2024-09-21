@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { formatDate } from '@/lib/utils'
+import { formatDate } from '@/lib/date'
 
 const BlogPostLink = ({ post }: { post: any }) => (
   <Link

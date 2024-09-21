@@ -9,7 +9,7 @@ export function BlogPosts() {
   return (
     <div>
       {allBlogs.length === 0 && (
-        <code className='text-2xl py-6 font-semibold'>nothing yet :(</code>
+        <code className='text-2xl py-6 font-semibold'>nothing yet :/</code>
       )}
       {allBlogs
         .sort((a, b) => {
@@ -29,7 +29,6 @@ export function BlogPosts() {
             <PostCard
               title={post.metadata.title}
               summary={post.metadata.summary}
-              author={post.metadata.author}
               publishedAt={post.metadata.publishedAt}
             />
           </Link>

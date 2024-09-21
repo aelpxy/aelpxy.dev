@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation'
+
 import { CustomMDX } from '@/components/mdx'
-import { formatDate, getBlogPosts } from '@/lib/utils'
+import { getBlogPosts } from '@/lib/utils'
+import { formatDate } from '@/lib/date'
 import { baseUrl } from '@/lib/sitemap'
 
 import Content from '@/components/content'

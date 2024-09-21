@@ -5,10 +5,6 @@ import { usePathname } from 'next/navigation'
 
 const navData = [
   {
-    name: 'home',
-    href: '/',
-  },
-  {
     name: 'blog',
     href: '/blog',
   },

@@ -1,10 +1,9 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { PlayCircle, PauseCircle } from 'lucide-react'
 
 interface TrackCardProps {
   artists: {
@@ -14,7 +13,6 @@ interface TrackCardProps {
   title: string
   album: string
   image: string
-  preview_url: string
 }
 
 const TrackCard: React.FC<TrackCardProps> = ({
@@ -23,83 +21,34 @@ const TrackCard: React.FC<TrackCardProps> = ({
   title,
   album,
   image,
-  preview_url,
 }) => {
   const ref = useRef<HTMLDivElement>(null)
-  const audioRef = useRef<HTMLAudioElement | null>(null)
-  const fadeIntervalRef = useRef<NodeJS.Timeout | null>(null)
-
   const isInView = useInView(ref, { once: true })
 
   const [isHovered, setIsHovered] = useState(false)
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    audioRef.current = new Audio(preview_url)
-    audioRef.current.volume = 0.5
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768) // Adjust this breakpoint as needed
+    }
+
+    checkIfMobile()
+    window.addEventListener('resize', checkIfMobile)
 
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause()
-        audioRef.current = null
-      }
-      if (fadeIntervalRef.current) {
-        clearInterval(fadeIntervalRef.current)
-      }
+      window.removeEventListener('resize', checkIfMobile)
     }
-  }, [preview_url])
+  }, [])
 
   const handleMouseEnter = () => {
-    setIsHovered(true)
+    if (!isMobile) {
+      setIsHovered(true)
+    }
   }
 
   const handleMouseLeave = () => {
     setIsHovered(false)
-    if (audioRef.current && isPlaying) {
-      fadeOutAudio()
-    }
-  }
-
-  const fadeOutAudio = () => {
-    if (audioRef.current) {
-      const fadeOutInterval = 50
-      const fadeOutStep = 0.05
-
-      fadeIntervalRef.current = setInterval(() => {
-        if (audioRef.current && audioRef.current.volume > 0) {
-          audioRef.current.volume = Math.max(
-            0,
-            audioRef.current.volume - fadeOutStep
-          )
-        } else {
-          if (fadeIntervalRef.current) {
-            clearInterval(fadeIntervalRef.current)
-          }
-          if (audioRef.current) {
-            audioRef.current.pause()
-            audioRef.current.currentTime = 0
-          }
-          setIsPlaying(false)
-        }
-      }, fadeOutInterval)
-    }
-  }
-
-  const togglePlayPause = (e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    if (audioRef.current) {
-      if (isPlaying) {
-        fadeOutAudio()
-      } else {
-        if (fadeIntervalRef.current) {
-          clearInterval(fadeIntervalRef.current)
-        }
-        audioRef.current.volume = 0.5
-        audioRef.current.play()
-        setIsPlaying(true)
-      }
-    }
   }
 
   return (
@@ -125,32 +74,6 @@ const TrackCard: React.FC<TrackCardProps> = ({
           height={64}
           width={64}
         />
-        <AnimatePresence>
-          {isHovered && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className='absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-md cursor-pointer'
-              onClick={togglePlayPause}
-            >
-              <motion.div
-                key={isPlaying ? 'pause' : 'play'}
-                initial={{ scale: 0.5, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.5, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                {isPlaying ? (
-                  <PauseCircle className='text-white' size={32} />
-                ) : (
-                  <PlayCircle className='text-white' size={32} />
-                )}
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </motion.div>
       <div className='flex flex-col overflow-hidden'>
         <Link
@@ -168,13 +91,13 @@ const TrackCard: React.FC<TrackCardProps> = ({
       </div>
 
       <AnimatePresence>
-        {isHovered && (
+        {isHovered && !isMobile && (
           <motion.div
             initial={{ opacity: 0, x: 20, filter: 'blur(10px)' }}
             animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
             exit={{ opacity: 0, x: 20, filter: 'blur(10px)' }}
             transition={{ duration: 0.4 }}
-            className='absolute right-full top-1/2 transform -translate-y-1/2 mr-4 w-72 h-80 rounded-lg overflow-hidden z-10'
+            className='absolute right-full top-1/2 transform -translate-y-1/2 mr-4 w-72 h-80 rounded-lg overflow-hidden z-10 hidden md:block'
             style={{
               backgroundImage: `url(${image})`,
               backgroundSize: 'cover',
