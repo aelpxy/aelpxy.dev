@@ -1,14 +1,14 @@
 'use client'
 
-import React, { FC, ReactNode } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
 
 interface ContentProps {
   title: string
-  children: ReactNode
+  children: React.ReactNode
 }
 
-const Content: FC<ContentProps> = ({ title, children }) => {
+const Content: React.FC<ContentProps> = ({ title, children }) => {
   return (
     <motion.section
       initial={{ y: 20, opacity: 0 }}

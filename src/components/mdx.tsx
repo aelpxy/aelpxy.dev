@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote/rsc'
 import { createHighlighter } from 'shiki'
 import { motion } from 'framer-motion'

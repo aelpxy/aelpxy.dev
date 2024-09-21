@@ -3,6 +3,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+
 import { motion, useInView } from 'framer-motion'
 
 interface ArtistCardProps {

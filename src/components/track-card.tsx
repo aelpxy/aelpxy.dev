@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useState, useEffect } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
@@ -22,18 +22,19 @@ const TrackCard: React.FC<TrackCardProps> = ({
   album,
   image,
 }) => {
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = React.useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true })
 
-  const [isHovered, setIsHovered] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
+  const [isHovered, setIsHovered] = React.useState(false)
+  const [isMobile, setIsMobile] = React.useState(false)
 
-  useEffect(() => {
-    const checkIfMobile = () => {
-      setIsMobile(window.innerWidth < 768) // Adjust this breakpoint as needed
-    }
+  const checkIfMobile = () => {
+    setIsMobile(window.innerWidth < 768)
+  }
 
+  React.useEffect(() => {
     checkIfMobile()
+
     window.addEventListener('resize', checkIfMobile)
 
     return () => {
