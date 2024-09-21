@@ -42,6 +42,7 @@ export default async function Music() {
                 title={track.title}
                 album={track.album}
                 image={track.image}
+                preview_url={track.preview_url}
               />
             ))}
           </div>

@@ -63,6 +63,7 @@ export async function getTopTracks() {
             spotify: z.string(),
           }),
           name: z.string(),
+          preview_url: z.string(),
         })
       ),
     })
@@ -74,6 +75,7 @@ export async function getTopTracks() {
     title: item.name,
     album: item.album.name,
     image: item.album.images[0].url,
+    preview_url: item.preview_url,
   }))
 }
 
