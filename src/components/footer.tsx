@@ -24,7 +24,7 @@ const Footer = () => {
       viewport={{ once: true }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
     >
-      <div className='flex flex-col items-center justify-between pt-6 sm:pt-10 space-y-4 sm:space-y-0 sm:flex-row sm:space-x-4'>
+      <div className='flex flex-col items-center justify-between pt-6 sm:pt-10 space-y-4 sm:space-y-0 sm:flex-row sm:space-x-4 border-t border-neutral-900'>
         <span className='mr-0 transition-transform duration-300 ease-in-out text-sm sm:text-base text-neutral-300'>
           CC BY-SA © {new Date().getFullYear()} aelpxy.
         </span>

@@ -81,10 +81,6 @@ export default function Home() {
             I'm a software developer who loves building backends and minimalist
             frontends, I have over five years of experience with TypeScript and
             Go in production environments.
-            <p className='mt-6'>
-              I'm currently working on building a platform built for selling
-              digital goods.
-            </p>
           </div>
         </section>
 
