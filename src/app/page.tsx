@@ -24,9 +24,8 @@ export const metadata: Metadata = {
 const work = [
   {
     name: 'Pandabase',
-    role: 'Co-founder and CTO (January 2022 - Present)',
-    description:
-      'Your go-to platform for selling digital goods, with all your payment infrastructure in one place.',
+    role: 'Co-founder and CTO (January 2023 - Present)',
+    description: 'Payment infrastructure built for digital entrepreneurs.',
   },
   {
     name: 'Zote',
