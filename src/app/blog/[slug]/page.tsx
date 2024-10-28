@@ -1,58 +1,57 @@
-import { notFound } from 'next/navigation'
-
 import { MDX } from '@/components/mdx'
 import { formatDate } from '@/lib/date'
 import { baseUrl } from '@/lib/sitemap'
 import { getBlogPosts } from '@/lib/utils'
+import { notFound } from 'next/navigation'
+import * as React from 'react'
 
 import Content from '@/components/content'
 
-// @ts-ignore - A result of laziness
-export default function Post({ params }) {
-  let post = getBlogPosts().find((post) => post.slug === params.slug)
+export default async function Post({ params }: { params: { slug: string } }) {
+  const { slug } = await params
+
+  let post = getBlogPosts().find((post) => post.slug === slug)
 
   if (!post) {
     notFound()
   }
 
   return (
-    <main>
-      <Content title={post.metadata.title}>
-        <script
-          type='application/ld+json'
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'BlogPosting',
-              headline: post.metadata.title,
-              datePublished: post.metadata.publishedAt,
-              dateModified: post.metadata.publishedAt,
-              description: post.metadata.summary,
-              url: `${baseUrl}/blog/${post.slug}`,
-              author: {
-                '@type': 'Person',
-                name: 'aelpxy',
-              },
-            }),
-          }}
-        />
-        <h2 className='text-xl py-6 tracking-tighter text-stone-100 font-mono'>
-          <span className='select-none'>`</span>/blog/{post.slug}
-          <span className='select-none'>`</span>
-        </h2>
+    <Content title={post.metadata.title}>
+      <script
+        type='application/ld+json'
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            headline: post.metadata.title,
+            datePublished: post.metadata.publishedAt,
+            dateModified: post.metadata.publishedAt,
+            description: post.metadata.summary,
+            url: `${baseUrl}/blog/${post.slug}`,
+            author: {
+              '@type': 'Person',
+              name: 'aelpxy',
+            },
+          }),
+        }}
+      />
+      <h2 className='text-xl py-6 tracking-tighter text-stone-100 font-mono'>
+        <span className='select-none'>`</span>/blog/{post.slug}
+        <span className='select-none'>`</span>
+      </h2>
 
-        <div className='flex justify-between items-center mb-8 text-sm'>
-          <p className='text-sm text-stone-400'>
-            {formatDate(post.metadata.publishedAt)}
-          </p>
-        </div>
-        <article className='prose'>
-          {/* @ts-ignore */}
-          <MDX source={post.content} />
-        </article>
-      </Content>
-    </main>
+      <div className='flex justify-between items-center mb-8 text-sm'>
+        <p className='text-sm text-stone-400'>
+          {formatDate(post.metadata.publishedAt)}
+        </p>
+      </div>
+      <article className='prose'>
+        {/* @ts-ignore */}
+        <MDX source={post.content} />
+      </article>
+    </Content>
   )
 }
 
@@ -67,6 +66,7 @@ export async function generateStaticParams() {
 // @ts-ignore
 export function generateMetadata({ params }) {
   let post = getBlogPosts().find((post) => post.slug === params.slug)
+
   if (!post) {
     return
   }

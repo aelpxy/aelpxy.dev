@@ -232,13 +232,11 @@ const components = {
 
 export function MDX({ components: userComponents, ...props }: CustomMDXProps) {
   return (
-    <React.Suspense>
-      <MDXRemote
-        {...props}
-        // @ts-ignore
-        components={{ ...components, ...(userComponents || {}) }}
-      />
-    </React.Suspense>
+    <MDXRemote
+      {...props}
+      // @ts-ignore
+      components={{ ...components, ...(userComponents || {}) }}
+    />
   )
 }
 
