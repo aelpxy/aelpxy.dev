@@ -3,9 +3,8 @@
 @tailwind utilities;
 
 :root {
+  --background-color: 18, 17, 17;
   --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 0, 0, 0;
   --scrollbar-color: #2a2a2a;
   --scrollbar-bg: #1a1a1a;
   --scrollbar-hover: #3a3a3a;
@@ -13,12 +12,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: rgb(var(--background-color));
 }
 
 @layer utilities {
@@ -87,11 +81,11 @@ html {
 }
 
 .prose a {
-  @apply underline transition-all decoration-neutral-400 underline-offset-2 decoration-[0.1em];
+  @apply underline transition-all decoration-stone-400 underline-offset-2 decoration-[0.1em];
 }
 
 .prose .anchor:after {
-  @apply text-neutral-300;
+  @apply text-stone-300;
   content: '#';
 }
 
@@ -122,15 +116,15 @@ html {
 }
 
 .prose p {
-  @apply my-4 text-neutral-200;
+  @apply my-4 text-stone-300;
 }
 
 .prose h1 {
-  @apply text-4xl font-medium tracking-tight mt-6 mb-2;
+  @apply text-3xl font-medium tracking-tight mt-6 mb-2;
 }
 
 .prose h2 {
-  @apply text-xl font-medium tracking-tight mt-6 mb-2;
+  @apply text-2xl font-medium tracking-tight mt-6 mb-2;
 }
 
 .prose h3 {

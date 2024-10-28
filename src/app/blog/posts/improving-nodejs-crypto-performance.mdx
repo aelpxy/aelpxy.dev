@@ -1,4 +1,3 @@
-
 ---
 title: 'A story on how we optimized things for performance'
 publishedAt: '2024-10-06'
@@ -6,28 +5,47 @@ author: 'aelpxy'
 summary: 'In a world where everything moves fast, you can't ignore the significance of performance.'
 ---
 
-## Introduction
+# Introduction
 
-I have always strived to write the most performant code at Pandabase, as we need speed and reliability to handle the large volume of payments we process every day. I’ve optimized various components, from database queries to caching, and implemented proper rate limits to ensure that everyone can utilize our API without sacrificing performance or security.
+I have always strived to write the most performant code at Pandabase, as we need
+speed and reliability to handle the large volume of payments we process every
+day. I’ve optimized various components, from database queries to caching, and
+implemented proper rate limits to ensure that everyone can utilize our API
+without sacrificing performance or security.
 
 ## The Problem
 
-During the development of our API, I faced a significant issue with performance. Our serial management system, which is written in TypeScript and Node.js, had issues with decrypting and encrypting the thousands of keys we processed. We did not want to compromise on speed, as processing time was reaching up to 5 seconds per request.
+During the development of our API, I faced a significant issue with performance.
+Our serial management system, which is written in TypeScript and Node.js, had
+issues with decrypting and encrypting the thousands of keys we processed. We did
+not want to compromise on speed, as processing time was reaching up to 5 seconds
+per request.
 
-Of course, several techniques could be employed, such as a job queue or processing in batches in the background. However, that didn’t make sense to me in this context, so I decided to try a couple of different approaches together.
+Of course, several techniques could be employed, such as a job queue or
+processing in batches in the background. However, that didn’t make sense to me
+in this context, so I decided to try a couple of different approaches together.
 
-## Solutions
+# Solutions
 
-I came up with a number of ideas to solve this issue during the development of this specific API. Since our stack was limited to Go and Node, here’s what I came up with:
+I came up with a number of ideas to solve this issue during the development of
+this specific API. Since our stack was limited to Go and Node, here’s what I
+came up with:
 
-### The Microservice
+## The Microservice
 
-The serials API has its own database, and everything was already finished; the only bottleneck was the encryption/decryption processing with AES-256-CBC. This led me to another idea: what if I wrote an HTTP server dedicated solely to encrypting and decrypting keys in a more performant language? I wanted to use either Go or Rust for this job, as both are fast enough to handle it.
+The serials API has its own database, and everything was already finished; the
+only bottleneck was the encryption/decryption processing with `AES-256-CBC`.
+This led me to another idea: what if I wrote an HTTP server dedicated solely to
+encrypting and decrypting keys in a more performant language? I wanted to use
+either Go or Rust for this job, as both are fast enough to handle it.
 
-Since our API mostly follows a microservice-based architecture, it was relatively easy to implement. However, this approach had several caveats and was ultimately abandoned. I did utilize goroutines in the Go implementation.
+Since our API mostly follows a microservice-based architecture, it was
+relatively easy to implement. However, this approach had several caveats and was
+ultimately abandoned. I did utilize goroutines in the Go implementation.
 
 Here's what the Go results looked like:
-```
+
+```sh
 ~/Workspace/ed-benchmark via Go v1.23.2
 ❯ go run benchmark.go
 Processed 1000000 keys in 1.152051375s
@@ -35,30 +53,43 @@ Processed 1000000 keys in 1.152051375s
 
 And the production binary
 
-```
+```sh
 ~/Workspace/ed-benchmark via Go v1.23.2
 ❯ ./benchmark
 Processed 1000000 keys in 1.118548291s
 ```
 
-I don't see a significant difference other than a couple of milliseconds between the two.
+I don't see a significant difference other than a couple of milliseconds between
+the two.
 
-### Node.js Worker Threads
+## Node.js Worker Threads
 
-Worker threads can spin up multiple workers, so I thought we could utilize this and speed up performance. I wrote an implementation that takes in batches of keys and decrypts them; the same applies for encryption. This seemed like a feasible solution, and performance improvements were as follows for one million keys.
+Worker threads can spin up multiple workers, so I thought we could utilize this
+and speed up performance. I wrote an implementation that takes in batches of
+keys and decrypts them; the same applies for encryption. This seemed like a
+feasible solution, and performance improvements were as follows for one million
+keys.
 
-```
+```sh
 ~/Workspace/ed-benchmark via Node.js v22.9.0
 ❯ node benchmark.js
 Single Thread: 5.494s
 Multi Thread: 3.908s
 ```
 
-## Things to note
+# Things to note
 
+While worker threads do indeed perform better than single-threaded processing,
+single-threaded execution excels with smaller workloads, which we largely deal
+with. I thought using a combination of both would give us the best of both
+worlds.
 
-While worker threads do indeed perform better than single-threaded processing, single-threaded execution excels with smaller workloads, which we largely deal with. I thought using a combination of both would give us the best of both worlds.
+From a technical aspect, this is due to how the CPU operates. Smaller key sets
+fit easily into the CPU cache, allowing single-threaded processing to perform
+better with fewer keys. In contrast, with a larger number of keys, cache misses
+become frequent, impacting performance. Overhead also plays a vital role.
 
-From a technical aspect, this is due to how the CPU operates. Smaller key sets fit easily into the CPU cache, allowing single-threaded processing to perform better with fewer keys. In contrast, with a larger number of keys, cache misses become frequent, impacting performance. Overhead also plays a vital role.
-
-For larger key sets, worker threads are the best solution as they allow for parallel execution and distribution across multiple CPU cores. However, for fewer keys, the overhead of managing threads can dominate, meaning the time spent managing threads may exceed the time spent on actual processing of keys.
+For larger key sets, worker threads are the best solution as they allow for
+parallel execution and distribution across multiple CPU cores. However, for
+fewer keys, the overhead of managing threads can dominate, meaning the time
+spent managing threads may exceed the time spent on actual processing of keys.

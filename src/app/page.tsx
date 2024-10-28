@@ -1,12 +1,12 @@
+import { BriefcaseBusinessIcon, MapPinIcon } from 'lucide-react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { MapPinIcon, BriefcaseBusinessIcon } from 'lucide-react'
 
-import Content from '@/components/content'
-import WorkCard from '@/components/work-card'
-import ProjectCard from '@/components/project-card'
-import IconItem from '@/components/icon-item'
 import BlogPostLink from '@/components/blog-post-link'
+import Content from '@/components/content'
+import IconItem from '@/components/icon-item'
+import ProjectCard from '@/components/project-card'
+import WorkCard from '@/components/work-card'
 import WorkSection from '@/components/work-section'
 
 import { getBlogPosts } from '@/lib/utils'
@@ -25,13 +25,8 @@ const work = [
   {
     name: 'Pandabase',
     role: 'Co-founder and CTO (January 2023 - Present)',
-    description: 'Payment infrastructure built for digital entrepreneurs.',
-  },
-  {
-    name: 'Zote',
-    role: 'Investor (March 2024 - Present)',
     description:
-      'The AI and software company created by creative developers for the benefit of humanity.',
+      'Payment infrastructure built for the next wave of digital entrepreneurs.',
   },
 ]
 
@@ -68,7 +63,7 @@ export default function Home() {
           <IconItem Icon={BriefcaseBusinessIcon}>
             Co-founder and CTO @{' '}
             <Link
-              className='underline decoration-wavy hover:text-neutral-400 transition-all'
+              className='underline decoration-wavy hover:text-stone-400 transition-all'
               href='https://pandabase.io'
               target='_blank'
               rel='noopener noreferrer'
@@ -76,10 +71,15 @@ export default function Home() {
               Pandabase
             </Link>
           </IconItem>
-          <div className='text-neutral-300 mt-12 sm:text-xl text-base'>
+          <div className='text-stone-300 mt-12 sm:text-xl text-base font-light'>
             I'm a software developer who loves building backends and minimalist
             frontends, I have over five years of experience with TypeScript and
-            Go in production environments.
+            Go in production.
+          </div>
+          <div className='text-stone-300 mt-6 sm:text-xl font-light'>
+            My primary work at Pandabase consists of backend engineering,
+            processing thousands of dollars each month. I wrote the initial
+            version and continue to maintain the core.
           </div>
         </section>
 
@@ -93,7 +93,7 @@ export default function Home() {
         </div>
 
         <div className='py-4'>
-          <h1 className='text-2xl sm:text-3xl lg:text-3xl text-neutral-50'>
+          <h1 className='text-2xl sm:text-3xl lg:text-3xl text-stone-50'>
             recent posts
           </h1>
           <div className='py-6'>
@@ -101,7 +101,7 @@ export default function Home() {
               <BlogPostLink key={post.slug} post={post} />
             ))}
             <Link href='/blog'>
-              <span className='mt-10 text-md hover:underline tracking-tighter text-neutral-300 decoration-wavy truncate ml-2'>
+              <span className='mt-10 text-md hover:underline tracking-tighter text-stone-300 decoration-wavy truncate ml-2'>
                 read all →
               </span>
             </Link>

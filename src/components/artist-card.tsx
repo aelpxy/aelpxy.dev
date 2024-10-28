@@ -1,8 +1,8 @@
 'use client'
 
-import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import React from 'react'
 
 import { motion, useInView } from 'framer-motion'
 
@@ -48,13 +48,13 @@ const ArtistCard: React.FC<ArtistCardProps> = ({
         <Link
           href={url}
           target='_blank'
-          className='underline decoration-neutral-100 transition-colors hover:decoration-neutral-200 focus:decoration-neutral-500 decoration-wavy'
+          className='underline decoration-stone-100 transition-colors hover:decoration-stone-200 focus:decoration-stone-500 decoration-wavy'
         >
-          <h3 className='hover:font-semibold text-neutral-100 text-sm sm:text-base truncate'>
+          <h3 className='hover:font-semibold text-stone-100 text-sm sm:text-base truncate'>
             {name}
           </h3>
         </Link>
-        <p className='text-neutral-200 text-xs sm:text-sm truncate'>
+        <p className='text-stone-200 text-xs sm:text-sm truncate'>
           {followers} followers
         </p>
       </div>

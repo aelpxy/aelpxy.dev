@@ -14,8 +14,8 @@ const navData = [
   },
 ]
 
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const Navbar = () => {
   const pathname = usePathname()
@@ -30,7 +30,7 @@ const Navbar = () => {
         <motion.div
           initial={{ translateY: -20 }}
           animate={{ translateY: 0 }}
-          className='flex w-full items-center justify-between py-4 px-6 rounded-xl bg-neutral-950 backdrop-filter bg-opacity-30 backdrop-blur-md border border-neutral-900/90'
+          className='flex w-full items-center justify-between py-4 px-6 rounded-xl bg-stone-900 backdrop-filter bg-opacity-30 backdrop-blur-md'
         >
           <div>
             <div className='flex lg:flex-1 select-none'>
@@ -42,7 +42,7 @@ const Navbar = () => {
                 >
                   <span className='sr-only'>aelpxy</span>
                   <Image
-                    className='h-12 w-auto rounded-md border-neutral-600'
+                    className='h-12 w-auto rounded-md border-stone-600'
                     src={'/image.png'}
                     alt='Icon'
                     width={256}
@@ -58,8 +58,8 @@ const Navbar = () => {
                 <motion.code
                   className={`px-1.5 py-1 ease-in-out rounded-md transition-all  ${
                     pathname === link.href
-                      ? 'text-neutral-100 underline decoration-wavy'
-                      : 'text-neutral-400 hover:underline decoration-wavy'
+                      ? 'text-stone-100 underline decoration-wavy'
+                      : 'text-stone-400 hover:underline decoration-wavy'
                   }`}
                 >
                   {link.name}

@@ -1,12 +1,15 @@
 import type { Metadata } from 'next'
-import { Gowun_Dodum, JetBrains_Mono } from 'next/font/google'
+import { DM_Mono, DM_Sans } from 'next/font/google'
 import './globals.css'
 
-import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
+import Navbar from '@/components/navbar'
 
-const primaryFont = Gowun_Dodum({ weight: ['400'], subsets: ['vietnamese'] })
-const monoFont = JetBrains_Mono({
+const primaryFont = DM_Sans({
+  weight: ['300', '400', '500'],
+  subsets: ['latin'],
+})
+const monoFont = DM_Mono({
   weight: ['400'],
   subsets: ['latin'],
   variable: '--font-mono',
@@ -30,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${primaryFont.className} ${monoFont.variable} selection:text-neutral-900 selection:bg-neutral-100 min-h-screen antialiased`}
+        className={`${primaryFont.className} ${monoFont.variable} selection:text-stone-900 selection:bg-stone-100 min-h-screen antialiased`}
       >
         <Navbar />
         {children}

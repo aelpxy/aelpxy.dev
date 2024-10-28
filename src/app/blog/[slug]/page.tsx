@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation'
 
-import { CustomMDX } from '@/components/mdx'
-import { getBlogPosts } from '@/lib/utils'
+import { MDX } from '@/components/mdx'
 import { formatDate } from '@/lib/date'
 import { baseUrl } from '@/lib/sitemap'
+import { getBlogPosts } from '@/lib/utils'
 
 import Content from '@/components/content'
 
@@ -17,7 +17,7 @@ export default function Post({ params }) {
 
   return (
     <main>
-      <Content title={`blog/${post.slug}`}>
+      <Content title={post.metadata.title}>
         <script
           type='application/ld+json'
           suppressHydrationWarning
@@ -37,18 +37,19 @@ export default function Post({ params }) {
             }),
           }}
         />
-        <h1 className='text-2xl py-6 tracking-tighter text-neutral-100'>
-          {post.metadata.title}
-        </h1>
+        <h2 className='text-xl py-6 tracking-tighter text-stone-100 font-mono'>
+          <span className='select-none'>`</span>/blog/{post.slug}
+          <span className='select-none'>`</span>
+        </h2>
 
         <div className='flex justify-between items-center mb-8 text-sm'>
-          <p className='text-sm text-neutral-400'>
+          <p className='text-sm text-stone-400'>
             {formatDate(post.metadata.publishedAt)}
           </p>
         </div>
         <article className='prose'>
           {/* @ts-ignore */}
-          <CustomMDX source={post.content} />
+          <MDX source={post.content} />
         </article>
       </Content>
     </main>

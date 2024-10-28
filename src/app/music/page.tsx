@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 
+import ArtistCard from '@/components/artist-card'
 import Content from '@/components/content'
 import TrackCard from '@/components/track-card'
-import ArtistCard from '@/components/artist-card'
 
-import { getTopTracks, getTopArtists } from '@/lib/spotify'
+import { getTopArtists, getTopTracks } from '@/lib/spotify'
 
 export const metadata: Metadata = {
   title: 'aelpxy - music',
@@ -29,7 +29,7 @@ export default async function Music() {
       </div>
 
       <Content title='music'>
-        <h1 className='text-2xl py-6 font-semibold text-neutral-300'>
+        <h1 className='text-2xl py-6 font-semibold text-stone-300'>
           top tracks this month
         </h1>
         <section className='py-4 px-6'>
@@ -47,7 +47,7 @@ export default async function Music() {
           </div>
         </section>
 
-        <h1 className='text-2xl py-6 font-semibold text-neutral-300'>
+        <h1 className='text-2xl py-6 font-semibold text-stone-300'>
           top artists this month
         </h1>
         <section className='py-4 px-6'>

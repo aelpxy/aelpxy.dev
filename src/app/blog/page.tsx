@@ -16,7 +16,7 @@ export default function Blog() {
   return (
     <main>
       <Content title='blog'>
-        <h1 className='text-2xl py-6 font-semibold text-neutral-300'>
+        <h1 className='text-2xl py-6 font-semibold text-stone-300'>
           words i've written
         </h1>
         <section className='py-4'>

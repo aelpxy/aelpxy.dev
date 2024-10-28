@@ -1,27 +1,33 @@
-import React from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
+'use client'
 
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote/rsc'
-import { createHighlighter } from 'shiki'
 import { motion } from 'framer-motion'
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote/rsc'
+import Image from 'next/image'
+import Link from 'next/link'
+import React, { Children, useMemo, useState } from 'react'
+import { createHighlighter } from 'shiki'
+
+interface CustomLinkProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  href: string
+  children: React.ReactNode
+}
+
+interface RoundedImageProps {
+  src: string
+  alt: string
+  width?: number
+  height?: number
+  className?: string
+}
 
 interface TableData {
   headers: string[]
   rows: string[][]
 }
 
-interface CustomLinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  href: string
-}
-
-interface RoundedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-  alt: string
-}
-
-interface CodeProps extends React.HTMLAttributes<HTMLElement> {
-  children: string
+interface TableProps {
+  data: TableData
 }
 
 interface HeadingProps {
@@ -33,126 +39,185 @@ interface CustomMDXProps
   components?: Record<string, React.ComponentType<any>>
 }
 
-function Table({ data }: { data: TableData }) {
-  let headers = data.headers.map((header, index) => (
-    <th key={index}>{header}</th>
-  ))
+const slugify = (str: string): string => {
+  if (typeof str !== 'string') return ''
 
-  let rows = data.rows.map((row, index) => (
-    <tr key={index}>
-      {row.map((cell, cellIndex) => (
-        <td key={cellIndex}>{cell}</td>
-      ))}
-    </tr>
-  ))
+  return str
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/&/g, '-and-')
+    .replace(/[^\w-]+/g, '')
+    .replace(/--+/g, '-')
+}
+
+const Table = ({ data }: TableProps) => {
+  const { headers, rows } = data
+
+  const tableHeaders = useMemo(
+    () =>
+      headers.map((header, index) => (
+        <th key={index} className='p-2 text-left font-semibold'>
+          {header}
+        </th>
+      )),
+    [headers]
+  )
+
+  const tableRows = useMemo(
+    () =>
+      rows.map((row, index) => (
+        <tr key={index} className='hover:bg-stone-800'>
+          {row.map((cell, cellIndex) => (
+            <td
+              key={cellIndex}
+              className='p-2 text-left border-t border-stone-700'
+            >
+              {cell}
+            </td>
+          ))}
+        </tr>
+      )),
+    [rows]
+  )
 
   return (
-    <table>
-      <thead>
-        <tr>{headers}</tr>
-      </thead>
-      <tbody>{rows}</tbody>
-    </table>
+    <div className='overflow-x-auto'>
+      <table className='w-full border-collapse'>
+        <thead className='bg-stone-800'>
+          <tr>{tableHeaders}</tr>
+        </thead>
+        <tbody>{tableRows}</tbody>
+      </table>
+    </div>
   )
 }
 
-function CustomLink(props: CustomLinkProps) {
-  let href = props.href
+const CustomLink = ({ href, children, ...props }: CustomLinkProps) => {
+  if (!href) {
+    return <span>{children}</span>
+  }
 
-  if (href.startsWith('/')) {
+  if (href.startsWith('/') || href.startsWith('#')) {
     return (
-      // @ts-ignore
       <Link href={href} {...props}>
-        {/* @ts-ignore */}
-        {props.children}
+        {children}
       </Link>
     )
   }
 
-  if (href.startsWith('#')) {
-    return <a {...props} />
-  }
-
-  return <Link target='_blank' rel='noopener noreferrer' {...props} />
+  return (
+    <Link
+      href={href}
+      target='_blank'
+      rel='noopener noreferrer'
+      className='text-stone-400 hover:text-stone-200'
+      {...props}
+    >
+      {children}
+    </Link>
+  )
 }
 
-function RoundedImage(props: RoundedImageProps) {
-  const [isLoaded, setIsLoaded] = React.useState(false)
+const RoundedImage = ({
+  src,
+  alt,
+  width,
+  height,
+  className,
+  ...props
+}: RoundedImageProps) => {
+  const [isLoaded, setIsLoaded] = useState(false)
 
   return (
     <motion.div
-      initial={{ filter: 'blur(10px)' }}
-      animate={{ filter: isLoaded ? 'blur(0px)' : 'blur(10px)' }}
-      transition={{ duration: 1, ease: 'easeOut' }}
+      initial={{ opacity: 0, filter: 'blur(10px)' }}
+      animate={{
+        opacity: isLoaded ? 1 : 0,
+        filter: isLoaded ? 'blur(0px)' : 'blur(10px)',
+      }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
     >
-      {/* @ts-ignore */}
       <Image
-        // @ts-ignore
-        alt={props.alt}
-        className='rounded-lg'
-        {...props}
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        className={`rounded-lg ${className || ''}`}
         onLoadingComplete={() => setIsLoaded(true)}
+        {...props}
       />
     </motion.div>
   )
 }
 
-interface CodeProps extends React.HTMLAttributes<HTMLElement> {
-  children: string
-  language: string
-}
+const Pre = async ({
+  children,
+  ...props
+}: React.HTMLAttributes<HTMLPreElement>) => {
+  const codeElement = Children.toArray(children).find(
+    (child): child is React.ReactElement =>
+      React.isValidElement(child) && child.type === 'code'
+  )
 
-async function Code({ children, ...props }: CodeProps) {
-  const lang = props.className?.replace('language-', '') || 'typescript'
+  if (!codeElement) {
+    return <pre {...props}>{children}</pre>
+  }
 
-  const highlighter = await createHighlighter({
-    themes: ['dark-plus'],
-    langs: ['javascript', 'typescript', 'go', 'rust'],
-  })
+  const className = codeElement.props?.className || ''
+  const code = String(codeElement.props.children).trim()
 
-  const html = highlighter.codeToHtml(children, {
-    lang: lang,
-    theme: 'dark-plus',
-  })
-
-  return <code dangerouslySetInnerHTML={{ __html: html }} {...props} />
-}
-
-function slugify(str: string) {
-  return str
-    .toString()
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, '-')
-    .replace(/&/g, '-and-')
-    .replace(/[^\w\-]+/g, '')
-    .replace(/\-\-+/g, '-')
-}
-
-function createHeading(level: number) {
-  const Heading = ({ children }: HeadingProps) => {
-    // @ts-ignore
-    let slug = slugify(children.toString())
-    return React.createElement(
-      `h${level}`,
-      { id: slug },
-      [
-        React.createElement('a', {
-          href: `#${slug}`,
-          key: `link-${slug}`,
-          className: 'anchor',
-        }),
-      ],
-      children
+  if (!className.startsWith('language-')) {
+    return (
+      <code className='px-1.5 py-0.5 rounded-md bg-stone-800 border border-stone-700 font-mono text-sm'>
+        {code}
+      </code>
     )
   }
 
-  Heading.displayName = `Heading${level}`
+  const lang = className.split('-')[1]
 
-  return Heading
+  if (!lang) {
+    return <pre {...props}>{children}</pre>
+  }
+
+  const highlighter = await createHighlighter({
+    themes: ['github-dark'],
+    langs: ['javascript', 'typescript', 'go', 'rust', 'sh', 'bash', 'fish'],
+  })
+
+  const html = highlighter.codeToHtml(code, {
+    lang,
+    theme: 'github-dark',
+  })
+
+  return (
+    <div className='my-6'>
+      <div className='rounded-lg border border-stone-700 bg-stone-900'>
+        <div className='overflow-x-auto'>
+          <div dangerouslySetInnerHTML={{ __html: html }} />
+        </div>
+      </div>
+    </div>
+  )
 }
 
-let components = {
+const createHeading = (level: number) => {
+  return function Heading({ children }: HeadingProps) {
+    const slug = slugify(children?.toString() || '')
+
+    return React.createElement(`h${level}`, { id: slug }, [
+      React.createElement('a', {
+        href: `#${slug}`,
+        key: `link-${slug}`,
+        className: 'anchor',
+      }),
+      children,
+    ])
+  }
+}
+
+const components = {
   h1: createHeading(1),
   h2: createHeading(2),
   h3: createHeading(3),
@@ -161,17 +226,20 @@ let components = {
   h6: createHeading(6),
   Image: RoundedImage,
   a: CustomLink,
-  code: Code,
+  pre: Pre,
   Table,
-}
+} as const
 
-export function CustomMDX(props: CustomMDXProps) {
+export function MDX({ components: userComponents, ...props }: CustomMDXProps) {
   return (
-    // @ts-ignore
-    <MDXRemote
-      {...props}
-      // @ts-ignore
-      components={{ ...components, ...(props.components || {}) }}
-    />
+    <React.Suspense>
+      <MDXRemote
+        {...props}
+        // @ts-ignore
+        components={{ ...components, ...(userComponents || {}) }}
+      />
+    </React.Suspense>
   )
 }
+
+export default MDX

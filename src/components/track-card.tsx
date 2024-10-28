@@ -1,9 +1,9 @@
 'use client'
 
-import React from 'react'
+import { AnimatePresence, motion, useInView } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion, useInView, AnimatePresence } from 'framer-motion'
+import React from 'react'
 
 interface TrackCardProps {
   artists: {
@@ -80,13 +80,13 @@ const TrackCard: React.FC<TrackCardProps> = ({
         <Link
           href={songUrl}
           target='_blank'
-          className='underline decoration-neutral-100 transition-colors hover:decoration-neutral-200 focus:decoration-neutral-500 decoration-wavy'
+          className='underline decoration-stone-100 transition-colors hover:decoration-stone-200 focus:decoration-stone-500 decoration-wavy'
         >
-          <h3 className='hover:font-semibold text-neutral-100 text-sm sm:text-base truncate'>
+          <h3 className='hover:font-semibold text-stone-100 text-sm sm:text-base truncate'>
             {title}
           </h3>
         </Link>
-        <p className='text-neutral-200 text-xs sm:text-sm truncate'>
+        <p className='text-stone-200 text-xs sm:text-sm truncate'>
           by {artists.map((artist) => artist.name).join(', ')}
         </p>
       </div>
@@ -120,7 +120,7 @@ const TrackCard: React.FC<TrackCardProps> = ({
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className='text-lg text-neutral-200 mb-1'
+                className='text-lg text-stone-200 mb-1'
               >
                 by {artists.map((artist) => artist.name).join(', ')}
               </motion.p>
@@ -128,7 +128,7 @@ const TrackCard: React.FC<TrackCardProps> = ({
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3 }}
-                className='text-sm text-neutral-300'
+                className='text-sm text-stone-300'
               >
                 featuring {title}
               </motion.p>
