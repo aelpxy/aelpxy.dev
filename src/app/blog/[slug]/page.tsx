@@ -7,7 +7,8 @@ import * as React from 'react'
 
 import Content from '@/components/content'
 
-export default function Post({ params }: { params: { slug: string } }) {
+// @ts-ignore
+export default function Post({ params }) {
   const { slug } = params
 
   let post = getBlogPosts().find((post) => post.slug === slug)
