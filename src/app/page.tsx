@@ -72,9 +72,9 @@ export default function Home() {
             </Link>
           </IconItem>
           <div className='text-stone-300 mt-12 sm:text-xl text-base font-light'>
-            I'm a software developer who loves building backends and minimalist
-            frontends, I have over five years of experience with TypeScript and
-            Go in production.
+            I&lsquo;m a software developer who loves building backends and
+            minimalist frontends, I have over five years of experience with
+            TypeScript and Go in production.
           </div>
           <div className='text-stone-300 mt-6 sm:text-xl font-light'>
             My primary work at Pandabase consists of backend engineering,

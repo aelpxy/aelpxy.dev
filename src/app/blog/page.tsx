@@ -17,7 +17,7 @@ export default function Blog() {
     <main>
       <Content title='blog'>
         <h1 className='text-2xl py-6 font-semibold text-stone-300'>
-          words i've written
+          words i&lsquo;ve written
         </h1>
         <section className='py-4'>
           <div className='flex flex-col gap-y-4'>
