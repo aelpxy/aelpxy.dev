@@ -7,8 +7,8 @@ import * as React from 'react'
 
 import Content from '@/components/content'
 
-export default async function Post({ params }: { params: { slug: string } }) {
-  const { slug } = await params
+export default function Post({ params }: { params: { slug: string } }) {
+  const { slug } = params
 
   let post = getBlogPosts().find((post) => post.slug === slug)
 
