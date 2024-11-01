@@ -24,9 +24,13 @@ export const metadata: Metadata = {
 const work = [
   {
     name: 'Pandabase',
-    role: 'Co-founder and CTO (January 2023 - Present)',
-    description:
-      'Payment infrastructure built for the next wave of digital entrepreneurs.',
+    role: 'Co-founder and CTO (Jan 2023 - Present)',
+    description: 'Payment platform for the next wave of digital entrepreneurs.',
+  },
+  {
+    name: 'Zote',
+    role: 'IInvestor (March 2024 - Present)',
+    description: 'The managed open deployment platform for everyone.',
   },
 ]
 
@@ -34,14 +38,13 @@ const projects = [
   {
     name: 'dbctl',
     role: 'Creator',
-    description:
-      'A command-line tool built to help you easily manage containerized databases.',
+    description: 'A CLI built to help you manage databases.',
   },
   {
     name: 'void',
     role: 'Maintainer',
     description:
-      'In memory key-value fault tolerant cache built to handle millions of requests.',
+      'Fault tolerant KV store built to handle millions of requests.',
   },
 ]
 
@@ -58,10 +61,10 @@ export default function Home() {
   return (
     <main>
       <Content title='about'>
-        <section className='px-0 sm:px-6 py-6 sm:py-12 text-md'>
+        <section className='px-0 sm:px-6 py-6 sm:py-12 text-md '>
           <IconItem Icon={MapPinIcon}>::1</IconItem>
           <IconItem Icon={BriefcaseBusinessIcon}>
-            Co-founder and CTO @{' '}
+            CTO & Co-founder @{' '}
             <Link
               className='underline decoration-wavy hover:text-stone-400 transition-all'
               href='https://pandabase.io'
@@ -74,16 +77,12 @@ export default function Home() {
           <div className='text-stone-300 mt-12 sm:text-xl text-base font-light'>
             I&lsquo;m a software developer who loves building backends and
             minimalist frontends, I have over five years of experience with
-            TypeScript and Go in production.
-          </div>
-          <div className='text-stone-300 mt-6 sm:text-xl font-light'>
-            My primary work at Pandabase consists of backend engineering,
-            processing thousands of dollars each month. I wrote the initial
-            version and continue to maintain the core.
+            TypeScript and Go in production. My primary work at Pandabase
+            consists of backend engineering and a bit of frontend.
           </div>
         </section>
 
-        <div className='flex flex-col md:flex-row justify-between max-w-4xl mx-auto'>
+        <div className='flex flex-col md:flex-row justify-between max-w-4xl mx-auto '>
           <WorkSection title='work' items={work} CardComponent={WorkCard} />
           <WorkSection
             title='projects'

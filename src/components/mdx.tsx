@@ -170,13 +170,13 @@ const Pre = async ({
   }
 
   const highlighter = await createHighlighter({
-    themes: ['github-dark'],
+    themes: ['vitesse-dark'],
     langs: ['javascript', 'typescript', 'go', 'rust', 'sh', 'bash', 'fish'],
   })
 
   const html = highlighter.codeToHtml(code, {
     lang,
-    theme: 'github-dark',
+    theme: 'vitesse-dark',
   })
 
   return (
