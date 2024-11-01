@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
-import remarkGfm from 'remark-gfm'
 import createMDX from '@next/mdx'
+import remarkGfm from 'remark-gfm'
 
 const nextConfig = {
   output: 'export',

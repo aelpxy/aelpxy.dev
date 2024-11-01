@@ -1,10 +1,8 @@
-'use client'
-
 import { motion } from 'framer-motion'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote/rsc'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { Children, useMemo, useState } from 'react'
+import React, { Children, useMemo } from 'react'
 import { createHighlighter } from 'shiki'
 
 interface CustomLinkProps
@@ -127,24 +125,14 @@ const RoundedImage = ({
   className,
   ...props
 }: RoundedImageProps) => {
-  const [isLoaded, setIsLoaded] = useState(false)
-
   return (
-    <motion.div
-      initial={{ opacity: 0, filter: 'blur(10px)' }}
-      animate={{
-        opacity: isLoaded ? 1 : 0,
-        filter: isLoaded ? 'blur(0px)' : 'blur(10px)',
-      }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
-    >
+    <motion.div>
       <Image
         src={src}
         alt={alt}
         width={width}
         height={height}
         className={`rounded-lg ${className || ''}`}
-        onLoadingComplete={() => setIsLoaded(true)}
         {...props}
       />
     </motion.div>
@@ -235,7 +223,7 @@ export function MDX({ components: userComponents, ...props }: CustomMDXProps) {
     <MDXRemote
       {...props}
       // @ts-ignore
-      components={{ ...components, ...(userComponents || {}) }}
+      components={{ ...components, ...userComponents }}
     />
   )
 }
