@@ -29,7 +29,7 @@ const work = [
   },
   {
     name: 'Zote',
-    role: 'IInvestor (March 2024 - Present)',
+    role: 'Investor (March 2024 - Present)',
     description: 'The managed open deployment platform for everyone.',
   },
 ]
