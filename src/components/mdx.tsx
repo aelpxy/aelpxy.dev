@@ -171,7 +171,16 @@ const Pre = async ({
 
   const highlighter = await createHighlighter({
     themes: ['vitesse-dark'],
-    langs: ['javascript', 'typescript', 'go', 'rust', 'sh', 'bash', 'fish'],
+    langs: [
+      'javascript',
+      'typescript',
+      'go',
+      'rust',
+      'sh',
+      'bash',
+      'fish',
+      'toml',
+    ],
   })
 
   const html = highlighter.codeToHtml(code, {

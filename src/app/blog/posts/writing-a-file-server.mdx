@@ -1,0 +1,175 @@
+---
+title: 'Writing a file server'
+publishedAt: '2024-11-24'
+author: 'aelpxy'
+summary: 'A talk about how this started and how I plan to develop this.'
+---
+
+This is a project with a story behind it. Not your average file server that just
+serves files. It should handle everything with charm. (Still in progress)
+
+## Why?
+
+I do not know.
+
+## Story
+
+Okay, so all of this started exactly two years ago, on November 30, 2022. At the
+time, I had a fairly good understanding of Go but didn't know how to build
+production apps in Go yet. As far as I remember, I created a project called
+`broccoli`. Shamelessly, I promoted it to my friend, hoping he would use it for
+his production apps. Back then, it only had two routes: `[GET] /`,
+`[POST] /upload`, `[GET] /:fileName`, if I remember correctly.
+
+![Image](https://res.cloudinary.com/velta/image/upload/v1732419272/image_zxlyjt.webp)
+
+Yes, I didn't maintain it for two years straight, nor did I add any new
+features. The last commit was made on March 31, 2023, and there was one earlier
+on January 30, 2023, which was supposed to add TLS terminal support but that
+never happened. It was kind of abandoned.
+
+I renamed the project to serve after March 31, 2023, if I remember correctly.
+
+Finally, on November 19, 2024, I decided to actively develop it again.
+
+![Image](https://res.cloudinary.com/velta/image/upload/v1732419301/image_ffnf1b.webp)
+
+I came up with a new name because "`serve`" didn't seem like a good fit anymore.
+
+The same friend who had previously reacted to the project seemed to like the new
+ideas and architecture I had come up with. It should (_keep in mind, DO NOT use
+this for production_) be able to serve low-traffic apps.
+
+My first idea was to make it similar to AWS S3. I know it's not easy, and I
+don't plan to replicate anything from S3, but I had a simple system and idea in
+mind. So far, I've managed to get TLS working, and it looks pretty cool. It does
+use a lot of dependencies, though.
+
+```sh
+Usage:
+  fresh serve [flags]
+
+Flags:
+      --cert-dir string   Directory to store Let's Encrypt certificates (default "./certs")
+  -d, --domain string     Domain name for the HTTP server
+  -f, --folder string     Directory to serve files from (default "./")
+  -h, --help              help for serve
+  -p, --port string       Port to serve the HTTP server on (default "3000")
+      --tls               Enable TLS for HTTPS server
+```
+
+Yes it can automatically issue Let's Encrypt certificates to your domain names.
+
+```sh
+$ fresh serve -f ./ -p 5000
+
+9:40AM INFO fresh: launching server protocol=http address=:5000
+9:40AM INFO fresh: incoming request method=GET path=/ ip=[::1]:55256 ua="cURL" proto=HTTP/1.1
+9:40AM INFO fresh: request completed method=GET path=/ status=200 size="593 B" ip=[::1]:55256
+```
+
+## Designing the architecture
+
+Just simple SQLite as the database, keeping in mind that this is a simple
+project to learn more about various concepts. I want to keep things very
+straightforward and easy to understand.
+
+The following command will set up everything you need, including the API and
+file server
+
+```sh
+$ fresh api --root=/var/fresh/data --domain=storage.aelpxy.dev
+```
+
+I'm also planning to add a config.toml configuration file, which will look
+something like this
+
+```toml
+# storage config
+[storage]
+path = "/var/fresh/data"  # path to store data
+chunk_size = 1024         # in bytes
+
+# api config
+[api]
+domain = "storage.aelpxy.dev"     # domain to serve on
+tls = "enabled"                   # TLS: enabled or disabled
+web = true                        # web ui support (yes, there will be a web interface!)
+jwt_secret = "aVerySecureSecret"  # JWT secret (should be encrypted with AES256)
+aes_secret = "32bitsecret"        # secret key
+
+# auth config
+[auth]
+username = ""                     # username for authentication
+password = ""                     # password (accepts argon2 hash)
+
+# web server config
+[serve]
+host = "0.0.0.0"                  # bind to all IP addresses
+port = 5000                       # web server port (ignored if TLS is enabled)
+folder = "./static-files"         # folder for static files
+static_site = false               # enable static site serving (set to true for static apps)
+tls = "enabled"                   # TLS: enabled or disabled
+domain = "static.aelpxy.dev"      # static web server domain
+cert_dir = "/var/fresh/certs"     # directory where TLS certificates will be stored
+
+```
+
+### Filesystem
+
+```txt
+/data/
+  ├── storage.db # stores data about buckets and its objects
+  └── assets/
+       ├── metadata.msgpack # stores lookups and access keys
+       ├── image.jpg
+       └── icons/
+             ├── img1.png
+             └── img2.png
+```
+
+What's happening is that the root folder can contain multiple buckets, along
+with a main `storage.db` file, which serves as the root SQLite database used to
+store information about the buckets.
+
+A `Bucket` is an actual folder on the system that stores metadata about objects
+in `MessagePack` format, as well as the objects themselves. The `MessagePack`
+file maps files and hashes for faster lookups. Each bucket contains objects,
+which can be either a file or a folder.
+
+The metadata for each object is stored in a corresponding `MessagePack` file
+residing in the bucket, named `metadata.msgpack`.
+
+It may seem like using `JSON` for storing the filesystem is the best idea, but
+here's the thing: `JSON` is text-based, while `MessagePack` is binary. As a
+result, `MessagePack` is typically faster and more compact to serialize and
+deserialize compared to `JSON`.
+
+`MessagePack` will provide better performance for large datasets, which we will
+definitely deal with. There are also benefits in terms of space efficiency.
+While it may not seem like a huge deal, large amounts of data can quickly take
+up a significant amount of space.
+
+```txt
++----------------------------------------------------------------------------------------------+
+|                               Root Filesystem (Data folder)                                  |
+|                                                                                              |
+|   ____________________    ____________________    ________________________________________   |
+|  |      Bucket A      |  |      Bucket 2      |  |             a-large-bucket             |  |
+|  |--------------------|  |--------------------|  |                                        |  |
+|  | +----------------+ |  | +-----------+      |  | folder/                                |  |
+|  | | object-img.png | |  | | Directory |      |  |    |-/assets.zip                       |  |
+|  | +----------------+ |  | +-----------+      |  | folder2/                               |  |
+|  |                    |  |       |            |  |    |-/files                            |  |
+|  | +----------------+ |  | +----------------+ |  |    |     |-/icon.png                   |  |
+|  | | object-111.zip | |  | | movie-file.zip | |  |    |     |-/icon2.png                  |  |
+|  | +----------------+ |  | +----------------+ |  |    |-/icon3.png                        |  |
+|  |____________________|  |____________________|  |________________________________________|  |
+|                                                                                              |
++----------------------------------------------------------------------------------------------+
+> authors note: this was painful to type out.
+```
+
+## Moving forward
+
+Maybe someday.
