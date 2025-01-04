@@ -1,5 +1,7 @@
 import { ImageResponse } from 'next/og'
 
+export const runtime = 'edge'
+
 async function loadGoogleFont(font: string, text: string) {
   const url = `https://fonts.googleapis.com/css2?family=${font}&text=${encodeURIComponent(
     text
@@ -17,12 +19,6 @@ async function loadGoogleFont(font: string, text: string) {
 
   throw new Error('failed to load font data')
 }
-
-const quotes = [
-  'Never keep broken windows in your code.',
-  'Be a pragmatic programmer.',
-  'Always document your code.',
-]
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
@@ -74,7 +70,7 @@ export async function GET(request: Request) {
           <div tw='flex flex-col items-center gap-3 max-w-[90%]'>
             <span tw='text-[#bfbfbf] text-5xl'>~/</span>
             <span tw='text-[#bfbfbf] mt-4 text-3xl'>
-              {quotes[Math.floor(Math.random() * quotes.length)]}
+              Software is like an art.
             </span>
           </div>
 

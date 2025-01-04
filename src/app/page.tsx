@@ -2,11 +2,14 @@ import type { Metadata } from 'next'
 
 import { BriefcaseBusinessIcon, MapPinIcon } from 'lucide-react'
 import Link from 'next/link'
+import { FaGolang } from 'react-icons/fa6'
+import { SiTypescript, SiZig } from 'react-icons/si'
 
 import BlogPostLink from '@/components/blog-post-link'
 import Content from '@/components/content'
 import IconItem from '@/components/icon-item'
 import ProjectCard from '@/components/project-card'
+import Tooltip from '@/components/tooltip'
 import WorkCard from '@/components/work-card'
 import WorkSection from '@/components/work-section'
 
@@ -79,10 +82,20 @@ export default function Home() {
             </Link>
           </IconItem>
           <div className='text-stone-300 mt-12 sm:text-xl text-base font-light'>
-            I&lsquo;m a software developer who loves building backends and
-            minimalist frontends, I have over five years of experience with
-            TypeScript and Go in production. My primary work at Pandabase
-            consists of backend engineering and a bit of frontend.
+            I‘m a software developer who loves building backends and minimalist
+            frontends, I have over six years of experience with
+            <Tooltip text='TypeScript'>
+              <SiTypescript className='text-[#3178c6] inline-block align-middle h-[25px] w-[25px] bg-white rounded mr-1 ml-1' />
+            </Tooltip>
+            and
+            <Tooltip text='Go'>
+              <FaGolang className='text-[#00aed9] inline-block align-middle h-[40px] w-[40px] ml-0.5 mr-1' />
+            </Tooltip>
+            in production and currently experimenting with
+            <Tooltip text='Zig'>
+              <SiZig className='text-[#f6a41c] inline-block align-middle ml-1 h-[30px] w-[30px]' />
+            </Tooltip>
+            .
           </div>
         </section>
 
