@@ -34,7 +34,7 @@ const work = [
   },
   {
     name: 'Zote',
-    role: 'Investor (March 2024 - Present)',
+    role: 'Maintainer (March 2024 - Present)',
     description: 'The managed open deployment platform for everyone.',
   },
 ]
@@ -53,7 +53,7 @@ const projects = [
   },
 ]
 
-export default function Home() {
+export default function Page() {
   const allBlogs = getBlogPosts()
 
   const recentPosts = allBlogs

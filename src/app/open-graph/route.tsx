@@ -34,20 +34,20 @@ export async function GET(request: Request) {
     imageResponse = new ImageResponse(
       (
         <div tw='h-full w-full flex flex-col items-center justify-center bg-[#121111] font-mono p-5 relative'>
-          <div tw='flex flex-col items-center gap-3 max-w-[90%]'>
+          <div tw='flex flex-col items-center max-w-[90%]'>
             <span tw='text-[#bfbfbf] text-5xl'>{title}</span>
             <span tw='text-[#bfbfbf] mt-4 text-3xl'>{path}</span>
           </div>
 
-          <div tw='absolute bottom-10 left-10 flex items-center gap-8'>
+          <div tw='absolute bottom-10 left-10 flex items-center'>
             <img
               src='https://aelpxy.dev/favicon.png'
               tw='w-20 h-20 rounded-md'
             />
           </div>
 
-          <div tw='absolute bottom-10 right-10 flex items-center gap-8'>
-            <span tw='text-[#bfbfbf] text-3xl whitespace-nowrap'>{date}</span>
+          <div tw='absolute bottom-10 right-10 flex items-center'>
+            <span tw='text-[#bfbfbf] text-3xl'>{date}</span>
           </div>
         </div>
       ),
@@ -67,24 +67,22 @@ export async function GET(request: Request) {
     imageResponse = new ImageResponse(
       (
         <div tw='h-full w-full flex flex-col items-center justify-center bg-[#121111] font-mono p-5 relative'>
-          <div tw='flex flex-col items-center gap-3 max-w-[90%]'>
+          <div tw='flex flex-col items-center max-w-[90%]'>
             <span tw='text-[#bfbfbf] text-5xl'>~/</span>
             <span tw='text-[#bfbfbf] mt-4 text-3xl'>
               Software is like an art.
             </span>
           </div>
 
-          <div tw='absolute bottom-10 left-10 flex items-center gap-8'>
+          <div tw='absolute bottom-10 left-10 flex items-center'>
             <img
               src='https://aelpxy.dev/favicon.png'
               tw='w-20 h-20 rounded-md'
             />
           </div>
 
-          <div tw='absolute bottom-10 right-10 flex items-center gap-8'>
-            <span tw='text-[#bfbfbf] text-3xl whitespace-nowrap'>
-              aelpxy.dev
-            </span>
+          <div tw='absolute bottom-10 right-10 flex items-center'>
+            <span tw='text-[#bfbfbf] text-3xl'>aelpxy.dev</span>
           </div>
         </div>
       ),

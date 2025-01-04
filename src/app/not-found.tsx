@@ -22,7 +22,7 @@ export default function NotFound() {
         <div className='mt-10' />
         <Link
           href='/'
-          className='hover:bg-stone-900 hover:text-stone-300 transition-all duration-300 ease-in-out p-2 rounded-xl border border-stone-800'
+          className='hover:bg-stone-900 hover:text-stone-300 transition-all duration-300 ease-in-out p-2 border border-stone-800'
         >
           Return to home
         </Link>

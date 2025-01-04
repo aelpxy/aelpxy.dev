@@ -12,6 +12,10 @@ const navData = [
     name: 'blog',
     href: '/blog',
   },
+  {
+    name: 'labs',
+    href: '/labs',
+  },
 ]
 
 import Image from 'next/image'

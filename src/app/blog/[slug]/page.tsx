@@ -9,7 +9,7 @@ import { getBlogPosts } from '@/lib/utils'
 import Content from '@/components/content'
 
 // @ts-ignore
-export default function Post({ params }) {
+export default function Page({ params }) {
   const { slug } = params
 
   let post = getBlogPosts().find((post) => post.slug === slug)

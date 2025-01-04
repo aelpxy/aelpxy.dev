@@ -13,7 +13,7 @@ export const metadata = {
   },
 }
 
-export default function Blog() {
+export default function Page() {
   return (
     <main>
       <Content title='blog'>
