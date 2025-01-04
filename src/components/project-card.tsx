@@ -1,5 +1,3 @@
-'use client'
-
 interface ProjectItem {
   name: string
   role: string

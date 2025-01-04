@@ -1,5 +1,3 @@
-'use client'
-
 interface WorkSectionSectionProps<T> {
   title: string
   items: T[]

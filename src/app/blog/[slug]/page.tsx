@@ -20,6 +20,28 @@ export default function Post({ params }) {
 
   return (
     <Content title={post.metadata.title}>
+      <h2 className='text-xl py-6 tracking-tighter text-stone-100 font-mono'>
+        <span className='select-none'>`</span>/blog/{post.slug}
+        <span className='select-none'>`</span>
+      </h2>
+
+      <article className='prose'>
+        {post.metadata.isDraft === 'true' ? (
+          <blockquote>This article is still a work in progress.</blockquote>
+        ) : (
+          <>
+            <div className='flex justify-between items-center mb-8 text-sm'>
+              <p className='text-sm text-stone-400'>
+                {formatDate(post.metadata.publishedAt)}
+              </p>
+            </div>
+
+            {/* @ts-ignore */}
+            <MDX source={post.content} />
+          </>
+        )}
+      </article>
+
       <script
         type='application/ld+json'
         suppressHydrationWarning
@@ -39,20 +61,6 @@ export default function Post({ params }) {
           }),
         }}
       />
-      <h2 className='text-xl py-6 tracking-tighter text-stone-100 font-mono'>
-        <span className='select-none'>`</span>/blog/{post.slug}
-        <span className='select-none'>`</span>
-      </h2>
-
-      <div className='flex justify-between items-center mb-8 text-sm'>
-        <p className='text-sm text-stone-400'>
-          {formatDate(post.metadata.publishedAt)}
-        </p>
-      </div>
-      <article className='prose'>
-        {/* @ts-ignore */}
-        <MDX source={post.content} />
-      </article>
     </Content>
   )
 }
@@ -77,11 +85,11 @@ export function generateMetadata({ params }) {
     title,
     publishedAt: publishedTime,
     summary: description,
-    // image,
+    image,
   } = post.metadata
-  // let ogImage = image
-  //   ? image
-  //   : `${baseUrl}/og?title=${encodeURIComponent(title)}`
+  let ogImage = image
+    ? image
+    : `${baseUrl}/open-graph?type=blog&title=${encodeURIComponent(title)}&path=${post.slug}&date=${publishedTime}`
 
   return {
     title,
@@ -92,17 +100,17 @@ export function generateMetadata({ params }) {
       type: 'article',
       publishedTime,
       url: `${baseUrl}/blog/${post.slug}`,
-      // images: [
-      //   {
-      //     url: ogImage,
-      //   },
-      // ],
+      images: [
+        {
+          url: ogImage,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      // images: [ogImage],
+      images: [ogImage],
     },
   }
 }

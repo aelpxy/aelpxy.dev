@@ -1,25 +1,27 @@
-import Link from 'next/link'
 import { getBlogPosts } from '@/lib/utils'
+import Link from 'next/link'
 
 import PostCard from './post-card'
 
 export function BlogPosts() {
-  let allBlogs = getBlogPosts()
+  let posts = getBlogPosts()
+
+  const publishedBlogs = posts.filter(
+    (post) => post.metadata.isDraft === 'false'
+  )
 
   return (
     <div>
-      {allBlogs.length === 0 && (
-        <code className='text-2xl py-6 font-semibold'>nothing yet :/</code>
+      {publishedBlogs.length === 0 && (
+        <code className='text-2xl py-6'>nothing yet :/</code>
       )}
-      {allBlogs
-        .sort((a, b) => {
-          if (
-            new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)
-          ) {
-            return -1
-          }
-          return 1
-        })
+
+      {publishedBlogs
+        .sort(
+          (a, b) =>
+            // @ts-ignore
+            new Date(b.metadata.publishedAt) - new Date(a.metadata.publishedAt)
+        )
         .map((post) => (
           <Link
             key={post.slug}

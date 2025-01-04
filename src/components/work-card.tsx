@@ -1,5 +1,3 @@
-'use client'
-
 interface WorkItem {
   name: string
   role: string

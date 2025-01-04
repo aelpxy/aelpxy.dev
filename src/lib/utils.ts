@@ -3,10 +3,11 @@ import path from 'path'
 
 type Metadata = {
   title: string
-  publishedAt: string
   summary: string
   image?: string
   author: string
+  isDraft: string // the markdown returns boolean not my fault!
+  publishedAt: string
 }
 
 function parseFrontmatter(fileContent: string) {
@@ -21,6 +22,8 @@ function parseFrontmatter(fileContent: string) {
     let [key, ...valueArr] = line.split(': ')
     let value = valueArr.join(': ').trim()
     value = value.replace(/^['"](.*)['"]$/, '$1')
+
+    // @ts-ignore
     metadata[key.trim() as keyof Metadata] = value
   })
 
@@ -53,5 +56,5 @@ function getMDXData(dir: string) {
 }
 
 export function getBlogPosts() {
-  return getMDXData(path.join(process.cwd(), 'src', 'app', 'blog', 'posts'))
+  return getMDXData(path.join(process.cwd(), 'src', 'posts'))
 }

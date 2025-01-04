@@ -1,6 +1,7 @@
+import Content from '@/components/content'
 import { BlogPosts } from '@/components/posts'
 
-import Content from '@/components/content'
+import { baseUrl } from '@/lib/sitemap'
 
 export const metadata = {
   title: 'aelpxy - blog',
@@ -8,7 +9,7 @@ export const metadata = {
   openGraph: {
     title: 'aelpxy',
     description: 'blog',
-    images: 'https://aelpxy.dev/image.png',
+    images: `${baseUrl}/open-graph?type=blog&title=${'words i‘ve written'}&path=${'/blog'}&date=${'aelpxy.dev'}`,
   },
 }
 

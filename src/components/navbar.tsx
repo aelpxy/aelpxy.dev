@@ -1,16 +1,16 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { usePathname } from 'next/navigation'
 
 const navData = [
   {
-    name: 'blog',
-    href: '/blog',
+    name: 'home',
+    href: '/',
   },
   {
-    name: 'music',
-    href: '/music',
+    name: 'blog',
+    href: '/blog',
   },
 ]
 
@@ -21,17 +21,9 @@ const Navbar = () => {
   const pathname = usePathname()
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -30 }}
-      animate={{ opacity: 1, y: 0 }}
-      className='py-2 select-none sticky top-0 z-10'
-    >
+    <motion.div className='py-2 select-none sticky top-0 z-10'>
       <div className='mx-auto max-w-[70rem] px-6 lg:px-32 py-2 select-none'>
-        <motion.div
-          initial={{ translateY: -20 }}
-          animate={{ translateY: 0 }}
-          className='flex w-full items-center justify-between py-4 px-6 rounded-xl bg-stone-900 backdrop-filter bg-opacity-30 backdrop-blur-md'
-        >
+        <motion.div className='flex w-full items-center justify-between py-4 px-6 rounded-xl bg-stone-900 backdrop-filter bg-opacity-30 backdrop-blur-md'>
           <div>
             <div className='flex lg:flex-1 select-none'>
               <Link href='/'>
@@ -43,7 +35,7 @@ const Navbar = () => {
                   <span className='sr-only'>aelpxy</span>
                   <Image
                     className='h-12 w-auto rounded-md border-stone-600'
-                    src={'/image.png'}
+                    src={'/favicon.png'}
                     alt='Icon'
                     width={256}
                     height={256}

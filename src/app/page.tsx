@@ -1,5 +1,6 @@
-import { BriefcaseBusinessIcon, MapPinIcon } from 'lucide-react'
 import type { Metadata } from 'next'
+
+import { BriefcaseBusinessIcon, MapPinIcon } from 'lucide-react'
 import Link from 'next/link'
 
 import BlogPostLink from '@/components/blog-post-link'
@@ -9,15 +10,16 @@ import ProjectCard from '@/components/project-card'
 import WorkCard from '@/components/work-card'
 import WorkSection from '@/components/work-section'
 
+import { baseUrl } from '@/lib/sitemap'
 import { getBlogPosts } from '@/lib/utils'
 
 export const metadata: Metadata = {
   title: 'aelpxy',
-  description: 'about',
+  description: 'home',
   openGraph: {
     title: 'aelpxy',
-    description: 'about',
-    images: 'https://aelpxy.dev/image.png',
+    description: 'home',
+    images: `${baseUrl}/open-graph?type=home`,
   },
 }
 
@@ -50,7 +52,9 @@ const projects = [
 
 export default function Home() {
   const allBlogs = getBlogPosts()
+
   const recentPosts = allBlogs
+    .filter((post) => post.metadata.isDraft === 'false')
     .sort(
       (a, b) =>
         new Date(b.metadata.publishedAt).getTime() -

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'aelpxy',
     description: '~/root',
-    images: 'https://aelpxy.dev/image.png',
+    images: 'https://aelpxy.dev/favicon.png',
   },
 }
 

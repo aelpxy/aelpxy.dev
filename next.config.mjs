@@ -1,9 +1,9 @@
-/** @type {import('next').NextConfig} */
-import createMDX from '@next/mdx'
-import remarkGfm from 'remark-gfm'
+import { setupDevPlatform } from '@cloudflare/next-on-pages/next-dev';
+import createMDX from '@next/mdx';
+import remarkGfm from 'remark-gfm';
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
   pageExtensions: ['md', 'mdx', 'ts', 'tsx'],
   images: {
     unoptimized: true,
@@ -29,5 +29,9 @@ const withMDX = createMDX({
     remarkPlugins: [remarkGfm],
   },
 })
+
+if (process.env.NODE_ENV === 'development') {
+  await setupDevPlatform();
+}
 
 export default withMDX(nextConfig)

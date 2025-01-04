@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote/rsc'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -152,7 +152,9 @@ const Pre = async ({
     return <pre {...props}>{children}</pre>
   }
 
+  // @ts-ignore
   const className = codeElement.props?.className || ''
+  // @ts-ignore
   const code = String(codeElement.props.children).trim()
 
   if (!className.startsWith('language-')) {
@@ -229,6 +231,7 @@ const components = {
 
 export function MDX({ components: userComponents, ...props }: CustomMDXProps) {
   return (
+    // @ts-ignore
     <MDXRemote
       {...props}
       // @ts-ignore
