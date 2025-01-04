@@ -38,7 +38,7 @@ export default function Page() {
         <div className='space-y-4 py-2'>
           <h2 className='text-xl'>Tasks</h2>
           <p className='text-md'>
-            A component designed to save simple tasks using your browser's{' '}
+            A component designed to save simple tasks using your browsers{' '}
             <code className='bg-stone-700 rounded p-1'>localStorage</code> API
             for persistence.
           </p>
