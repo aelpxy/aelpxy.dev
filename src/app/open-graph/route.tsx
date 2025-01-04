@@ -1,7 +1,5 @@
 import { ImageResponse } from 'next/og'
 
-import { formatDate } from '@/lib/date'
-
 async function loadGoogleFont(font: string, text: string) {
   const url = `https://fonts.googleapis.com/css2?family=${font}&text=${encodeURIComponent(
     text
@@ -34,8 +32,10 @@ export async function GET(request: Request) {
   const date = searchParams.get('date') || 'default'
   const path = searchParams.get('path') || '/'
 
+  let imageResponse: ImageResponse
+
   if (type === 'blog') {
-    return new ImageResponse(
+    imageResponse = new ImageResponse(
       (
         <div tw='h-full w-full flex flex-col items-center justify-center bg-[#121111] font-mono p-5 relative'>
           <div tw='flex flex-col items-center gap-3 max-w-[90%]'>
@@ -51,9 +51,7 @@ export async function GET(request: Request) {
           </div>
 
           <div tw='absolute bottom-10 right-10 flex items-center gap-8'>
-            <span tw='text-[#bfbfbf] text-3xl whitespace-nowrap'>
-              {formatDate(date)}
-            </span>
+            <span tw='text-[#bfbfbf] text-3xl whitespace-nowrap'>{date}</span>
           </div>
         </div>
       ),
@@ -69,10 +67,8 @@ export async function GET(request: Request) {
         ],
       }
     )
-  }
-
-  if (type === 'home') {
-    return new ImageResponse(
+  } else if (type === 'home') {
+    imageResponse = new ImageResponse(
       (
         <div tw='h-full w-full flex flex-col items-center justify-center bg-[#121111] font-mono p-5 relative'>
           <div tw='flex flex-col items-center gap-3 max-w-[90%]'>
@@ -108,5 +104,14 @@ export async function GET(request: Request) {
         ],
       }
     )
+  } else {
+    return new Response('invalid type', { status: 400 })
   }
+
+  imageResponse.headers.set(
+    'Cache-Control',
+    'no-cache, no-store, must-revalidate'
+  )
+
+  return imageResponse
 }

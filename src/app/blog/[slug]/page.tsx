@@ -89,7 +89,7 @@ export function generateMetadata({ params }) {
   } = post.metadata
   let ogImage = image
     ? image
-    : `${baseUrl}/open-graph?type=blog&title=${encodeURIComponent(title)}&path=~/blog/${post.slug}&date=${publishedTime}`
+    : `${baseUrl}/open-graph?type=blog&title=${encodeURIComponent(title)}&path=~/blog/${post.slug}&date=${formatDate(post.metadata.publishedAt)}`
 
   return {
     title,
