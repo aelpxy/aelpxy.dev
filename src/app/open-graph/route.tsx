@@ -1,5 +1,7 @@
 import { ImageResponse } from 'next/og'
 
+import { formatDate } from '@/lib/date'
+
 async function loadGoogleFont(font: string, text: string) {
   const url = `https://fonts.googleapis.com/css2?family=${font}&text=${encodeURIComponent(
     text
@@ -49,7 +51,9 @@ export async function GET(request: Request) {
           </div>
 
           <div tw='absolute bottom-10 right-10 flex items-center gap-8'>
-            <span tw='text-[#bfbfbf] text-3xl whitespace-nowrap'>{date}</span>
+            <span tw='text-[#bfbfbf] text-3xl whitespace-nowrap'>
+              {formatDate(date)}
+            </span>
           </div>
         </div>
       ),
@@ -81,7 +85,7 @@ export async function GET(request: Request) {
           <div tw='absolute bottom-10 left-10 flex items-center gap-8'>
             <img
               src='https://aelpxy.dev/favicon.png'
-              tw='w-20 h-20 rounded-full'
+              tw='w-20 h-20 rounded-md'
             />
           </div>
 

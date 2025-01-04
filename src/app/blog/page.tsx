@@ -9,7 +9,7 @@ export const metadata = {
   openGraph: {
     title: 'aelpxy',
     description: 'blog',
-    images: `${baseUrl}/open-graph?type=blog&title=${'words i‘ve written'}&path=${'/blog'}&date=${'aelpxy.dev'}`,
+    images: `${baseUrl}/open-graph?type=blog&title=${'words i‘ve written'}&path=${'~/blog'}&date=${'aelpxy.dev'}`,
   },
 }
 
