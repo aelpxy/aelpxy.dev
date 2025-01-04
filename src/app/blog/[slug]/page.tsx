@@ -1,9 +1,10 @@
+import { notFound } from 'next/navigation'
+import * as React from 'react'
+
 import { MDX } from '@/components/mdx'
 import { formatDate } from '@/lib/date'
 import { baseUrl } from '@/lib/sitemap'
 import { getBlogPosts } from '@/lib/utils'
-import { notFound } from 'next/navigation'
-import * as React from 'react'
 
 import Content from '@/components/content'
 
