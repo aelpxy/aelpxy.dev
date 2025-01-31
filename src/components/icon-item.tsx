@@ -7,8 +7,8 @@ const IconItem = ({
 }) => {
   return (
     <div className='flex items-center mb-2'>
-      <Icon className='text-stone-400/90 w-[1.2rem] mr-2' />
-      <span className='text-stone-300'>{children}</span>
+      <Icon className='text-neutral-400/90 w-[1.2rem] mr-2' />
+      <span className='text-neutral-300'>{children}</span>
     </div>
   )
 }

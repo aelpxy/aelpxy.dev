@@ -1,23 +1,53 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-:root {
-  --background-color: 18, 17, 17;
-  --foreground-rgb: 255, 255, 255;
-  --scrollbar-color: #2a2a2a;
-  --scrollbar-bg: #1a1a1a;
-  --scrollbar-hover: #3a3a3a;
+@theme {
+  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+  --background-image-gradient-conic: conic-gradient(
+    from 180deg at 50% 50%,
+    var(--tw-gradient-stops)
+  );
+
+  --font-mono: var(--font-mono);
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-color));
+html {
+  scroll-behavior: smooth;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  :root {
+    --background-color: 18, 17, 17;
+    --foreground-rgb: 255, 255, 255;
+    --scrollbar-color: #2a2a2a;
+    --scrollbar-bg: #1a1a1a;
+    --scrollbar-hover: #3a3a3a;
+  }
+
+  body {
+    color: rgb(var(--foreground-rgb));
+    background: rgb(var(--background-color));
   }
 }
 
@@ -81,11 +111,11 @@ html {
 }
 
 .prose a {
-  @apply underline transition-all decoration-stone-400 underline-offset-2 decoration-[0.1em];
+  @apply underline transition-all decoration-neutral-400 underline-offset-2 decoration-[0.1em];
 }
 
 .prose .anchor:after {
-  @apply text-stone-300;
+  @apply text-neutral-300;
   content: '#';
 }
 
@@ -116,7 +146,7 @@ html {
 }
 
 .prose p {
-  @apply my-4 text-stone-300;
+  @apply my-4 text-neutral-300;
 }
 
 .prose h1 {

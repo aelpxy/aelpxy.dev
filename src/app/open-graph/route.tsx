@@ -1,6 +1,7 @@
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
+const primaryFont = 'JetBrains Mono'
 
 async function loadGoogleFont(font: string, text: string) {
   const url = `https://fonts.googleapis.com/css2?family=${font}&text=${encodeURIComponent(
@@ -56,8 +57,8 @@ export async function GET(request: Request) {
         height: 600,
         fonts: [
           {
-            name: 'DM Mono',
-            data: await loadGoogleFont('DM Mono', title),
+            name: primaryFont,
+            data: await loadGoogleFont(primaryFont, title),
             style: 'normal',
           },
         ],
@@ -68,10 +69,8 @@ export async function GET(request: Request) {
       (
         <div tw='h-full w-full flex flex-col items-center justify-center bg-[#121111] font-mono p-5 relative'>
           <div tw='flex flex-col items-center max-w-[90%]'>
-            <span tw='text-[#bfbfbf] text-5xl'>~/</span>
-            <span tw='text-[#bfbfbf] mt-4 text-3xl'>
-              Software is like an art.
-            </span>
+            <span tw='text-[#bfbfbf] text-5xl'>~$ whoami</span>
+            <span tw='text-[#bfbfbf] mt-4 text-3xl'>aelpxy</span>
           </div>
 
           <div tw='absolute bottom-10 left-10 flex items-center'>
@@ -91,8 +90,8 @@ export async function GET(request: Request) {
         height: 600,
         fonts: [
           {
-            name: 'DM Mono',
-            data: await loadGoogleFont('DM Mono', title),
+            name: primaryFont,
+            data: await loadGoogleFont(primaryFont, title),
             style: 'normal',
           },
         ],

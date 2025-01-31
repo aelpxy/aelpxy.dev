@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote/rsc'
+import { Link } from 'next-view-transitions'
 import Image from 'next/image'
-import Link from 'next/link'
 import React, { Children, useMemo } from 'react'
 import { createHighlighter } from 'shiki'
 
@@ -65,11 +65,11 @@ const Table = ({ data }: TableProps) => {
   const tableRows = useMemo(
     () =>
       rows.map((row, index) => (
-        <tr key={index} className='hover:bg-stone-800'>
+        <tr key={index} className='hover:bg-neutral-800'>
           {row.map((cell, cellIndex) => (
             <td
               key={cellIndex}
-              className='p-2 text-left border-t border-stone-700'
+              className='p-2 text-left border-t border-neutral-700'
             >
               {cell}
             </td>
@@ -82,7 +82,7 @@ const Table = ({ data }: TableProps) => {
   return (
     <div className='overflow-x-auto'>
       <table className='w-full border-collapse'>
-        <thead className='bg-stone-800'>
+        <thead className='bg-neutral-800'>
           <tr>{tableHeaders}</tr>
         </thead>
         <tbody>{tableRows}</tbody>
@@ -109,7 +109,7 @@ const CustomLink = ({ href, children, ...props }: CustomLinkProps) => {
       href={href}
       target='_blank'
       rel='noopener noreferrer'
-      className='text-stone-400 hover:text-stone-200'
+      className='text-neutral-400 hover:text-neutral-200'
       {...props}
     >
       {children}
@@ -159,7 +159,7 @@ const Pre = async ({
 
   if (!className.startsWith('language-')) {
     return (
-      <code className='px-1.5 py-0.5 rounded-md bg-stone-800 border border-stone-700 font-mono text-sm'>
+      <code className='px-1.5 py-0.5 rounded-md bg-neutral-800 border border-neutral-700 font-mono text-sm'>
         {code}
       </code>
     )
@@ -192,7 +192,7 @@ const Pre = async ({
 
   return (
     <div className='my-6'>
-      <div className='rounded-lg border border-stone-700 bg-stone-900'>
+      <div className='rounded-lg border border-neutral-700 bg-neutral-900'>
         <div className='overflow-x-auto'>
           <div dangerouslySetInnerHTML={{ __html: html }} />
         </div>

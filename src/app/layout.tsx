@@ -1,18 +1,16 @@
 import type { Metadata } from 'next'
-import { DM_Mono, DM_Sans } from 'next/font/google'
+import { ViewTransitions } from 'next-view-transitions'
+import { JetBrains_Mono } from 'next/font/google'
+
 import './globals.css'
 
 import Footer from '@/components/footer'
+import Hotkeys from '@/components/hotkeys'
 import Navbar from '@/components/navbar'
 
-const primaryFont = DM_Sans({
+const primaryFont = JetBrains_Mono({
   weight: ['300', '400', '500'],
   subsets: ['latin'],
-})
-const monoFont = DM_Mono({
-  weight: ['400'],
-  subsets: ['latin'],
-  variable: '--font-mono',
 })
 
 export const metadata: Metadata = {
@@ -31,14 +29,17 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en'>
-      <body
-        className={`${primaryFont.className} ${monoFont.variable} selection:text-stone-900 selection:bg-stone-100 min-h-screen antialiased`}
-      >
-        <Navbar />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang='en'>
+        <Hotkeys />
+        <body
+          className={`${primaryFont.className} selection:text-neutral-900 selection:bg-neutral-100 min-h-screen antialiased`}
+        >
+          <Navbar />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </ViewTransitions>
   )
 }

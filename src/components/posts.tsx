@@ -1,5 +1,5 @@
 import { getBlogPosts } from '@/lib/utils'
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 
 import PostCard from './post-card'
 
