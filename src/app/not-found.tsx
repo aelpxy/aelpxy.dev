@@ -48,7 +48,7 @@ export default function NotFound() {
             What are you looking for?
           </h1>
           <p>
-            Oops, I don&apos;t think it's here {':('} (too bad, but hey,
+            Oops, I don&apos;t think it&apos;s here {':('} (too bad, but hey,
             you&apos;re amazing!)
           </p>
         </div>
