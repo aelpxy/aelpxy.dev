@@ -15,27 +15,27 @@ export const metadata: Metadata = {
 const hiddenLinks = [
   {
     name: '~/cheatsheet',
-    href: '/~/secret/cheatsheet',
+    href: '/~/cheatsheet',
   },
   {
     name: '~/experiments',
-    href: '/~/secret/experiments',
+    href: '/~/experiments',
   },
   {
     name: '~/music',
-    href: '/~/secret/music',
+    href: '/~/music',
   },
   {
     name: '~/photos',
-    href: '/~/secret/photos',
+    href: '/~/photos',
   },
   {
     name: '~/books',
-    href: '/~/secret/books',
+    href: '/~/books',
   },
   {
     name: '~/tools',
-    href: '/~/secret/tools',
+    href: '/~/tools',
   },
 ]
 
