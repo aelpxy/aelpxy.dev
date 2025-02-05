@@ -97,13 +97,13 @@ export default function Page() {
           </IconItem>
           <div className='text-neutral-300 mt-12 sm:text-xl text-base font-light'>
             <p className='text-base tracking-tight'>
-              A software developer who’s been writing code for the past six
-              years. I’ve worked in production environments and utilized various
-              tools. I classify myself as a backend engineer with knowledge in
-              frontend development.
+              A software developer who has been writing code for the past six
+              years. I have worked on large-scale data pipelines and production
+              backends for multiple years now. Security and compliance are
+              always a concern for me.
             </p>
             <div className='mt-10 text-base tracking-tight'>
-              I have a special place for these languages
+              My preferred programming languages are
               <Tooltip text='TypeScript'>
                 <SiTypescript className='text-[#3178c6] inline-block align-middle h-[23px] w-[23px] bg-white rounded-sm mr-1 ml-1.5' />
               </Tooltip>
@@ -114,8 +114,8 @@ export default function Page() {
               and
               <Tooltip text='Zig'>
                 <SiZig className='text-[#f6a41c] inline-block align-middle ml-1.5 h-[30px] w-[30px]' />
-              </Tooltip>{' '}
-              are lovely.
+              </Tooltip>
+              .
             </div>
           </div>
         </section>
