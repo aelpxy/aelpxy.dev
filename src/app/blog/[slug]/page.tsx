@@ -77,31 +77,26 @@ export async function generateStaticParams() {
 
 // @ts-ignore
 export async function generateMetadata({ params }) {
-  const p = await params
-  let post = getBlogPosts().find(async (post) => post.slug === p.slug)
+  const { slug } = await params
+
+  let post = getBlogPosts().find((post) => post.slug === slug)
 
   if (!post) {
-    return
+    return notFound()
   }
 
-  let {
-    title,
-    publishedAt: publishedTime,
-    summary: description,
-    image,
-  } = post.metadata
-  let ogImage = image
-    ? image
-    : `${baseUrl}/open-graph?type=blog&title=${encodeURIComponent(title)}&path=~/blog/${post.slug}&date=${formatDate(post.metadata.publishedAt)}`
+  let ogImage = post.metadata.image
+    ? post.metadata.image
+    : `${baseUrl}/open-graph?type=blog&title=${encodeURIComponent(post.metadata.title)}&path=~/blog/${post.slug}&date=${formatDate(post.metadata.publishedAt)}`
 
   return {
-    title,
-    description,
+    title: post.metadata.title,
+    description: post.metadata.summary,
     openGraph: {
-      title,
-      description,
+      title: post.metadata.title,
+      description: post.metadata.summary,
       type: 'article',
-      publishedTime,
+      publishedTime: post.metadata.publishedAt,
       url: `${baseUrl}/blog/${post.slug}`,
       images: [
         {
@@ -111,8 +106,8 @@ export async function generateMetadata({ params }) {
     },
     twitter: {
       card: 'summary_large_image',
-      title,
-      description,
+      title: post.metadata.title,
+      description: post.metadata.summary,
       images: [ogImage],
     },
   }
