@@ -14,7 +14,7 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <motion.footer className='mt-2 border border-neutral-800 mx-auto mb-2 px-6 sm:px-12 lg:px-32 py-10 sm:py-16 max-w-[60rem] border'>
+    <motion.footer className='mt-2 border-neutral-800 mx-auto mb-2 px-6 sm:px-12 lg:px-32 py-10 sm:py-16 max-w-[60rem] border'>
       <div className='flex flex-col items-center justify-between pt-6 sm:pt-10 space-y-4 sm:space-y-0 sm:flex-row sm:space-x-4 border-t border-neutral-800'>
         <Tooltip text='https://creativecommons.org/licenses/by-sa/4.0/deed.en'>
           <Link
@@ -23,7 +23,7 @@ const Footer = () => {
             href={'https://creativecommons.org/licenses/by-sa/4.0/deed.en'}
             className='mr-0 transition-transform duration-300 ease-in-out text-sm sm:text-base text-neutral-300 hover:text-neutral-400'
           >
-            CC BY-SA 4.0 © {new Date().getFullYear()} - aelpxy.
+            © {new Date().getFullYear()} - aelpxy.dev
           </Link>
         </Tooltip>
 

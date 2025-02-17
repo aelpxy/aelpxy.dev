@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build && next-sitemap",
+    "dev": "GIT_SHA=$(git rev-parse --short HEAD) next dev",
+    "build": "GIT_SHA=$(git rev-parse --short HEAD) next build && next-sitemap",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache"

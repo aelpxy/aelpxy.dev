@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { BriefcaseBusinessIcon, MapPinIcon } from 'lucide-react'
 import { Link } from 'next-view-transitions'
 import { FaGolang } from 'react-icons/fa6'
-import { SiTypescript, SiZig } from 'react-icons/si'
+import { SiRust, SiTypescript, SiZig } from 'react-icons/si'
 
 import BlogPostLink from '@/components/blog-post-link'
 import Content from '@/components/content'
@@ -43,13 +43,13 @@ const work = [
 
 const projects = [
   {
-    name: 'g/dbctl',
+    name: 'gh/dbctl',
     role: 'Creator',
     description: 'A CLI built to help you manage databases.',
     slug: 'aelpxy/dbctl',
   },
   {
-    name: 'g/void',
+    name: 'gh/void',
     role: 'Maintainer',
     description:
       'Fault tolerant KV store built to handle millions of requests.',
@@ -81,7 +81,7 @@ export default function Page() {
             </Tooltip>
           </IconItem>
           <IconItem Icon={BriefcaseBusinessIcon}>
-            CTO & Co-founder @{' '}
+            Engineering @{' '}
             <Link
               className='underline decoration-wavy hover:text-neutral-400 transition-all'
               href='https://pandabase.io'
@@ -96,12 +96,7 @@ export default function Page() {
             </Link>
           </IconItem>
           <div className='text-neutral-300 mt-12 sm:text-xl text-base font-light'>
-            <p className='text-base tracking-tight'>
-              A software developer who has been writing code for the past six
-              years. I have worked on large-scale data pipelines and production
-              backends for multiple years now. Security and compliance are
-              always a concern for me.
-            </p>
+            <p className='text-base tracking-tight'>I develop software.</p>
             <div className='mt-10 text-base tracking-tight'>
               My preferred programming languages are
               <Tooltip text='TypeScript'>
@@ -123,7 +118,7 @@ export default function Page() {
         <div className='flex flex-col md:flex-row justify-between max-w-4xl mx-auto '>
           <WorkSection title='my work' items={work} CardComponent={WorkCard} />
           <WorkSection
-            title='my projects'
+            title='my repos'
             items={projects}
             CardComponent={ProjectCard}
           />
@@ -131,7 +126,7 @@ export default function Page() {
 
         <div className='py-4'>
           <h1 className='text-2xl sm:text-3xl lg:text-3xl text-neutral-50'>
-            recent posts
+            posts
           </h1>
           <div className='py-6'>
             {recentPosts.map((post) => (

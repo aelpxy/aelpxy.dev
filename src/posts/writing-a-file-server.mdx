@@ -19,8 +19,11 @@ Okay, so all of this started exactly two years ago, on November 30, 2022. At the
 time, I had a fairly good understanding of Go but didn't know how to build
 production apps in Go yet. As far as I remember, I created a project called
 `broccoli`. Shamelessly, I promoted it to my friend, hoping he would use it for
-his production apps. Back then, it only had two routes: `[GET] /`,
-`[POST] /upload`, `[GET] /:fileName`, if I remember correctly.
+his production apps. Back then, it only had three routes if I remember correctly.
+
+- `[GET] /`
+- `[POST] /upload`
+- `[GET] /:fileName`
 
 ![Image](https://res.cloudinary.com/velta/image/upload/v1732419272/image_zxlyjt.webp)
 
@@ -96,13 +99,13 @@ chunk_size = 1024         # in bytes
 domain = "storage.aelpxy.dev"     # domain to serve on
 tls = "enabled"                   # TLS: enabled or disabled
 web = true                        # web ui support (yes, there will be a web interface!)
-jwt_secret = "aVerySecureSecret"  # JWT secret (should be encrypted with AES256)
-aes_secret = "32bitsecret"        # secret key
+jwt_secret = "aVerySecureSecret"  # jwt secret
+aes_secret = "32bitsecret"        # secure secret key
 
 # auth config
 [auth]
 username = ""                     # username for authentication
-password = ""                     # password (accepts argon2 hash)
+password = ""                     # password (only supports argon2 hashes)
 
 # web server config
 [serve]
