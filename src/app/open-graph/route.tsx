@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
@@ -41,9 +42,10 @@ export async function GET(request: Request) {
           </div>
 
           <div tw='absolute bottom-10 left-10 flex items-center'>
-            <img
+            <Image
               src='https://aelpxy.dev/favicon.png'
               tw='w-20 h-20 rounded-md'
+              alt='Source'
             />
           </div>
 
@@ -74,9 +76,10 @@ export async function GET(request: Request) {
           </div>
 
           <div tw='absolute bottom-10 left-10 flex items-center'>
-            <img
+            <Image
               src='https://aelpxy.dev/favicon.png'
               tw='w-20 h-20 rounded-md'
+              alt='Source'
             />
           </div>
 

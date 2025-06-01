@@ -23,7 +23,7 @@ const Footer = () => {
             href={'https://creativecommons.org/licenses/by-sa/4.0/deed.en'}
             className='mr-0 transition-transform duration-300 ease-in-out text-sm sm:text-base text-neutral-300 hover:text-neutral-400'
           >
-            © {new Date().getFullYear()} - aelpxy.dev
+            © {new Date().getFullYear()} CC BY-SA 4.0 - aelpxy.dev
           </Link>
         </Tooltip>
 

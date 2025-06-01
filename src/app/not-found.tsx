@@ -12,33 +12,6 @@ export const metadata: Metadata = {
   },
 }
 
-const hiddenLinks = [
-  {
-    name: '~/cheatsheet',
-    href: '/~/cheatsheet',
-  },
-  {
-    name: '~/experiments',
-    href: '/~/experiments',
-  },
-  {
-    name: '~/music',
-    href: '/~/music',
-  },
-  {
-    name: '~/photos',
-    href: '/~/photos',
-  },
-  {
-    name: '~/books',
-    href: '/~/books',
-  },
-  {
-    name: '~/tools',
-    href: '/~/tools',
-  },
-]
-
 export default function NotFound() {
   return (
     <Content title='~$ Unknown command'>
@@ -69,21 +42,6 @@ export default function NotFound() {
               ~/blog
             </Link>
           </div>
-          <p>
-            Shh, don&apos;t tell anyone about these; they&apos;re hidden and
-            just for you!
-          </p>
-        </div>
-        <div className='py-10 flex flex-col space-y-2'>
-          {hiddenLinks.map((link, index) => (
-            <Link
-              key={index}
-              href={link.href}
-              className='hover:text-neutral-300 transition-all duration-300 ease-in-out p-2 hover:underline decoration-wavy'
-            >
-              {link.name}
-            </Link>
-          ))}
         </div>
       </div>
     </Content>

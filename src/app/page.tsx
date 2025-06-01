@@ -1,17 +1,9 @@
 import type { Metadata } from 'next'
 
-import { BriefcaseBusinessIcon, MapPinIcon } from 'lucide-react'
 import { Link } from 'next-view-transitions'
-import { FaGolang } from 'react-icons/fa6'
-import { SiRust, SiTypescript, SiZig } from 'react-icons/si'
 
 import BlogPostLink from '@/components/blog-post-link'
 import Content from '@/components/content'
-import IconItem from '@/components/icon-item'
-import ProjectCard from '@/components/project-card'
-import Tooltip from '@/components/tooltip'
-import WorkCard from '@/components/work-card'
-import WorkSection from '@/components/work-section'
 
 import { baseUrl } from '@/lib/sitemap'
 import { getBlogPosts } from '@/lib/utils'
@@ -25,37 +17,6 @@ export const metadata: Metadata = {
     images: `${baseUrl}/open-graph?type=home`,
   },
 }
-
-const work = [
-  {
-    name: 'Pandabase',
-    role: 'CTO (Jan 2023 - Present)',
-    description: 'The native payments platform built for entrepreneurs.',
-    link: 'https://pandabase.io',
-  },
-  {
-    name: 'Velta, LLC.',
-    role: 'Co-founder & CTO (March 2022 - Present)',
-    description: 'The managed open deployment platform for everyone.',
-    link: 'https://velta.dev',
-  },
-]
-
-const projects = [
-  {
-    name: 'gh/dbctl',
-    role: 'Creator',
-    description: 'A CLI built to help you manage databases.',
-    slug: 'aelpxy/dbctl',
-  },
-  {
-    name: 'gh/void',
-    role: 'Maintainer',
-    description:
-      'Fault tolerant KV store built to handle millions of requests.',
-    slug: 'zotehq/void',
-  },
-]
 
 export default function Page() {
   const allBlogs = getBlogPosts()
@@ -73,56 +34,12 @@ export default function Page() {
     <main>
       <Content title='~$ whoami'>
         <section className='px-0 py-6 sm:py-12 text-md'>
-          <IconItem Icon={MapPinIcon}>
-            <Tooltip text='IPv6'>
-              <span className='hover:text-neutral-400 transition-all cursor-pointer'>
-                ::1
-              </span>
-            </Tooltip>
-          </IconItem>
-          <IconItem Icon={BriefcaseBusinessIcon}>
-            Engineering @{' '}
-            <Link
-              className='underline decoration-wavy hover:text-neutral-400 transition-all'
-              href='https://pandabase.io'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <Tooltip text='pandabase.io'>
-                <span className='underline decoration-wavy hover:text-neutral-400 transition-all'>
-                  Pandabase
-                </span>
-              </Tooltip>
-            </Link>
-          </IconItem>
-          <div className='text-neutral-300 mt-12 sm:text-xl text-base font-light'>
-            <p className='text-base tracking-tight'>I develop software.</p>
-            <div className='mt-10 text-base tracking-tight'>
-              My preferred programming languages are
-              <Tooltip text='TypeScript'>
-                <SiTypescript className='text-[#3178c6] inline-block align-middle h-[23px] w-[23px] bg-white rounded-sm mr-1 ml-1.5' />
-              </Tooltip>
-              ,
-              <Tooltip text='Go'>
-                <FaGolang className='text-[#00aed9] inline-block align-middle h-[40px] w-[40px] ml-0.5 mr-1' />
-              </Tooltip>
-              and
-              <Tooltip text='Zig'>
-                <SiZig className='text-[#f6a41c] inline-block align-middle ml-1.5 h-[30px] w-[30px]' />
-              </Tooltip>
-              .
-            </div>
+          <div className='text-neutral-300 mt-6 sm:text-xl text-base font-light'>
+            <p className='text-base tracking-tight'>
+              theres something for everyone.
+            </p>
           </div>
         </section>
-
-        <div className='flex flex-col md:flex-row justify-between max-w-4xl mx-auto '>
-          <WorkSection title='my work' items={work} CardComponent={WorkCard} />
-          <WorkSection
-            title='my repos'
-            items={projects}
-            CardComponent={ProjectCard}
-          />
-        </div>
 
         <div className='py-4'>
           <h1 className='text-2xl sm:text-3xl lg:text-3xl text-neutral-50'>
