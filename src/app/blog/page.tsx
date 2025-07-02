@@ -16,7 +16,7 @@ export const metadata = {
 export default function Page() {
   return (
     <main>
-      <Content title='~$ cd ./blog'>
+      <Content title='ls ./blog'>
         <h1 className='text-2xl py-6 text-neutral-300'>things to read.</h1>
         <section className='py-6'>
           <div className='flex flex-col gap-y-4'>

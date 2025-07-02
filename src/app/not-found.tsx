@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <Content title='~$ Unknown command'>
+    <Content title='unknown page'>
       <div className='mt-10'>
         <div>
           <h1 className='text-2xl py-6 font-semibold'>

@@ -1,4 +1,3 @@
-import { motion } from 'motion/react'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote/rsc'
 import { Link } from 'next-view-transitions'
 import Image from 'next/image'
@@ -126,16 +125,14 @@ const RoundedImage = ({
   ...props
 }: RoundedImageProps) => {
   return (
-    <motion.div>
-      <Image
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        className={`rounded-lg ${className || ''}`}
-        {...props}
-      />
-    </motion.div>
+    <Image
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      className={`rounded-lg ${className || ''}`}
+      {...props}
+    />
   )
 }
 

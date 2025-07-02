@@ -71,7 +71,7 @@ export async function GET(request: Request) {
       (
         <div tw='h-full w-full flex flex-col items-center justify-center bg-[#121111] font-mono p-5 relative'>
           <div tw='flex flex-col items-center max-w-[90%]'>
-            <span tw='text-[#bfbfbf] text-5xl'>~$ whoami</span>
+            <span tw='text-[#bfbfbf] text-5xl'>whoami</span>
             <span tw='text-[#bfbfbf] mt-4 text-3xl'>aelpxy</span>
           </div>
 

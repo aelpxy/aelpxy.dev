@@ -32,11 +32,14 @@ export default function Page() {
 
   return (
     <main>
-      <Content title='~$ whoami'>
+      <Content title='whoami'>
         <section className='px-0 py-6 sm:py-12 text-md'>
           <div className='text-neutral-300 mt-6 sm:text-xl text-base font-light'>
             <p className='text-base tracking-tight'>
-              theres something for everyone.
+              software guy. very keen to tinker with electronics.
+            </p>
+            <p className='mt-2 text-base tracking-tight'>
+              If you ever feel like giving up, remember it's only the beginning.
             </p>
           </div>
         </section>

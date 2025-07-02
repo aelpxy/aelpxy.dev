@@ -9,12 +9,12 @@ import { Link } from 'next-view-transitions'
 
 const socialLinks = [
   { href: 'https://github.com/aelpxy', Icon: FaGithub, label: 'GitHub' },
-  { href: 'mailto:aelpxy@velta.dev', Icon: MdAlternateEmail, label: 'Email' },
+  { href: 'mailto:hey@aelpxy.dev', Icon: MdAlternateEmail, label: 'Email' },
 ]
 
 const Footer = () => {
   return (
-    <motion.footer className='mt-2 border-neutral-800 mx-auto mb-2 px-6 sm:px-12 lg:px-32 py-10 sm:py-16 max-w-[60rem] border'>
+    <motion.footer className='mt-2 mx-auto mb-2 px-6 sm:px-12 lg:px-32 py-10 sm:py-16 max-w-[60rem] '>
       <div className='flex flex-col items-center justify-between pt-6 sm:pt-10 space-y-4 sm:space-y-0 sm:flex-row sm:space-x-4 border-t border-neutral-800'>
         <Tooltip text='https://creativecommons.org/licenses/by-sa/4.0/deed.en'>
           <Link

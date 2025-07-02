@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { ViewTransitions } from 'next-view-transitions'
-import { JetBrains_Mono } from 'next/font/google'
+import { Geist_Mono } from 'next/font/google'
 
 import './globals.css'
 
@@ -8,7 +8,7 @@ import Footer from '@/components/footer'
 import Hotkeys from '@/components/hotkeys'
 import Navbar from '@/components/navbar'
 
-const primaryFont = JetBrains_Mono({
+const primaryFont = Geist_Mono({
   weight: ['300', '400', '500'],
   subsets: ['latin'],
 })

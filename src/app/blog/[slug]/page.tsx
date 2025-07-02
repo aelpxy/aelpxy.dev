@@ -20,13 +20,6 @@ export default async function Page({ params }) {
 
   return (
     <Content title={post.metadata.title}>
-      <h2 className='text-xl py-6 tracking-tighter text-neutral-100 font-mono'>
-        <span className='select-none'>~$ pwd</span>
-        <div className='mt-0.5'>
-          <span className='select-none'>/blog/{post.slug}</span>
-        </div>
-      </h2>
-
       <article className='prose'>
         {post.metadata.isDraft === 'true' ? (
           <blockquote>This article is still a work in progress.</blockquote>
