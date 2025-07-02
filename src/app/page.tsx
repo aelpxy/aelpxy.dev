@@ -39,7 +39,8 @@ export default function Page() {
               software guy. very keen to tinker with electronics.
             </p>
             <p className='mt-2 text-base tracking-tight'>
-              If you ever feel like giving up, remember it's only the beginning.
+              If you ever feel like giving up, remember it&apos;s only the
+              beginning.
             </p>
           </div>
         </section>
