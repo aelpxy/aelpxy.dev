@@ -23,9 +23,24 @@ importers:
       '@next/mdx':
         specifier: ^15.4.3
         version: 15.4.3(@mdx-js/loader@3.1.0(acorn@8.15.0)(webpack@5.95.0))(@mdx-js/react@3.1.0(@types/react@19.1.8)(react@19.1.0))
+      '@orpc/client':
+        specifier: ^1.7.4
+        version: 1.7.4
+      '@orpc/contract':
+        specifier: ^1.7.4
+        version: 1.7.4
+      '@orpc/server':
+        specifier: ^1.7.4
+        version: 1.7.4
+      '@orpc/tanstack-query':
+        specifier: ^1.7.4
+        version: 1.7.4(@orpc/client@1.7.4)(@tanstack/query-core@5.83.0)
       '@types/mdx':
         specifier: ^2.0.13
         version: 2.0.13
+      hono:
+        specifier: ^4.8.5
+        version: 4.8.5
       lucide-react:
         specifier: ^0.525.0
         version: 0.525.0(react@19.1.0)
@@ -464,6 +479,47 @@ packages:
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
 
+  '@orpc/client@1.7.4':
+    resolution: {integrity: sha512-74wUIp3/LWmYU7ENhUVtHvF3KNcobA3rikPHg2q4fmtcczgdn6R/cKv1rbYKKPkGFpyY9LDk0K7zjbeNbN4IFA==}
+
+  '@orpc/contract@1.7.4':
+    resolution: {integrity: sha512-lQAYxo1WZYfEc/WsB0aluc1v0tuAVPmZponhQPK0DdB3MNR9x0wys4Wldf5xtnZ47ilFVt2p1w59qAjR/DwA8g==}
+
+  '@orpc/server@1.7.4':
+    resolution: {integrity: sha512-J1+09abwzLjSVP46/2hDGW/835WLFacX1rfGuBpJPD2cCxVUEQOrzhoIuxezFYhW5u2Y4PPrqanLjayuo673sw==}
+    peerDependencies:
+      crossws: '>=0.3.4'
+      ws: '>=8.18.1'
+    peerDependenciesMeta:
+      crossws:
+        optional: true
+      ws:
+        optional: true
+
+  '@orpc/shared@1.7.4':
+    resolution: {integrity: sha512-CUEsKZcCPENheqAJqhH6tG/wTCrGHUmWD5nro6afiVC/H8ujb5cI7HVvZxn4nXh4Vw2W7fxBiY4cx7sKGUm1vg==}
+
+  '@orpc/standard-server-aws-lambda@1.7.4':
+    resolution: {integrity: sha512-VH9ZEhwSUwv6bAa+1ShHNgolH0h0SG9xPcadewGVkuDk/DP/TB/chd85pyV+3qmu1bsbBTr2b7cAFqdwdMMGww==}
+
+  '@orpc/standard-server-fetch@1.7.4':
+    resolution: {integrity: sha512-BpuknICqaIX7oUZDjTW8r6XIgTaG7sd7Y7jTTT7Ci4S30/VGAYPfJtZV9MJjpdglBMiLQOSbFoseWb9WnGQqKA==}
+
+  '@orpc/standard-server-node@1.7.4':
+    resolution: {integrity: sha512-I3UgUu0EI1Asuaex8R5ut3+b8ZUAYOAnbsieaxBbglUn48ffRiDw+wGi3MNZtbDrJEhN/4TmkUuvpbQpO7da8w==}
+
+  '@orpc/standard-server-peer@1.7.4':
+    resolution: {integrity: sha512-EVx4nm3HGq4072s4CadTtbv9c/Mf2NW3TL7o8tRqUMyrhBpF20mfRmw982s8S1iYBCC33ObUT5v+prhJ09pSpw==}
+
+  '@orpc/standard-server@1.7.4':
+    resolution: {integrity: sha512-O0R18fMwCL9BqnCPJELiRpCo+vEB7QA+pqlPiH4J3FNWrJuNv5cVzjJ8/iXuaXMXxXRH51H03EKjsCW4uq8dUA==}
+
+  '@orpc/tanstack-query@1.7.4':
+    resolution: {integrity: sha512-YLWrDfGVGkijprTHHxmuXpwCjjruXWfKLlzKhV9gQRjheknQRSDhAvKDc7MKzj6zl2iPaS+laAOtYQMtFi/XrA==}
+    peerDependencies:
+      '@orpc/client': 1.7.4
+      '@tanstack/query-core': '>=5.80.2'
+
   '@react-aria/focus@3.21.0':
     resolution: {integrity: sha512-7NEGtTPsBy52EZ/ToVKCu0HSelE3kq9qeis+2eEq90XSuJOMaDHUQrA7RC2Y89tlEwQB31bud/kKRi9Qme1dkA==}
     peerDependencies:
@@ -527,6 +583,9 @@ packages:
 
   '@shikijs/vscode-textmate@10.0.2':
     resolution: {integrity: sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg==}
+
+  '@standard-schema/spec@1.0.0':
+    resolution: {integrity: sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA==}
 
   '@swc/helpers@0.5.15':
     resolution: {integrity: sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==}
@@ -621,6 +680,9 @@ packages:
 
   '@tailwindcss/postcss@4.1.11':
     resolution: {integrity: sha512-q/EAIIpF6WpLhKEuQSEVMZNMIY8KhWoAemZ9eylNAih9jxMGAYPPWBn3I9QL/2jZ+e7OEz/tZkX5HwbBR4HohA==}
+
+  '@tanstack/query-core@5.83.0':
+    resolution: {integrity: sha512-0M8dA+amXUkyz5cVUm/B+zSk3xkQAcuXuz5/Q/LveT4ots2rBpPTZOzd7yJa2Utsf8D2Upl5KyjhHRY+9lB/XA==}
 
   '@tanstack/react-virtual@3.13.12':
     resolution: {integrity: sha512-Gd13QdxPSukP8ZrkbgS2RwoZseTTbQPLnQEn7HY/rqtM+8Zt95f7xKC7N0EsKs7aoz0WzZ+fditZux+F8EzYxA==}
@@ -1542,6 +1604,10 @@ packages:
   hast-util-whitespace@3.0.0:
     resolution: {integrity: sha512-88JUN06ipLwsnv+dVn+OIYOvAuvBMy/Qoi6O7mQHxdPXpjy+Cd6xRkWwux7DKO+4sYILtLBRIKgsdpS2gQc7qw==}
 
+  hono@4.8.5:
+    resolution: {integrity: sha512-Up2cQbtNz1s111qpnnECdTGqSIUIhZJMLikdKkshebQSEBcoUKq6XJayLGqSZWidiH0zfHRCJqFu062Mz5UuRA==}
+    engines: {node: '>=16.9.0'}
+
   html-void-elements@3.0.0:
     resolution: {integrity: sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg==}
 
@@ -2169,6 +2235,9 @@ packages:
   oniguruma-to-es@4.3.3:
     resolution: {integrity: sha512-rPiZhzC3wXwE59YQMRDodUwwT9FZ9nNBwQQfsd1wfdtlKEyCdRV0avrTcSZ5xlIvGRVPd/cx6ZN45ECmS39xvg==}
 
+  openapi-types@12.1.3:
+    resolution: {integrity: sha512-N4YtSYJqghVu4iek2ZUvcN/0aqH1kRDuNqzcycDxhOUpg7GdvLa2F3DgS6yBNhInhv2r/6I0Flkn7CqL8+nIcw==}
+
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
     engines: {node: '>= 0.8.0'}
@@ -2247,6 +2316,10 @@ packages:
 
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
+
+  radash@12.1.1:
+    resolution: {integrity: sha512-h36JMxKRqrAxVD8201FrCpyeNuUY9Y5zZwujr20fFO77tpUtGa6EZzfKw/3WaiBX95fq7+MpsuMLNdSnORAwSA==}
+    engines: {node: '>=14.18.0'}
 
   randombytes@2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
@@ -2586,6 +2659,10 @@ packages:
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
+
+  type-fest@4.41.0:
+    resolution: {integrity: sha512-TeTSQ6H5YHvpqVwBRcnLDCBnDOHWYu7IvGbHT6N8AOymcr9PJGjc1GTtiWZTYg0NCgYwvnYWEkVChQAr9bjfwA==}
+    engines: {node: '>=16'}
 
   typed-array-buffer@1.0.3:
     resolution: {integrity: sha512-nAYYwfY3qnzX30IkA6AQZjVbtK6duGontcQm1WSG1MD94YLqK0515GNApXkoxKOWMusVssAHWLh9SeaoefYFGw==}
@@ -3080,6 +3157,69 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
+  '@orpc/client@1.7.4':
+    dependencies:
+      '@orpc/shared': 1.7.4
+      '@orpc/standard-server': 1.7.4
+      '@orpc/standard-server-fetch': 1.7.4
+      '@orpc/standard-server-peer': 1.7.4
+
+  '@orpc/contract@1.7.4':
+    dependencies:
+      '@orpc/client': 1.7.4
+      '@orpc/shared': 1.7.4
+      '@standard-schema/spec': 1.0.0
+      openapi-types: 12.1.3
+
+  '@orpc/server@1.7.4':
+    dependencies:
+      '@orpc/client': 1.7.4
+      '@orpc/contract': 1.7.4
+      '@orpc/shared': 1.7.4
+      '@orpc/standard-server': 1.7.4
+      '@orpc/standard-server-aws-lambda': 1.7.4
+      '@orpc/standard-server-fetch': 1.7.4
+      '@orpc/standard-server-node': 1.7.4
+      '@orpc/standard-server-peer': 1.7.4
+
+  '@orpc/shared@1.7.4':
+    dependencies:
+      radash: 12.1.1
+      type-fest: 4.41.0
+
+  '@orpc/standard-server-aws-lambda@1.7.4':
+    dependencies:
+      '@orpc/shared': 1.7.4
+      '@orpc/standard-server': 1.7.4
+      '@orpc/standard-server-fetch': 1.7.4
+      '@orpc/standard-server-node': 1.7.4
+
+  '@orpc/standard-server-fetch@1.7.4':
+    dependencies:
+      '@orpc/shared': 1.7.4
+      '@orpc/standard-server': 1.7.4
+
+  '@orpc/standard-server-node@1.7.4':
+    dependencies:
+      '@orpc/shared': 1.7.4
+      '@orpc/standard-server': 1.7.4
+      '@orpc/standard-server-fetch': 1.7.4
+
+  '@orpc/standard-server-peer@1.7.4':
+    dependencies:
+      '@orpc/shared': 1.7.4
+      '@orpc/standard-server': 1.7.4
+
+  '@orpc/standard-server@1.7.4':
+    dependencies:
+      '@orpc/shared': 1.7.4
+
+  '@orpc/tanstack-query@1.7.4(@orpc/client@1.7.4)(@tanstack/query-core@5.83.0)':
+    dependencies:
+      '@orpc/client': 1.7.4
+      '@orpc/shared': 1.7.4
+      '@tanstack/query-core': 5.83.0
+
   '@react-aria/focus@3.21.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@react-aria/interactions': 3.25.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -3166,6 +3306,8 @@ snapshots:
 
   '@shikijs/vscode-textmate@10.0.2': {}
 
+  '@standard-schema/spec@1.0.0': {}
+
   '@swc/helpers@0.5.15':
     dependencies:
       tslib: 2.8.1
@@ -3245,6 +3387,8 @@ snapshots:
       '@tailwindcss/oxide': 4.1.11
       postcss: 8.5.6
       tailwindcss: 4.1.11
+
+  '@tanstack/query-core@5.83.0': {}
 
   '@tanstack/react-virtual@3.13.12(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
@@ -4446,6 +4590,8 @@ snapshots:
     dependencies:
       '@types/hast': 3.0.4
 
+  hono@4.8.5: {}
+
   html-void-elements@3.0.0: {}
 
   ignore@5.3.2: {}
@@ -5326,6 +5472,8 @@ snapshots:
       regex: 6.0.1
       regex-recursion: 6.0.2
 
+  openapi-types@12.1.3: {}
+
   optionator@0.9.4:
     dependencies:
       deep-is: 0.1.4
@@ -5404,6 +5552,8 @@ snapshots:
   punycode@2.3.1: {}
 
   queue-microtask@1.2.3: {}
+
+  radash@12.1.1: {}
 
   randombytes@2.1.0:
     dependencies:
@@ -5879,6 +6029,8 @@ snapshots:
   type-check@0.4.0:
     dependencies:
       prelude-ls: 1.2.1
+
+  type-fest@4.41.0: {}
 
   typed-array-buffer@1.0.3:
     dependencies:

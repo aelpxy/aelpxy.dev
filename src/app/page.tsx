@@ -5,8 +5,8 @@ import { Link } from 'next-view-transitions'
 import BlogPostLink from '@/components/blog-post-link'
 import Content from '@/components/content'
 
+import { client } from '@/lib/rpc'
 import { baseUrl } from '@/lib/sitemap'
-import { getBlogPosts } from '@/lib/utils'
 
 export const metadata: Metadata = {
   title: 'aelpxy',
@@ -18,17 +18,8 @@ export const metadata: Metadata = {
   },
 }
 
-export default function Page() {
-  const allBlogs = getBlogPosts()
-
-  const recentPosts = allBlogs
-    .filter((post) => post.metadata.isDraft === 'false')
-    .sort(
-      (a, b) =>
-        new Date(b.metadata.publishedAt).getTime() -
-        new Date(a.metadata.publishedAt).getTime()
-    )
-    .slice(0, 3)
+export default async function Page() {
+  const posts = await client.posts.sortByRecent()
 
   return (
     <main>
@@ -51,7 +42,7 @@ export default function Page() {
             posts
           </h1>
           <div className='py-6'>
-            {recentPosts.map((post) => (
+            {posts.map((post) => (
               <BlogPostLink key={post.slug} post={post} />
             ))}
           </div>

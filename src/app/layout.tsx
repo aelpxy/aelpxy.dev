@@ -1,8 +1,9 @@
+import '../lib/rpc.server'
+import './globals.css'
+
 import type { Metadata } from 'next'
 import { ViewTransitions } from 'next-view-transitions'
 import { Geist_Mono } from 'next/font/google'
-
-import './globals.css'
 
 import Footer from '@/components/footer'
 import Hotkeys from '@/components/hotkeys'
