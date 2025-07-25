@@ -1,4 +1,4 @@
-import { getBlogPosts } from '@/lib/utils'
+import { getBlogPosts } from '@/lib/markdown'
 import { Link } from 'next-view-transitions'
 
 import PostCard from './post-card'

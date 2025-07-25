@@ -1,7 +1,7 @@
 import { os } from '@orpc/server'
 import * as z from 'zod'
 
-import { getBlogPosts } from '@/lib/utils'
+import { getBlogPosts } from '@/lib/markdown'
 
 const PostSchema = z.object({
   id: z.number().int().min(1),

@@ -1,5 +1,6 @@
 import '../lib/rpc.server'
 import './globals.css'
+import { Providers } from './providers'
 
 import type { Metadata } from 'next'
 import { ViewTransitions } from 'next-view-transitions'
@@ -36,11 +37,13 @@ export default function RootLayout({
         <body
           className={`${primaryFont.className} selection:text-neutral-900 selection:bg-neutral-100 min-h-screen antialiased`}
         >
-          <Navbar />
-          {children}
-          <Footer />
+          <Providers>
+            <Navbar />
+            {children}
+            <Footer />
+          </Providers>
         </body>
-      </html>
+      </html>{' '}
     </ViewTransitions>
   )
 }

@@ -1,4 +1,4 @@
-import { getBlogPosts } from './utils'
+import { getBlogPosts } from './markdown'
 
 export const baseUrl = 'https://aelpxy.dev'
 

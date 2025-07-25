@@ -3,8 +3,8 @@ import * as React from 'react'
 
 import { MDX } from '@/components/mdx'
 import { formatDate } from '@/lib/date'
+import { getBlogPosts } from '@/lib/markdown'
 import { baseUrl } from '@/lib/sitemap'
-import { getBlogPosts } from '@/lib/utils'
 
 import Content from '@/components/content'
 

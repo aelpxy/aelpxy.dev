@@ -2,79 +2,17 @@
 title: 'Writing a file server'
 publishedAt: '2024-11-24'
 author: 'aelpxy'
-summary: 'A talk about how this started and how I plan to develop this.'
-isDraft: true
+summary: 'A very experimental design for a file server that is not meant for production.'
+isDraft: false
 ---
-
-This is a project with a story behind it. Not your average file server that just
-serves files. It should handle everything with charm. (Still in progress)
 
 ## Why?
 
 I do not know.
 
-## Story
-
-Okay, so all of this started exactly two years ago, on November 30, 2022. At the
-time, I had a fairly good understanding of Go but didn't know how to build
-production apps in Go yet. As far as I remember, I created a project called
-`broccoli`. Shamelessly, I promoted it to my friend, hoping he would use it for
-his production apps. Back then, it only had three routes if I remember correctly.
-
-- `[GET] /`
-- `[POST] /upload`
-- `[GET] /:fileName`
-
-![Image](https://res.cloudinary.com/velta/image/upload/v1732419272/image_zxlyjt.webp)
-
-Yes, I didn't maintain it for two years straight, nor did I add any new
-features. The last commit was made on March 31, 2023, and there was one earlier
-on January 30, 2023, which was supposed to add TLS terminal support but that
-never happened. It was kind of abandoned.
-
-I renamed the project to serve after March 31, 2023, if I remember correctly.
-
-Finally, on November 19, 2024, I decided to actively develop it again.
-
-![Image](https://res.cloudinary.com/velta/image/upload/v1732419301/image_ffnf1b.webp)
-
-I came up with a new name because "`serve`" didn't seem like a good fit anymore.
-
-The same friend who had previously reacted to the project seemed to like the new
-ideas and architecture I had come up with. It should (_keep in mind, DO NOT use
-this for production_) be able to serve low-traffic apps.
-
-My first idea was to make it similar to AWS S3. I know it's not easy, and I
-don't plan to replicate anything from S3, but I had a simple system and idea in
-mind. So far, I've managed to get TLS working, and it looks pretty cool. It does
-use a lot of dependencies, though.
-
-```sh
-Usage:
-  fresh serve [flags]
-
-Flags:
-      --cert-dir string   Directory to store Let's Encrypt certificates (default "./certs")
-  -d, --domain string     Domain name for the HTTP server
-  -f, --folder string     Directory to serve files from (default "./")
-  -h, --help              help for serve
-  -p, --port string       Port to serve the HTTP server on (default "3000")
-      --tls               Enable TLS for HTTPS server
-```
-
-Yes it can automatically issue Let's Encrypt certificates to your domain names.
-
-```sh
-$ fresh serve -f ./ -p 5000
-
-9:40AM INFO fresh: launching server protocol=http address=:5000
-9:40AM INFO fresh: incoming request method=GET path=/ ip=[::1]:55256 ua="cURL" proto=HTTP/1.1
-9:40AM INFO fresh: request completed method=GET path=/ status=200 size="593 B" ip=[::1]:55256
-```
-
 ## Designing the architecture
 
-Just simple SQLite as the database, keeping in mind that this is a simple
+Just SQLite as the database, keeping in mind that this is a simple
 project to learn more about various concepts. I want to keep things very
 straightforward and easy to understand.
 
@@ -176,4 +114,4 @@ up a significant amount of space.
 
 ## Moving forward
 
-Maybe someday.
+I will probably actually never finish writing the actual code.
