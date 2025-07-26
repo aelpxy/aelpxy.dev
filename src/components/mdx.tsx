@@ -1,8 +1,8 @@
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote/rsc'
+import { MDXRemote } from 'next-mdx-remote/rsc'
 import { Link } from 'next-view-transitions'
 import Image from 'next/image'
-import React, { Children, useMemo } from 'react'
-import { createHighlighter } from 'shiki'
+import React, { Children } from 'react'
+import { createHighlighter, type Highlighter } from 'shiki'
 
 interface CustomLinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -31,60 +31,103 @@ interface HeadingProps {
   children: React.ReactNode
 }
 
-interface CustomMDXProps
-  extends MDXRemoteSerializeResult<Record<string, unknown>> {
+interface CustomMDXProps {
+  source: string
   components?: Record<string, React.ComponentType<any>>
 }
+
+interface PreProps extends React.HTMLAttributes<HTMLPreElement> {
+  children: React.ReactNode
+}
+
+let highlighterInstance: Highlighter | null = null
+let highlighterPromise: Promise<Highlighter> | null = null
+
+const getHighlighter = async (): Promise<Highlighter> => {
+  if (highlighterInstance) {
+    return highlighterInstance
+  }
+
+  if (highlighterPromise) {
+    return highlighterPromise
+  }
+
+  highlighterPromise = createHighlighter({
+    themes: ['vitesse-dark'],
+    langs: [
+      'javascript',
+      'typescript',
+      'go',
+      'rust',
+      'sh',
+      'bash',
+      'fish',
+      'toml',
+      'json',
+      'yaml',
+      'markdown',
+      'html',
+      'css',
+    ],
+  }).then((highlighter) => {
+    highlighterInstance = highlighter
+    highlighterPromise = null
+    return highlighter
+  })
+
+  return highlighterPromise
+}
+
+const slugCache = new Map<string, string>()
 
 const slugify = (str: string): string => {
   if (typeof str !== 'string') return ''
 
-  return str
+  if (slugCache.has(str)) {
+    return slugCache.get(str)!
+  }
+
+  const slug = str
     .toLowerCase()
     .trim()
     .replace(/\s+/g, '-')
     .replace(/&/g, '-and-')
     .replace(/[^\w-]+/g, '')
     .replace(/--+/g, '-')
+
+  slugCache.set(str, slug)
+  return slug
 }
 
 const Table = ({ data }: TableProps) => {
   const { headers, rows } = data
 
-  const tableHeaders = useMemo(
-    () =>
-      headers.map((header, index) => (
-        <th key={index} className='p-2 text-left font-semibold'>
-          {header}
-        </th>
-      )),
-    [headers]
-  )
-
-  const tableRows = useMemo(
-    () =>
-      rows.map((row, index) => (
-        <tr key={index} className='hover:bg-neutral-800'>
-          {row.map((cell, cellIndex) => (
-            <td
-              key={cellIndex}
-              className='p-2 text-left border-t border-neutral-700'
-            >
-              {cell}
-            </td>
-          ))}
-        </tr>
-      )),
-    [rows]
-  )
-
   return (
     <div className='overflow-x-auto'>
       <table className='w-full border-collapse'>
         <thead className='bg-neutral-800'>
-          <tr>{tableHeaders}</tr>
+          <tr>
+            {headers.map((header, index) => (
+              <th key={index} className='p-2 text-left font-semibold'>
+                {header}
+              </th>
+            ))}
+          </tr>
         </thead>
-        <tbody>{tableRows}</tbody>
+        <tbody>
+          {rows.map((row, index) => (
+            <tr key={index} className='hover:bg-neutral-800'>
+              {row.map((cell, cellIndex) => (
+                <td
+                  key={cellIndex}
+                  className='p-2 text-left border-t border-neutral-700'
+                >
+                  {cell}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   )
@@ -95,7 +138,9 @@ const CustomLink = ({ href, children, ...props }: CustomLinkProps) => {
     return <span>{children}</span>
   }
 
-  if (href.startsWith('/') || href.startsWith('#')) {
+  const isInternal = href.startsWith('/') || href.startsWith('#')
+
+  if (isInternal) {
     return (
       <Link href={href} {...props}>
         {children}
@@ -124,22 +169,21 @@ const RoundedImage = ({
   className,
   ...props
 }: RoundedImageProps) => {
+  const combinedClassName = `rounded-lg ${className || ''}`
+
   return (
     <Image
       src={src}
       alt={alt}
       width={width}
       height={height}
-      className={`rounded-lg ${className || ''}`}
+      className={combinedClassName}
       {...props}
     />
   )
 }
 
-const Pre = async ({
-  children,
-  ...props
-}: React.HTMLAttributes<HTMLPreElement>) => {
+const Pre = async ({ children, ...props }: PreProps) => {
   const codeElement = Children.toArray(children).find(
     (child): child is React.ReactElement =>
       React.isValidElement(child) && child.type === 'code'
@@ -149,10 +193,8 @@ const Pre = async ({
     return <pre {...props}>{children}</pre>
   }
 
-  // @ts-ignore
-  const className = codeElement.props?.className || ''
-  // @ts-ignore
-  const code = String(codeElement.props.children).trim()
+  const className = (codeElement.props as any)?.className || ''
+  const code = String((codeElement.props as any)?.children || '').trim()
 
   if (!className.startsWith('language-')) {
     return (
@@ -168,38 +210,44 @@ const Pre = async ({
     return <pre {...props}>{children}</pre>
   }
 
-  const highlighter = await createHighlighter({
-    themes: ['vitesse-dark'],
-    langs: [
-      'javascript',
-      'typescript',
-      'go',
-      'rust',
-      'sh',
-      'bash',
-      'fish',
-      'toml',
-    ],
-  })
+  try {
+    const highlighter = await getHighlighter()
+    const html = highlighter.codeToHtml(code, {
+      lang,
+      theme: 'vitesse-dark',
+    })
 
-  const html = highlighter.codeToHtml(code, {
-    lang,
-    theme: 'vitesse-dark',
-  })
-
-  return (
-    <div className='my-6'>
-      <div className='rounded-lg border border-neutral-700 bg-neutral-900'>
-        <div className='overflow-x-auto'>
-          <div dangerouslySetInnerHTML={{ __html: html }} />
+    return (
+      <div className='my-6'>
+        <div className='rounded-lg border border-neutral-700 bg-neutral-900'>
+          <div className='overflow-x-auto'>
+            <div dangerouslySetInnerHTML={{ __html: html }} />
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  } catch (error) {
+    console.warn('Failed to highlight code:', error)
+    return (
+      <div className='my-6'>
+        <div className='rounded-lg border border-neutral-700 bg-neutral-900 p-4'>
+          <pre className='text-sm text-neutral-300 overflow-x-auto'>
+            <code>{code}</code>
+          </pre>
+        </div>
+      </div>
+    )
+  }
 }
 
-const createHeading = (level: number) => {
-  return function Heading({ children }: HeadingProps) {
+const headingCache = new Map<number, React.ComponentType<HeadingProps>>()
+
+const createHeading = (level: number): React.ComponentType<HeadingProps> => {
+  if (headingCache.has(level)) {
+    return headingCache.get(level)!
+  }
+
+  const HeadingComponent = ({ children }: HeadingProps) => {
     const slug = slugify(children?.toString() || '')
 
     return React.createElement(`h${level}`, { id: slug }, [
@@ -211,6 +259,11 @@ const createHeading = (level: number) => {
       children,
     ])
   }
+
+  HeadingComponent.displayName = `Heading${level}`
+  headingCache.set(level, HeadingComponent)
+
+  return HeadingComponent
 }
 
 const components = {
@@ -224,17 +277,14 @@ const components = {
   a: CustomLink,
   pre: Pre,
   Table,
-} as const
-
-export function MDX({ components: userComponents, ...props }: CustomMDXProps) {
-  return (
-    // @ts-ignore
-    <MDXRemote
-      {...props}
-      // @ts-ignore
-      components={{ ...components, ...userComponents }}
-    />
-  )
 }
+
+export function MDX({ source, components: userComponents }: CustomMDXProps) {
+  const mergedComponents = { ...components, ...userComponents }
+
+  return <MDXRemote source={source} components={mergedComponents} />
+}
+
+MDX.displayName = 'MDX'
 
 export default MDX
