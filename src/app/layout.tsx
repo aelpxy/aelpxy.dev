@@ -1,4 +1,4 @@
-import '../lib/rpc.server'
+import '@/server/rpc.server'
 import './globals.css'
 import { Providers } from './providers'
 

@@ -1,14 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-
-type Metadata = {
-  title: string
-  summary: string
-  image?: string
-  author: string
-  isDraft: string // the markdown returns boolean not my fault!
-  publishedAt: string
-}
+import { Metadata } from '@/types'
 
 function parseFrontmatter(fileContent: string) {
   let frontmatterRegex = /---\s*([\s\S]*?)\s*---/
@@ -56,5 +48,5 @@ function getMDXData(dir: string) {
 }
 
 export function getBlogPosts() {
-  return getMDXData(path.join(process.cwd(), 'src', 'posts'))
+  return getMDXData(path.join(process.cwd(), 'src', 'content', 'posts'))
 }

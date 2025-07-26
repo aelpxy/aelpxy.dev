@@ -5,8 +5,8 @@ import { Link } from 'next-view-transitions'
 import BlogPostLink from '@/components/blog-post-link'
 import Content from '@/components/content'
 
-import { client } from '@/lib/rpc'
 import { baseUrl } from '@/lib/sitemap'
+import { client } from '@/server/rpc'
 
 export const metadata: Metadata = {
   title: 'aelpxy',

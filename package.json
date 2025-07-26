@@ -18,6 +18,7 @@
     "@orpc/client": "^1.7.4",
     "@orpc/contract": "^1.7.4",
     "@orpc/server": "^1.7.4",
+    "@orpc/shared": "^1.7.4",
     "@orpc/tanstack-query": "^1.7.4",
     "@tanstack/react-query": "^5.83.0",
     "@types/mdx": "^2.0.13",
@@ -34,6 +35,7 @@
     "react-icons": "^5.5.0",
     "remark-gfm": "^4.0.1",
     "shiki": "^3.8.1",
+    "superjson": "^2.2.1",
     "zod": "^4.0.5"
   },
   "devDependencies": {
