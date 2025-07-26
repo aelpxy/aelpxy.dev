@@ -1,4 +1,5 @@
 import '@/server/rpc.server'
+import 'katex/dist/katex.min.css'
 import './globals.css'
 import { Providers } from './providers'
 

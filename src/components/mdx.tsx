@@ -2,6 +2,8 @@ import { MDXRemote } from 'next-mdx-remote/rsc'
 import { Link } from 'next-view-transitions'
 import Image from 'next/image'
 import React, { Children } from 'react'
+import rehypeKatex from 'rehype-katex'
+import remarkMath from 'remark-math'
 import { createHighlighter, type Highlighter } from 'shiki'
 
 interface CustomLinkProps
@@ -266,6 +268,22 @@ const createHeading = (level: number): React.ComponentType<HeadingProps> => {
   return HeadingComponent
 }
 
+const Math = ({ children, ...props }: { children: React.ReactNode }) => {
+  return (
+    <span className='katex-display-wrapper' {...props}>
+      {children}
+    </span>
+  )
+}
+
+const InlineMath = ({ children, ...props }: { children: React.ReactNode }) => {
+  return (
+    <span className='katex-inline-wrapper' {...props}>
+      {children}
+    </span>
+  )
+}
+
 const components = {
   h1: createHeading(1),
   h2: createHeading(2),
@@ -277,12 +295,25 @@ const components = {
   a: CustomLink,
   pre: Pre,
   Table,
+  math: Math,
+  inlineMath: InlineMath,
 }
 
 export function MDX({ source, components: userComponents }: CustomMDXProps) {
   const mergedComponents = { ...components, ...userComponents }
 
-  return <MDXRemote source={source} components={mergedComponents} />
+  return (
+    <MDXRemote
+      source={source}
+      components={mergedComponents}
+      options={{
+        mdxOptions: {
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex],
+        },
+      }}
+    />
+  )
 }
 
 MDX.displayName = 'MDX'
