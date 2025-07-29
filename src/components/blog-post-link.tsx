@@ -1,8 +1,15 @@
 import { Link } from 'next-view-transitions'
 
 import { formatDate } from '@/lib/date'
+import { Metadata } from '@/types'
 
-const BlogPostLink = ({ post }: { post: any }) => (
+interface BlogPost {
+  metadata: Metadata
+  slug: string
+  content: string
+}
+
+const BlogPostLink = ({ post }: { post: BlogPost }) => (
   <Link
     key={post.slug}
     className='flex flex-col space-y-1 mb-4'

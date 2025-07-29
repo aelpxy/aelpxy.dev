@@ -1,6 +1,6 @@
+import { Metadata } from '@/types'
 import fs from 'fs'
 import path from 'path'
-import { Metadata } from '@/types'
 
 function parseFrontmatter(fileContent: string) {
   let frontmatterRegex = /---\s*([\s\S]*?)\s*---/
@@ -14,9 +14,15 @@ function parseFrontmatter(fileContent: string) {
     let [key, ...valueArr] = line.split(': ')
     let value = valueArr.join(': ').trim()
     value = value.replace(/^['"](.*)['"]$/, '$1')
+    let trimmedKey = key.trim()
 
-    // @ts-ignore
-    metadata[key.trim() as keyof Metadata] = value
+    // Convert isDraft from string to boolean
+    if (trimmedKey === 'isDraft') {
+      metadata[trimmedKey as keyof Metadata] = (value === 'true') as any
+    } else {
+      // @ts-ignore
+      metadata[trimmedKey as keyof Metadata] = value
+    }
   })
 
   return { metadata: metadata as Metadata, content }

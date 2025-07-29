@@ -3,6 +3,6 @@ export type Metadata = {
   summary: string
   image?: string
   author: string
-  isDraft: string // the markdown returns boolean not my fault!
+  isDraft: boolean
   publishedAt: string
 }

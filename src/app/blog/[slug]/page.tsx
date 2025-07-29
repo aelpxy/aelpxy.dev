@@ -21,7 +21,7 @@ export default async function Page({ params }) {
   return (
     <Content title={post.metadata.title}>
       <article className='prose'>
-        {post.metadata.isDraft === 'true' ? (
+        {post.metadata.isDraft ? (
           <blockquote>This article is still a work in progress.</blockquote>
         ) : (
           <>

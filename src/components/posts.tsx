@@ -6,9 +6,7 @@ import PostCard from './post-card'
 export function BlogPosts() {
   let posts = getBlogPosts()
 
-  const publishedBlogs = posts.filter(
-    (post) => post.metadata.isDraft === 'false'
-  )
+  const publishedBlogs = posts.filter((post) => !post.metadata.isDraft)
 
   return (
     <div>
@@ -19,8 +17,8 @@ export function BlogPosts() {
       {publishedBlogs
         .sort(
           (a, b) =>
-            // @ts-ignore
-            new Date(b.metadata.publishedAt) - new Date(a.metadata.publishedAt)
+            new Date(b.metadata.publishedAt).getTime() -
+            new Date(a.metadata.publishedAt).getTime()
         )
         .map((post) => (
           <Link
