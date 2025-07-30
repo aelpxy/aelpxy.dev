@@ -14,6 +14,14 @@ app.use(
   })
 )
 
+app.get('/health', (c) => {
+  return c.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+  })
+})
+
 app.use('/rpc/*', async (c, next) => {
   const { matched, response } = await rpcHandler.handle(c.req.raw, {
     prefix: '/api/rpc',
