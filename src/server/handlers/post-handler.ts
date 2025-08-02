@@ -1,4 +1,4 @@
-import { os } from '@orpc/server'
+import { ORPCError, os } from '@orpc/server'
 import * as z from 'zod'
 
 import { getBlogPosts } from '@/lib/markdown'
@@ -22,8 +22,8 @@ export const sortLatestPosts = os.handler(async () => {
 
     return recentPosts
   } catch (error) {
-    console.error('Error fetching recent posts:', error)
-    throw new Error('Failed to fetch recent posts')
+    console.error(error)
+    throw new ORPCError('INTERNAL_SERVER_ERROR')
   }
 })
 
@@ -33,12 +33,14 @@ export const findPost = os.input(PostSchema).handler(async ({ input }) => {
     const post = allBlogs.find((post) => post.slug === input.slug)
 
     if (!post) {
-      throw new Error(`Post with slug '${input.slug}' not found`)
+      throw new ORPCError('NOT_FOUND', {
+        message: `Post with slug '${input.slug}' not found`,
+      })
     }
 
     return post
   } catch (error) {
-    console.error('Error finding post:', error)
-    throw error
+    console.error(error)
+    throw new ORPCError('INTERNAL_SERVER_ERROR')
   }
 })

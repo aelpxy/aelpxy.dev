@@ -122,7 +122,7 @@ export default function Page() {
               Share Not Found
             </h1>
             <p className='mt-4 text-neutral-300'>
-              This share doesn't exist or has expired.
+              This share does not exist or has expired.
             </p>
           </div>
 

@@ -1,5 +1,5 @@
 import { db } from '@/lib/db'
-import { os } from '@orpc/server'
+import { ORPCError, os } from '@orpc/server'
 import * as z from 'zod'
 
 const CreateShareSchema = z.object({
@@ -34,8 +34,8 @@ export const createShare = os
 
       return { id: share.id }
     } catch (error) {
-      console.error('Error creating share:', error)
-      throw new Error('Failed to create share')
+      console.error(error)
+      throw new ORPCError('INTERNAL_SERVER_ERROR')
     }
   })
 
@@ -57,16 +57,20 @@ export const getShare = os.input(GetShareSchema).handler(async ({ input }) => {
     })
 
     if (!share) {
-      throw new Error('Share not found')
+      throw new ORPCError('NOT_FOUND', {
+        message: 'Share not found',
+      })
     }
 
     if (share.expiresAt && share.expiresAt < new Date()) {
-      throw new Error('Share has expired')
+      throw new ORPCError('FORBIDDEN', {
+        message: 'Share has expired',
+      })
     }
 
     return share
   } catch (error) {
-    console.error('Error getting share:', error)
-    throw error
+    console.error(error)
+    throw new ORPCError('INTERNAL_SERVER_ERROR')
   }
 })
