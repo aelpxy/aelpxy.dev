@@ -7,7 +7,13 @@
     "build": "GIT_SHA=$(git rev-parse --short HEAD) next build && next-sitemap",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache"
+    "postinstall": "prisma generate",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
+    "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
+    "db:generate": "prisma migrate dev",
+    "db:migrate": "prisma migrate deploy",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.7",
@@ -20,9 +26,13 @@
     "@orpc/server": "^1.7.8",
     "@orpc/shared": "^1.7.8",
     "@orpc/tanstack-query": "^1.7.8",
+    "@prisma/adapter-pg": "^6.13.0",
+    "@prisma/client": "^6.13.0",
+    "@t3-oss/env-nextjs": "^0.13.8",
     "@tanstack/react-query": "^5.84.1",
     "@types/mdx": "^2.0.13",
     "hono": "^4.8.12",
+    "ioredis": "^5.7.0",
     "katex": "^0.16.22",
     "lucide-react": "^0.536.0",
     "motion": "^12.23.12",
@@ -30,6 +40,8 @@
     "next-mdx-remote": "^5.0.0",
     "next-sitemap": "^4.2.3",
     "next-view-transitions": "^0.3.4",
+    "nuqs": "^2.4.3",
+    "pg": "^8.16.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-hotkeys-hook": "^5.1.0",
@@ -39,6 +51,7 @@
     "remark-math": "^6.0.0",
     "shiki": "^3.9.1",
     "superjson": "^2.2.2",
+    "tw-animate-css": "^1.3.6",
     "zod": "^4.0.14"
   },
   "devDependencies": {
@@ -50,6 +63,7 @@
     "eslint-config-next": "15.4.5",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
+    "prisma": "^6.13.0",
     "tailwindcss": "^4.1.11",
     "typescript": "^5.9.2"
   }
