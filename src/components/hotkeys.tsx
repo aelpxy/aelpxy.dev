@@ -6,8 +6,10 @@ import { useHotkeys } from 'react-hotkeys-hook'
 export default function Hotkeys() {
   const router = useTransitionRouter()
 
-  useHotkeys('h', () => router.push('/'), { enableOnFormTags: true })
-  useHotkeys(['b', 'p'], () => router.push('/blog'), { enableOnFormTags: true })
+  useHotkeys('ctrl+h', () => router.push('/'), { enableOnFormTags: true })
+  useHotkeys(['ctrl+b', 'ctrl+p'], () => router.push('/blog'), {
+    enableOnFormTags: true,
+  })
 
   return null
 }
