@@ -1,7 +1,7 @@
 'use client'
 
 import { encryptText, validateSecurityEnvironment } from '@/lib/crypto'
-import { client } from '@/server/rpc'
+import { client } from '@/server/rpc-client'
 import {
   AlertTriangle,
   Copy,
