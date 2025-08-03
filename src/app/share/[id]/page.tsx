@@ -1,7 +1,8 @@
 'use client'
 
 import { decryptText, validateSecurityEnvironment } from '@/lib/crypto'
-import { client } from '@/server/rpc-client'
+import { rpc } from '@/server/rpc-client'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import {
   AlertTriangle,
   CheckCircle,
@@ -13,7 +14,7 @@ import {
   Unlock,
 } from 'lucide-react'
 import { useParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 export default function Page() {
   const params = useParams()
@@ -22,62 +23,45 @@ export default function Page() {
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [decryptedText, setDecryptedText] = useState('')
-  const [error, setError] = useState('')
-  const [isDecrypting, setIsDecrypting] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
-  const [share, setShare] = useState<any>(null)
   const [copied, setCopied] = useState(false)
 
-  useEffect(() => {
-    const fetchShare = async () => {
-      try {
-        const shareData = await client.shares.get({ id: shareId })
-        setShare(shareData)
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Share not found')
-      } finally {
-        setIsLoading(false)
-      }
-    }
+  const shareQuery = useQuery(
+    rpc.shares.get.queryOptions({
+      input: {
+        id: shareId,
+      },
+    })
+  )
 
-    if (shareId) {
-      fetchShare()
-    }
-  }, [shareId])
+  const decryptMutation = useMutation({
+    mutationFn: async ({ password }: { password: string }) => {
+      if (!shareQuery.data) {
+        throw new Error('Share data not available')
+      }
+
+      validateSecurityEnvironment()
+
+      return await decryptText({
+        encryptedContent: shareQuery.data.encryptedContent,
+        salt: shareQuery.data.salt,
+        iv: shareQuery.data.iv,
+        keyHash: shareQuery.data.keyHash,
+        authTag: shareQuery.data.authTag,
+        version: shareQuery.data.version,
+        password: password,
+      })
+    },
+    onSuccess: (decrypted) => {
+      setDecryptedText(decrypted)
+    },
+  })
 
   const handleDecrypt = async () => {
     if (!password.trim()) {
-      setError('Please enter the password')
       return
     }
 
-    if (!share) {
-      setError('Share data not available')
-      return
-    }
-
-    setIsDecrypting(true)
-    setError('')
-
-    try {
-      validateSecurityEnvironment()
-
-      const decrypted = await decryptText({
-        encryptedContent: share.encryptedContent,
-        salt: share.salt,
-        iv: share.iv,
-        keyHash: share.keyHash,
-        authTag: share.authTag,
-        version: share.version,
-        password: password,
-      })
-
-      setDecryptedText(decrypted)
-    } catch (err) {
-      setError('Failed to decrypt. Please check your password and try again.')
-    } finally {
-      setIsDecrypting(false)
-    }
+    decryptMutation.mutate({ password })
   }
 
   const copyToClipboard = async () => {
@@ -93,10 +77,10 @@ export default function Page() {
   const resetView = () => {
     setDecryptedText('')
     setPassword('')
-    setError('')
+    decryptMutation.reset()
   }
 
-  if (isLoading) {
+  if (shareQuery.isLoading) {
     return (
       <div className='mx-auto max-w-2xl py-8'>
         <div className='p-6'>
@@ -112,7 +96,7 @@ export default function Page() {
     )
   }
 
-  if (error && !share) {
+  if (shareQuery.error && !shareQuery.data) {
     return (
       <div className='mx-auto max-w-2xl py-8'>
         <div className='p-6'>
@@ -133,7 +117,9 @@ export default function Page() {
               </div>
               <div className='ml-3'>
                 <h3 className='text-sm font-medium text-neutral-200'>Error</h3>
-                <div className='mt-2 text-sm text-neutral-400'>{error}</div>
+                <div className='mt-2 text-sm text-neutral-400'>
+                  {shareQuery.error?.message}
+                </div>
               </div>
             </div>
           </div>
@@ -225,9 +211,17 @@ export default function Page() {
             </div>
 
             <div className='border-t border-neutral-700 pt-4 text-sm text-neutral-400'>
-              <p>Share created: {new Date(share.createdAt).toLocaleString()}</p>
-              {share.expiresAt && (
-                <p>Expires: {new Date(share.expiresAt).toLocaleString()}</p>
+              <p>
+                Share created:{' '}
+                {shareQuery.data?.createdAt
+                  ? new Date(shareQuery.data.createdAt).toLocaleString()
+                  : 'Unknown'}
+              </p>
+              {shareQuery.data?.expiresAt && (
+                <p>
+                  Expires:{' '}
+                  {new Date(shareQuery.data.expiresAt).toLocaleString()}
+                </p>
               )}
             </div>
           </div>
@@ -286,7 +280,7 @@ export default function Page() {
             </div>
           </div>
 
-          {error && (
+          {decryptMutation.error && (
             <div className='border border-neutral-600 bg-neutral-800 p-4'>
               <div className='flex'>
                 <div className='flex-shrink-0'>
@@ -296,7 +290,9 @@ export default function Page() {
                   <h3 className='text-sm font-medium text-neutral-200'>
                     Error
                   </h3>
-                  <div className='mt-2 text-sm text-neutral-400'>{error}</div>
+                  <div className='mt-2 text-sm text-neutral-400'>
+                    {decryptMutation.error?.message}
+                  </div>
                 </div>
               </div>
             </div>
@@ -304,10 +300,10 @@ export default function Page() {
 
           <button
             onClick={handleDecrypt}
-            disabled={isDecrypting || !password.trim()}
+            disabled={decryptMutation.isPending || !password.trim()}
             className='w-full flex items-center justify-center gap-2 border border-neutral-600 bg-neutral-700 px-4 py-2 text-sm font-medium text-neutral-100 hover:bg-neutral-600 disabled:bg-neutral-800 disabled:text-neutral-500 disabled:cursor-not-allowed transition-colors'
           >
-            {isDecrypting ? (
+            {decryptMutation.isPending ? (
               <>
                 <Loader2 className='h-4 w-4 animate-spin' />
                 Decrypting...
@@ -321,9 +317,16 @@ export default function Page() {
           </button>
 
           <div className='border-t border-neutral-700 pt-4 text-sm text-neutral-400'>
-            <p>Share created: {new Date(share.createdAt).toLocaleString()}</p>
-            {share.expiresAt && (
-              <p>Expires: {new Date(share.expiresAt).toLocaleString()}</p>
+            <p>
+              Share created:{' '}
+              {shareQuery.data?.createdAt
+                ? new Date(shareQuery.data.createdAt).toLocaleString()
+                : 'Unknown'}
+            </p>
+            {shareQuery.data?.expiresAt && (
+              <p>
+                Expires: {new Date(shareQuery.data.expiresAt).toLocaleString()}
+              </p>
             )}
           </div>
         </div>

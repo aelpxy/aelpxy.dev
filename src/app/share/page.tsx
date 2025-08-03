@@ -1,7 +1,9 @@
 'use client'
 
 import { encryptText, validateSecurityEnvironment } from '@/lib/crypto'
-import { client } from '@/server/rpc-client'
+import { rpc } from '@/server/rpc-client'
+import { isDefinedError } from '@orpc/client'
+import { useMutation } from '@tanstack/react-query'
 import {
   AlertTriangle,
   Copy,
@@ -19,50 +21,54 @@ export default function Page() {
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [shareLink, setShareLink] = useState('')
-  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+
   const router = useRouter()
 
+  const createShareMutation = useMutation(
+    rpc.shares.create.mutationOptions({
+      onSuccess: (result) => {
+        const link = `${window.location.origin}/share/${result.id}`
+        setShareLink(link)
+      },
+    })
+  )
+
   const handleShare = async () => {
+    setIsLoading(true)
     if (!text.trim()) {
-      setError('Please enter some text to share')
       return
     }
 
     if (!password.trim()) {
-      setError('Please enter a password')
       return
     }
 
     if (password.length < 12) {
-      setError('Password must be at least 12 characters for security')
       return
     }
 
-    setIsLoading(true)
-    setError('')
+    validateSecurityEnvironment()
 
-    try {
-      validateSecurityEnvironment()
+    const encrypted = await encryptText(text, password)
 
-      const encrypted = await encryptText(text, password)
-
-      const result = await client.shares.create({
+    createShareMutation.mutate(
+      {
         encryptedContent: encrypted.encryptedContent,
         salt: encrypted.salt,
         iv: encrypted.iv,
         keyHash: encrypted.keyHash,
         authTag: encrypted.authTag,
         version: encrypted.version,
-      })
-
-      const link = `${window.location.origin}/share/${result.id}`
-      setShareLink(link)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create share')
-    } finally {
-      setIsLoading(false)
-    }
+      },
+      {
+        onError: (e) => {
+          if (isDefinedError(e)) {
+            alert(e)
+          }
+        },
+      }
+    )
   }
 
   const copyToClipboard = async () => {
@@ -77,8 +83,19 @@ export default function Page() {
     setText('')
     setPassword('')
     setShareLink('')
-    setError('')
+    createShareMutation.reset()
   }
+
+  const getValidationError = () => {
+    if (!text.trim()) return 'Please enter some text to share'
+    if (!password.trim()) return 'Please enter a password'
+    if (password.length < 12)
+      return 'Password must be at least 12 characters for security'
+    return null
+  }
+
+  const validationError = getValidationError()
+  const error = createShareMutation.error?.message || validationError
 
   if (shareLink) {
     return (
@@ -101,7 +118,7 @@ export default function Page() {
                 htmlFor='share-link'
                 className='block text-sm font-medium text-neutral-200'
               >
-                Share Link
+                Link
               </label>
               <div className='mt-1 flex gap-2'>
                 <input
@@ -247,7 +264,7 @@ export default function Page() {
             {isLoading ? (
               <>
                 <Loader2 className='h-4 w-4 animate-spin' />
-                Mutating your text...
+                Encrypting & Creating...
               </>
             ) : (
               <>
