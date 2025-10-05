@@ -55,6 +55,7 @@ const AesEncryption = () => {
     return crypto.subtle.deriveKey(
       {
         name: 'PBKDF2',
+        // @ts-ignore
         salt: salt,
         iterations: iterations,
         hash: 'SHA-256',
@@ -256,10 +257,7 @@ const AesEncryption = () => {
   }
 
   return (
-    <ToolCard
-      title='AES Encryption/Decryption'
-      description='Advanced AES encryption with customizable parameters.'
-    >
+    <ToolCard title='AES' description='with bunch of params.'>
       <div className='space-y-4'>
         <div className='grid grid-cols-2 gap-2'>
           <button
