@@ -1,15 +1,7 @@
-import { getBlogPosts } from '$lib/markdown.server';
-import type { BlogPost } from '$lib/types';
+import { getNotionPosts } from '$lib/notion';
 
 export async function load() {
-	const allPosts = await getBlogPosts();
-
-	const posts: BlogPost[] = allPosts
-		.filter((post) => !post.metadata.isDraft)
-		.sort(
-			(a, b) =>
-				new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime()
-		);
+	const posts = await getNotionPosts();
 
 	return {
 		posts

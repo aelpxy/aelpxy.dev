@@ -1,10 +1,9 @@
-import { getBlogPosts } from '$lib/markdown.server';
+import { getNotionPostBySlug, getNotionPosts } from '$lib/notion';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ params }) => {
-	const posts = await getBlogPosts();
-	const post = posts.find((p) => p.slug === params.slug);
+	const post = await getNotionPostBySlug(params.slug);
 
 	if (!post) {
 		throw error(404, 'Post not found');
@@ -16,7 +15,7 @@ export const load: PageServerLoad = async ({ params }) => {
 };
 
 export async function entries() {
-	const posts = await getBlogPosts();
+	const posts = await getNotionPosts();
 	return posts.map((post) => ({
 		slug: post.slug
 	}));
