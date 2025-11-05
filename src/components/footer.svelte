@@ -8,7 +8,10 @@
 	];
 </script>
 
-<footer class="mx-auto mt-2 mb-2 max-w-280 px-6 py-10 sm:px-12 sm:py-16 lg:px-32">
+<footer
+	class="mx-auto mt-2 mb-2 max-w-280 px-6 py-10 sm:px-12 sm:py-16 lg:px-32"
+	style="view-transition-name: footer;"
+>
 	<div
 		class="flex flex-col items-center justify-between space-y-4 border-t border-neutral-800 pt-6 sm:flex-row sm:space-y-0 sm:space-x-4 sm:pt-10"
 	>

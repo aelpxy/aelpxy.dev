@@ -75,7 +75,7 @@
 	<link rel="canonical" href="https://aelpxy.dev/blog/{post.slug}" />
 </svelte:head>
 
-<section>
+<section class="px-6">
 	<article class="prose">
 		{#if post.metadata.isDraft}
 			<blockquote>This article is still a work in progress.</blockquote>

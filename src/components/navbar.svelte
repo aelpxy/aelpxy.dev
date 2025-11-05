@@ -17,10 +17,11 @@
 	];
 </script>
 
-<div class="sticky top-0 z-10 select-none">
+<div class="sticky top-0 z-10 select-none" style="view-transition-name: navbar;">
 	<div class="mx-auto max-w-304 select-none lg:px-30">
 		<div
-			class="bg-opacity-30 flex w-full items-center justify-between border-b border-b-neutral-800 bg-neutral-900/10 px-6 py-4 backdrop-blur-sm backdrop-filter"
+			class="flex w-full items-center justify-between border-b border-b-neutral-800 px-6 py-4"
+			style="background: rgb(18, 17, 17);"
 		>
 			<div>
 				<div class="flex select-none lg:flex-1">

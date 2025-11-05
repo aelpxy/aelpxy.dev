@@ -66,8 +66,8 @@ code:not(pre code) {
 		color: rgb(var(--foreground-rgb));
 		background: rgb(var(--background-color));
 		min-height: 100vh;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
+		/* -webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale; */
 		font-family:
 			Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif;
 	}
@@ -146,14 +146,23 @@ code:not(pre code) {
 	}
 }
 
-::view-transition-old(root) {
+/* dont animate navbar and footer */
+::view-transition-old(navbar),
+::view-transition-new(navbar),
+::view-transition-old(footer),
+::view-transition-new(footer) {
+	animation: none;
+}
+
+/* only animate main page */
+::view-transition-old(main-content) {
 	animation:
 		200ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
 		200ms cubic-bezier(0.4, 0, 1, 1) both blur-out,
 		200ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
 }
 
-::view-transition-new(root) {
+::view-transition-new(main-content) {
 	animation:
 		300ms cubic-bezier(0, 0, 0.2, 1) 100ms both fade-in,
 		300ms cubic-bezier(0, 0, 0.2, 1) 100ms both blur-in,
@@ -176,7 +185,7 @@ code:not(pre code) {
 .prose {
 	font-family:
 		Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif;
-	max-width: 65ch;
+	max-width: 100ch;
 	margin-left: auto;
 	margin-right: auto;
 }

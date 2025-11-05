@@ -12,7 +12,14 @@ type BlurSlideParams = {
 
 export function blurSlide(
 	node: Element,
-	{ delay = 0, duration = 400, easing = cubicOut, y = 30, blur = 10, opacity = 0 }: BlurSlideParams = {}
+	{
+		delay = 0,
+		duration = 400,
+		easing = cubicOut,
+		y = 30,
+		blur = 10,
+		opacity = 0
+	}: BlurSlideParams = {}
 ): TransitionConfig {
 	const style = getComputedStyle(node);
 	const targetOpacity = +style.opacity;

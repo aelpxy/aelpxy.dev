@@ -30,5 +30,7 @@
 </svelte:head>
 
 <Navbar />
-{@render children()}
+<div style="view-transition-name: main-content;">
+	{@render children()}
+</div>
 <Footer />
