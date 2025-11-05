@@ -25,7 +25,7 @@
 					<BlogPostLink {post} />
 				{/each}
 			</div>
-			<a href="/blog">
+			<a href="/blog" data-sveltekit-preload-data="tap">
 				<span
 					class="text-md ml-2 truncate tracking-tighter text-neutral-300 decoration-wavy hover:underline"
 				>

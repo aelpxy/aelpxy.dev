@@ -20,7 +20,7 @@
 		>
 			<div>
 				<div class="flex select-none lg:flex-1">
-					<a href="/">
+					<a href="/" data-sveltekit-preload-data="tap">
 						<div class="-m-1.5 p-1.5">
 							<span class="sr-only">aelpxy</span>
 							<img
@@ -36,7 +36,7 @@
 			</div>
 			<div>
 				{#each navData as link (link.name)}
-					<a href={link.href} class="px-2.5">
+					<a href={link.href} class="px-2.5" data-sveltekit-preload-data="tap">
 						<code
 							class="px-1.5 py-1 transition-all ease-in-out {page.url.pathname === link.href
 								? 'text-neutral-100 underline decoration-wavy'
