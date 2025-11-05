@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Content from '../../components/content.svelte';
 	import BlogPostLink from '../../components/blog-post-link.svelte';
+	import Content from '../../components/content.svelte';
 
 	let { data } = $props();
 </script>
@@ -37,8 +37,8 @@
 </svelte:head>
 
 <main>
-	<Content title="ls ./blog">
-		<h1 class="py-6 text-2xl text-neutral-300">things to read.</h1>
+	<Content title="blog">
+		<h1 class="py-6 text-2xl text-neutral-300">personal opinionated thoughts</h1>
 		<section class="py-6">
 			<div class="flex flex-col gap-y-4">
 				{#if data.posts.length === 0}

@@ -1,5 +1,5 @@
 ---
-title: 'Exploring the power of static typing'
+title: 'Power of static code'
 publishedAt: '2022-06-07'
 author: 'aelpxy'
 summary: "There's a long debate about static and dynamic typing in the world of

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import '@fontsource/inter';
 	import '@fontsource-variable/jetbrains-mono';
-	import '@fontsource/merriweather';
 	import '../app.css';
 	import Navbar from '../components/navbar.svelte';
 	import Footer from '../components/footer.svelte';

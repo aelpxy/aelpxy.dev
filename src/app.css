@@ -48,6 +48,11 @@ code:not(pre code) {
 	text-wrap: balance;
 }
 
+@utility font-baskerville {
+	font-family:
+		Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif;
+}
+
 @layer utilities {
 	:root {
 		--background-color: 18, 17, 17;
@@ -62,7 +67,8 @@ code:not(pre code) {
 		background: rgb(var(--background-color));
 		min-height: 100vh;
 		antialiased: true;
-		font-family: 'Merriweather', Georgia, Cambria, 'Times New Roman', Times, serif;
+		font-family:
+			Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif;
 	}
 }
 
@@ -147,7 +153,8 @@ code:not(pre code) {
 
 /* prose styles for markdown content */
 .prose {
-	font-family: 'Merriweather', Georgia, Cambria, 'Times New Roman', Times, serif;
+	font-family:
+		Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif;
 	max-width: 65ch;
 	margin-left: auto;
 	margin-right: auto;

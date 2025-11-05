@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { MusicIcon } from '@lucide/svelte';
+	import { onMount } from 'svelte';
 
 	type NowPlayingData = {
 		isPlaying: boolean;
@@ -80,7 +80,7 @@
 			{/if}
 			<div class="min-w-0 flex-1">
 				<div class="mb-1 flex items-center gap-2">
-					<MusicIcon size={16} class="animate-pulse text-green-500" />
+					<MusicIcon size={16} class="text-green-500" />
 					<span class="text-xs text-neutral-400">now playing</span>
 				</div>
 				<p class="truncate text-sm font-medium text-neutral-100">

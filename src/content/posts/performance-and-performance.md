@@ -1,5 +1,5 @@
 ---
-title: 'Performance, performance and performance'
+title: 'Performance'
 publishedAt: '2024-10-06'
 author: 'aelpxy'
 summary: "In a world where everything moves fast, you can't ignore the significance of

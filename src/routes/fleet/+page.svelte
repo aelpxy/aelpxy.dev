@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { LaptopIcon, MonitorIcon, ServerIcon } from '@lucide/svelte';
 	import Content from '../../components/content.svelte';
-	import { MonitorIcon, LaptopIcon, ServerIcon } from '@lucide/svelte';
 
 	const hardware = [
 		{
@@ -69,32 +69,27 @@
 </svelte:head>
 
 <Content title="fleet">
-	<section class="px-0 py-6 sm:py-12">
-		<p class="mb-8 text-base text-neutral-300">
-			my collection of machines that keep everything running.
-		</p>
+	<section class="text-md px-0 py-6 sm:py-8">
+		<div class="mt-2 text-base font-light text-neutral-300 sm:text-xl">
+			<p class="text-xl tracking-tight">my collection of machines that keep everything running.</p>
+		</div>
 
-		<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
+		<div class="space-y-8 py-8">
 			{#each hardware as machine (machine.name)}
 				{@const Icon = machine.icon}
-				<div
-					class="rounded-lg border border-neutral-800 bg-neutral-900/50 p-6 transition-all duration-300 hover:border-neutral-700 hover:bg-neutral-900/70"
-				>
-					<div class="mb-4">
-						<div class="flex items-center gap-2">
-							<Icon size={20} class="text-neutral-400" />
-							<h3 class="text-xl font-medium text-neutral-100">
-								<code>{machine.name}</code>
-							</h3>
-						</div>
-						<p class="mt-2 text-sm text-neutral-400">{machine.type}</p>
+				<div class="space-y-2">
+					<div class="flex items-center gap-2 px-1">
+						<Icon size={18} class="text-neutral-400" />
+						<h3 class="text-xl tracking-tighter text-neutral-100">
+							{machine.name}
+						</h3>
+						<span class="text-sm text-neutral-500">/ {machine.type}</span>
 					</div>
 
-					<ul class="space-y-2">
+					<ul class="space-y-1 px-1">
 						{#each machine.specs as spec}
-							<li class="flex items-start text-sm text-neutral-300">
-								<span class="mr-2 text-neutral-500">→</span>
-								<span>{spec}</span>
+							<li class="text-base text-neutral-400">
+								{spec}
 							</li>
 						{/each}
 					</ul>

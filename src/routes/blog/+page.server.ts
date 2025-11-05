@@ -4,7 +4,6 @@ import type { BlogPost } from '$lib/types';
 export async function load() {
 	const allPosts = await getBlogPosts();
 
-	// Filter out draft posts and sort by date
 	const posts: BlogPost[] = allPosts
 		.filter((post) => !post.metadata.isDraft)
 		.sort(

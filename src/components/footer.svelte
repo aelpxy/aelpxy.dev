@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { GithubIcon, MailIcon, KeyRoundIcon } from '@lucide/svelte';
+	import { GithubIcon, MailIcon, TwitterIcon } from '@lucide/svelte';
 
 	const socialLinks = [
-		{ href: 'https://github.com/aelpxy.gpg', label: 'PGP', icon: KeyRoundIcon },
-		{ href: 'https://github.com/aelpxy', label: 'GitHub', icon: GithubIcon },
-		{ href: 'mailto:hey@aelpxy.dev', label: 'Email', icon: MailIcon }
+		{ href: 'mailto:hey@aelpxy.dev', label: 'Email', icon: MailIcon },
+		{ href: 'https://twitter.com/aelpxy', label: 'Twitter', icon: TwitterIcon },
+		{ href: 'https://github.com/aelpxy', label: 'GitHub', icon: GithubIcon }
 	];
 </script>
 
@@ -29,9 +29,9 @@
 					rel="noreferrer noopener"
 					target="_blank"
 					aria-label={label}
-					class="border border-neutral-700 bg-neutral-900 p-2 text-neutral-300 transition-all duration-300 ease-in-out hover:bg-neutral-800 hover:text-neutral-100"
+					class="text-neutral-400 transition-all ease-in-out hover:text-neutral-100"
 				>
-					<Icon size={16} />
+					<Icon size={18} />
 				</a>
 			{/each}
 		</div>

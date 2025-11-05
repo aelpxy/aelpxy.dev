@@ -1,5 +1,5 @@
 ---
-title: 'Writing a file server'
+title: 'A file server'
 publishedAt: '2024-11-24'
 author: 'aelpxy'
 summary: 'A very experimental design for a file server that is not meant for

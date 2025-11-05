@@ -1,5 +1,5 @@
 ---
-title: 'My developer setup for 2024'
+title: 'A setup for 2024'
 publishedAt: '2024-06-21'
 author: 'aelpxy'
 summary: "This is the developer setup I've used for most of this year, and I plan to
