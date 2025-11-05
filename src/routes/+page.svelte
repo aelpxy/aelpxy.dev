@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Content from '$lib/../components/content.svelte';
 	import BlogPostLink from '$lib/../components/blog-post-link.svelte';
+	import NowPlaying from '../components/now-playing.svelte';
 
 	let { data } = $props();
 </script>
@@ -44,6 +45,10 @@
 				<p class="mt-2 text-base tracking-tight">
 					If you ever feel like giving up, remember it's only the beginning.
 				</p>
+			</div>
+
+			<div class="mt-8">
+				<NowPlaying />
 			</div>
 		</section>
 
