@@ -16,3 +16,5 @@ export async function load() {
 		posts
 	};
 }
+
+export const prerender = true;
