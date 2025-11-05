@@ -22,7 +22,7 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href="/favicon.png" />
+	<link rel="icon" href="/favicon.png" sizes="96x96" type="image/png" />
 	<meta name="author" content="aelpxy" />
 </svelte:head>
 
