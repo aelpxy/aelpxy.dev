@@ -18,8 +18,7 @@
 	};
 
 	const status = page.status ?? 500;
-	const errorInfo =
-		errorMessages[status] ||
+	const errorInfo = errorMessages[status] ||
 		errorMessages[500] || {
 			title: `${status}: error`,
 			message: 'something unexpected happened.'

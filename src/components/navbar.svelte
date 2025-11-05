@@ -9,6 +9,10 @@
 		{
 			name: 'blog',
 			href: '/blog'
+		},
+		{
+			name: 'fleet',
+			href: '/fleet'
 		}
 	];
 </script>
