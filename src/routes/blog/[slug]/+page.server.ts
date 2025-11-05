@@ -1,4 +1,4 @@
-import { getNotionPostBySlug, getNotionPosts } from '$lib/notion';
+import { getNotionPostBySlug } from '$lib/notion';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
@@ -14,11 +14,8 @@ export const load: PageServerLoad = async ({ params }) => {
 	};
 };
 
-export async function entries() {
-	const posts = await getNotionPosts();
-	return posts.map((post) => ({
-		slug: post.slug
-	}));
-}
-
-export const prerender = true;
+export const config = {
+	isr: {
+		expiration: 86400
+	}
+};
