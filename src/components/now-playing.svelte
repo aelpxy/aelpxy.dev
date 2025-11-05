@@ -1,14 +1,51 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { MusicIcon } from '@lucide/svelte';
-	import { getCurrentlyPlaying } from '$lib/remote-fns/spotify.remote';
 
-	const query = getCurrentlyPlaying();
+	type NowPlayingData = {
+		isPlaying: boolean;
+		title?: string;
+		artist?: string;
+		album?: string;
+		albumImageUrl?: string;
+		songUrl?: string;
+	};
+
+	type ApiResponse =
+		| {
+				ok: true;
+				data: NowPlayingData;
+		  }
+		| {
+				ok: false;
+				error: string;
+		  };
+
+	let nowPlaying = $state<NowPlayingData>({ isPlaying: false });
+	let loading = $state(true);
+
+	async function fetchNowPlaying() {
+		try {
+			const response = await fetch('/api/spotify/now-playing');
+			const result = (await response.json()) as ApiResponse;
+
+			if (result.ok) {
+				nowPlaying = result.data;
+			} else {
+				console.error('Spotify error:', result.error);
+				nowPlaying = { isPlaying: false };
+			}
+		} catch (error) {
+			console.error('Error fetching now playing:', error);
+			nowPlaying = { isPlaying: false };
+		} finally {
+			loading = false;
+		}
+	}
 
 	onMount(() => {
-		const interval = setInterval(() => {
-			query.refresh();
-		}, 30 * 1000);
+		fetchNowPlaying();
+		const interval = setInterval(fetchNowPlaying, 15 * 1000);
 		return () => clearInterval(interval);
 	});
 </script>
@@ -16,7 +53,7 @@
 <div
 	class="rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition-all duration-300 hover:border-neutral-700"
 >
-	{#if query.loading}
+	{#if loading}
 		<div class="flex animate-pulse items-center gap-4">
 			<div class="h-16 w-16 rounded bg-neutral-800"></div>
 			<div class="min-w-0 flex-1">
@@ -25,22 +62,17 @@
 				<div class="h-3 w-32 rounded bg-neutral-800"></div>
 			</div>
 		</div>
-	{:else if query.error}
-		<div class="flex items-center gap-3">
-			<MusicIcon size={16} class="text-red-500" />
-			<span class="text-sm text-neutral-400">failed to load</span>
-		</div>
-	{:else if query.current?.data.isPlaying && query.current.data.title}
+	{:else if nowPlaying.isPlaying && nowPlaying.title}
 		<a
-			href={query.current.data.songUrl}
+			href={nowPlaying.songUrl}
 			target="_blank"
 			rel="noopener noreferrer"
 			class="flex items-center gap-4"
 		>
-			{#if query.current.data.albumImageUrl}
+			{#if nowPlaying.albumImageUrl}
 				<img
-					src={query.current.data.albumImageUrl}
-					alt={query.current.data.title}
+					src={nowPlaying.albumImageUrl}
+					alt={nowPlaying.title}
 					class="h-16 w-16 rounded"
 					width="64"
 					height="64"
@@ -52,9 +84,9 @@
 					<span class="text-xs text-neutral-400">now playing</span>
 				</div>
 				<p class="truncate text-sm font-medium text-neutral-100">
-					{query.current.data.title}
+					{nowPlaying.title}
 				</p>
-				<p class="truncate text-xs text-neutral-400">{query.current.data.artist}</p>
+				<p class="truncate text-xs text-neutral-400">{nowPlaying.artist}</p>
 			</div>
 		</a>
 	{:else}
