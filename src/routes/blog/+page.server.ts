@@ -8,8 +8,8 @@ export async function load() {
 	};
 }
 
-export const config = {
-	isr: {
-		expiration: 300
-	}
-};
+// export const config = {
+// 	isr: {
+// 		expiration: 300
+// 	}
+// };
