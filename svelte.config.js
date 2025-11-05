@@ -15,7 +15,7 @@ const config = {
 			remarkPlugins: [remarkMath],
 			rehypePlugins: [rehypeKatex],
 			layout: {
-				blog: './src/lib/components/mdx-layout.svelte'
+				blog: './src/components/mdx-layout.svelte'
 			}
 		})
 	],
