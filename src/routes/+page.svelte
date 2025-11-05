@@ -5,6 +5,35 @@
 	let { data } = $props();
 </script>
 
+<svelte:head>
+	<title>aelpxy</title>
+	<meta
+		name="description"
+		content="software and infrastructure engineer passionate about tinkering with electronics"
+	/>
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://aelpxy.dev/" />
+	<meta property="og:title" content="aelpxy" />
+	<meta
+		property="og:description"
+		content="software and infrastructure engineer passionate about tinkering with electronics"
+	/>
+	<meta property="og:site_name" content="aelpxy" />
+
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:url" content="https://aelpxy.dev/" />
+	<meta name="twitter:title" content="aelpxy" />
+	<meta
+		name="twitter:description"
+		content="software and infrastructure engineer passionate about tinkering with electronics"
+	/>
+
+	<link rel="canonical" href="https://aelpxy.dev/" />
+</svelte:head>
+
 <main>
 	<Content title="whoami">
 		<section class="text-md px-0 py-6 sm:py-12">

@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>Blog - aelpxy</title>
+	<title>blog - aelpxy</title>
 	<meta
 		name="description"
 		content="thoughts and writings about software engineering, infrastructure, and electronics"
@@ -15,7 +15,7 @@
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://aelpxy.dev/blog" />
-	<meta property="og:title" content="Blog - aelpxy" />
+	<meta property="og:title" content="blog - aelpxy" />
 	<meta
 		property="og:description"
 		content="thoughts and writings about software engineering, infrastructure, and electronics"
@@ -25,7 +25,7 @@
 	<!-- Twitter -->
 	<meta name="twitter:card" content="summary" />
 	<meta name="twitter:url" content="https://aelpxy.dev/blog" />
-	<meta name="twitter:title" content="Blog - aelpxy" />
+	<meta name="twitter:title" content="blog - aelpxy" />
 	<meta
 		name="twitter:description"
 		content="thoughts and writings about software engineering, infrastructure, and electronics"
