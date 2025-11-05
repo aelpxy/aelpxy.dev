@@ -66,7 +66,8 @@ code:not(pre code) {
 		color: rgb(var(--foreground-rgb));
 		background: rgb(var(--background-color));
 		min-height: 100vh;
-		antialiased: true;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
 		font-family:
 			Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif;
 	}
@@ -117,26 +118,46 @@ code:not(pre code) {
 
 @keyframes slide-from-right {
 	from {
-		transform: translateX(30px);
+		transform: translateY(20px);
 	}
 }
 
 @keyframes slide-to-left {
 	to {
-		transform: translateX(-30px);
+		transform: translateY(-20px);
+	}
+}
+
+@keyframes blur-in {
+	from {
+		filter: blur(8px);
+	}
+	to {
+		filter: blur(0);
+	}
+}
+
+@keyframes blur-out {
+	from {
+		filter: blur(0);
+	}
+	to {
+		filter: blur(8px);
 	}
 }
 
 ::view-transition-old(root) {
 	animation:
-		90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
-		300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+		200ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+		200ms cubic-bezier(0.4, 0, 1, 1) both blur-out,
+		200ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
 }
 
 ::view-transition-new(root) {
 	animation:
-		210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
-		300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+		300ms cubic-bezier(0, 0, 0.2, 1) 100ms both fade-in,
+		300ms cubic-bezier(0, 0, 0.2, 1) 100ms both blur-in,
+		300ms cubic-bezier(0.4, 0, 0.2, 1) 100ms both slide-from-right;
 }
 
 :root {
