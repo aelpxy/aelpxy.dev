@@ -10,6 +10,10 @@
 	let { children } = $props();
 
 	onNavigate((navigation) => {
+		if (navigation.from?.url.pathname === navigation.to?.url.pathname) {
+			return;
+		}
+
 		if (!document.startViewTransition) return;
 
 		return new Promise((resolve) => {
