@@ -1,0 +1,284 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+
+@theme {
+	--background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+	--background-image-gradient-conic: conic-gradient(
+		from 180deg at 50% 50%,
+		var(--tw-gradient-stops)
+	);
+}
+
+html {
+	scroll-behavior: smooth;
+	min-width: 360px;
+}
+
+code,
+pre,
+kbd,
+samp {
+	font-family:
+		'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro',
+		Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+}
+
+/* Only apply color to inline code, not code blocks */
+code:not(pre code) {
+	color: #f5f5f5;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+*/
+@layer base {
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-neutral-200, currentColor);
+	}
+}
+
+@utility text-balance {
+	text-wrap: balance;
+}
+
+@layer utilities {
+	:root {
+		--background-color: 18, 17, 17;
+		--foreground-rgb: 255, 255, 255;
+		--scrollbar-color: #2a2a2a;
+		--scrollbar-bg: #1a1a1a;
+		--scrollbar-hover: #3a3a3a;
+	}
+
+	body {
+		color: rgb(var(--foreground-rgb));
+		background: rgb(var(--background-color));
+		min-height: 100vh;
+		antialiased: true;
+		font-family: 'Merriweather', Georgia, Cambria, 'Times New Roman', Times, serif;
+	}
+}
+
+/* scrollbar styles */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: var(--scrollbar-color) var(--scrollbar-bg);
+}
+
+*::-webkit-scrollbar {
+	width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+	background: var(--scrollbar-bg);
+	border-radius: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: var(--scrollbar-color);
+	border-radius: 8px;
+	border: 2px solid var(--scrollbar-bg);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+	background-color: var(--scrollbar-hover);
+}
+
+::selection {
+	background-color: #47a3f3;
+	color: #fefefe;
+}
+
+/* View Transitions */
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+}
+
+@keyframes fade-out {
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes slide-from-right {
+	from {
+		transform: translateX(30px);
+	}
+}
+
+@keyframes slide-to-left {
+	to {
+		transform: translateX(-30px);
+	}
+}
+
+::view-transition-old(root) {
+	animation:
+		90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+		300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+}
+
+::view-transition-new(root) {
+	animation:
+		210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+		300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+}
+
+:root {
+	--sh-class: #2d5e9d;
+	--sh-identifier: #354150;
+	--sh-sign: #8996a3;
+	--sh-string: #007f7a;
+	--sh-keyword: #e02518;
+	--sh-comment: #a19595;
+	--sh-jsxliterals: #6266d1;
+	--sh-property: #e25a1c;
+	--sh-entity: #e25a1c;
+}
+
+/* prose styles for markdown content */
+.prose {
+	font-family: 'Merriweather', Georgia, Cambria, 'Times New Roman', Times, serif;
+	max-width: 65ch;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.prose .anchor {
+	@apply invisible absolute no-underline;
+	margin-left: -1em;
+	padding-right: 0.5em;
+	width: 80%;
+	max-width: 700px;
+	cursor: pointer;
+}
+
+.anchor:hover {
+	@apply visible;
+}
+
+.prose a {
+	@apply underline decoration-neutral-400 decoration-[0.1em] underline-offset-2 transition-all;
+}
+
+.prose .anchor:after {
+	@apply text-neutral-300;
+	content: '#';
+}
+
+.prose *:hover > .anchor {
+	@apply visible;
+}
+
+.prose pre {
+	@apply overflow-x-auto rounded-lg px-3 py-2 text-sm;
+	font-family:
+		'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro',
+		Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+}
+
+.prose code {
+	@apply rounded-lg px-1 py-0.5;
+	font-family:
+		'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro',
+		Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+}
+
+.prose pre code {
+	@apply p-0;
+	border: initial;
+	line-height: 1.5;
+}
+
+.prose code span {
+	@apply font-medium;
+}
+
+.prose img {
+	@apply m-0;
+}
+
+.prose p {
+	@apply my-4 text-neutral-300;
+}
+
+.prose h1 {
+	@apply mt-6 mb-2 text-3xl font-medium tracking-tight text-neutral-100;
+}
+
+.prose h2 {
+	@apply mt-6 mb-2 text-2xl font-medium tracking-tight text-neutral-100;
+}
+
+.prose h3 {
+	@apply mt-6 mb-2 text-xl font-medium tracking-tight text-neutral-100;
+}
+
+.prose h4 {
+	@apply mt-6 mb-2 text-lg font-medium tracking-tight text-neutral-100;
+}
+
+.prose strong {
+	@apply font-medium;
+}
+
+.prose ul {
+	@apply list-disc pl-6;
+}
+
+.prose ol {
+	@apply list-decimal pl-6;
+}
+
+.prose li {
+	@apply text-neutral-100;
+}
+
+.prose a {
+	@apply text-neutral-300 transition-colors duration-300;
+}
+
+.prose a:hover {
+	@apply text-neutral-100;
+}
+
+.prose > :first-child {
+	margin-top: 1.25em !important;
+	margin-bottom: 1.25em !important;
+}
+
+pre::-webkit-scrollbar {
+	display: none;
+}
+
+pre {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+input[type='text'],
+input[type='email'] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+table {
+	display: block;
+	max-width: fit-content;
+	overflow-x: auto;
+	white-space: nowrap;
+}
+
+.title {
+	text-wrap: balance;
+}
