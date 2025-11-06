@@ -4,34 +4,39 @@
 
 	const hardware = [
 		{
-			name: 'desktop-pc',
+			name: 'desktop',
 			type: 'primary and gaming machine',
 			icon: MonitorIcon,
 			specs: [
 				'AMD Ryzen 7 7800X3D',
-				'32GB @ 6000MHz',
+				'32GB @ 6000MHz RAM',
 				'1x 1TB NVMe SSD',
 				'2x 512GB NVMe SSD',
-				'Sapphire Nitro+ RX 9070 XT'
+				'AMD Radeon RX 9070 XT'
 			]
 		},
 		{
 			name: 'macbook-air',
-			type: 'coding a lot lately on this',
+			type: 'primary work machine',
 			icon: LaptopIcon,
-			specs: ['M4 Air @ 16GB', '256GB Storage']
+			specs: ['M4', '16GB RAM', '256GB Storage']
 		},
 		{
-			name: 'dev-machine',
-			type: 'i just ssh into this and code',
+			name: 'az-red',
+			type: 'dev server (i code in this via ssh)',
 			icon: ServerIcon,
-			specs: ['AMD Ryzen 7 5700X', '32GB @ 3200MHz', 'RTX 3050 8GB', '2x 128GB NVMe SSDs']
+			specs: [
+				'AMD Ryzen 7 5700X',
+				'32GB @ 3200MHz RAM',
+				'NVIDIA GeForce RTX 3050 8GB',
+				'2x 128GB NVMe SSDs'
+			]
 		},
 		{
 			name: 'az-blue',
 			type: 'server',
 			icon: ServerIcon,
-			specs: ['Intel Core i5-10400', '16GB RAM', '480GB SATA SSD']
+			specs: ['Intel Core i5-10400', '16GB @ 2666MHz RAM', '480GB SATA SSD']
 		},
 		{
 			name: 'az-yellow',

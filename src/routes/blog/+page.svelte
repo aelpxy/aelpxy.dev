@@ -80,10 +80,7 @@
 		<section class="py-6">
 			<div class="flex flex-col gap-y-4">
 				{#if filteredPosts.length === 0}
-					<div
-						in:fade={{ duration: 150 }}
-						out:fade={{ duration: 100 }}
-					>
+					<div in:fade={{ duration: 150 }} out:fade={{ duration: 100 }}>
 						<span class="py-6 text-2xl">
 							{searchQuery.trim() === '' ? 'nothing yet' : 'no posts found'}
 						</span>

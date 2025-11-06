@@ -3,12 +3,12 @@
 	import { onMount } from 'svelte';
 
 	type NowPlayingData = {
-		isPlaying: boolean;
-		title?: string;
+		name?: string;
 		artist?: string;
 		album?: string;
-		albumImageUrl?: string;
+		albumArt?: string;
 		songUrl?: string;
+		isPlaying?: boolean;
 	};
 
 	type ApiResponse =
@@ -28,6 +28,8 @@
 		try {
 			const response = await fetch('/api/spotify/now-playing');
 			const result = (await response.json()) as ApiResponse;
+
+			console.log(result);
 
 			if (result.ok) {
 				nowPlaying = result.data;
@@ -62,17 +64,17 @@
 				<div class="h-3 w-32 rounded bg-neutral-800"></div>
 			</div>
 		</div>
-	{:else if nowPlaying.isPlaying && nowPlaying.title}
+	{:else if nowPlaying.isPlaying && nowPlaying.name}
 		<a
 			href={nowPlaying.songUrl}
 			target="_blank"
 			rel="noopener noreferrer"
 			class="flex items-center gap-4"
 		>
-			{#if nowPlaying.albumImageUrl}
+			{#if nowPlaying}
 				<img
-					src={nowPlaying.albumImageUrl}
-					alt={nowPlaying.title}
+					src={nowPlaying.albumArt}
+					alt={nowPlaying.name}
 					class="h-16 w-16 rounded"
 					width="64"
 					height="64"
@@ -80,11 +82,11 @@
 			{/if}
 			<div class="min-w-0 flex-1">
 				<div class="mb-1 flex items-center gap-2">
-					<MusicIcon size={16} class="text-green-500" />
+					<MusicIcon size={16} class="text-neutral-500" />
 					<span class="text-xs text-neutral-400">now playing</span>
 				</div>
 				<p class="truncate text-sm font-medium text-neutral-100">
-					{nowPlaying.title}
+					{nowPlaying.name}
 				</p>
 				<p class="truncate text-xs text-neutral-400">{nowPlaying.artist}</p>
 			</div>
