@@ -1,11 +1,24 @@
 <script lang="ts">
 	import { ClockIcon, CalendarIcon, ExternalLinkIcon } from '@lucide/svelte';
+	import { invalidate } from '$app/navigation';
+	import { onMount } from 'svelte';
 
 	import Content from '../../components/content.svelte';
 	import NowPlaying from '../../components/now-playing.svelte';
 
 	let { data } = $props();
-	const { topTracks, recentTracks } = data;
+
+	let interval: ReturnType<typeof setInterval>;
+
+	onMount(() => {
+		interval = setInterval(() => {
+			invalidate('app:now-playing');
+		}, 30000);
+
+		return () => {
+			if (interval) clearInterval(interval);
+		};
+	});
 </script>
 
 <svelte:head>
@@ -36,9 +49,9 @@
 		</div>
 
 		<div class="space-y-8 py-8">
-			<NowPlaying />
+			<NowPlaying initialData={data.nowPlaying} />
 
-			{#if topTracks && topTracks.length > 0}
+			{#if data.topTracks && data.topTracks.length > 0}
 				<div class="space-y-3">
 					<div class="flex items-center gap-2 px-1">
 						<CalendarIcon size={18} class="text-neutral-400" />
@@ -47,7 +60,7 @@
 					</div>
 
 					<div class="space-y-0.5">
-						{#each topTracks as track, index}
+						{#each data.topTracks as track, index}
 							<div
 								class="group flex items-center gap-2 rounded border border-transparent px-1.5 py-1.5 transition-colors hover:border-neutral-800 hover:bg-neutral-900/30"
 							>
@@ -78,7 +91,7 @@
 				</div>
 			{/if}
 
-			{#if recentTracks && recentTracks.length > 0}
+			{#if data.recentTracks && data.recentTracks.length > 0}
 				<div class="space-y-3">
 					<div class="flex items-center gap-2 px-1">
 						<ClockIcon size={18} class="text-neutral-400" />
@@ -86,7 +99,7 @@
 					</div>
 
 					<div class="space-y-0.5">
-						{#each recentTracks as track}
+						{#each data.recentTracks as track}
 							<div
 								class="group flex items-center gap-2 rounded border border-transparent px-1.5 py-1.5 transition-colors hover:border-neutral-800 hover:bg-neutral-900/30"
 							>

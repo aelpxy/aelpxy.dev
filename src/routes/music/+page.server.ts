@@ -1,21 +1,27 @@
-import { getTopTracks, getRecentlyPlayed } from '$lib/spotify';
+import type { PageServerLoad } from './$types';
+import { getTopTracks, getRecentlyPlayed, getNowPlaying } from '$lib/spotify';
 
-export async function load() {
+export const load: PageServerLoad = async ({ depends }) => {
+	depends('app:now-playing');
+
 	try {
-		const [topTracks, recentTracks] = await Promise.all([
+		const [topTracks, recentTracks, nowPlaying] = await Promise.all([
 			getTopTracks(10).catch(() => []),
-			getRecentlyPlayed(10).catch(() => [])
+			getRecentlyPlayed(10).catch(() => []),
+			getNowPlaying().catch(() => null)
 		]);
 
 		return {
 			topTracks,
-			recentTracks
+			recentTracks,
+			nowPlaying
 		};
 	} catch (error) {
 		console.error('Error fetching Spotify data:', error);
 		return {
 			topTracks: [],
-			recentTracks: []
+			recentTracks: [],
+			nowPlaying: null
 		};
 	}
-}
+};
