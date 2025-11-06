@@ -265,7 +265,7 @@ code:not(pre code) {
 }
 
 .prose strong {
-	@apply font-medium;
+	@apply font-bold text-neutral-100;
 }
 
 .prose ul {
