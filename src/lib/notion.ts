@@ -19,7 +19,7 @@ async function highlightCode(code: string, lang: string): Promise<string> {
 			lang,
 			theme: 'vitesse-dark'
 		});
-		return html;
+		return `<div class="border border-neutral-800/50 rounded-sm">${html}</div>`;
 	} catch (error) {
 		console.warn(`failed to highlight code with lang "${lang}":`, error);
 		return `<pre><code class="language-${lang}">${code}</code></pre>`;
