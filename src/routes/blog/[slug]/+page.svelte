@@ -101,7 +101,7 @@
 							<span>•</span>
 							<span class="flex items-center gap-1">
 								<ClockIcon size={14} />
-								{readingTime} min read
+								{readingTime.text}
 							</span>
 						</div>
 					</div>
