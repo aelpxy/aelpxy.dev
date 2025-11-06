@@ -48,7 +48,7 @@
 
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://aelpxy.dev/specs" />
+	<meta property="og:url" content="https://aelpxy.dev/fleet" />
 	<meta property="og:title" content="fleet - aelpxy" />
 	<meta
 		property="og:description"
