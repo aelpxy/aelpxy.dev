@@ -2,7 +2,6 @@
 	import BlogPostLink from '$lib/../components/blog-post-link.svelte';
 	import Content from '$lib/../components/content.svelte';
 	import { GithubIcon } from '@lucide/svelte';
-	import NowPlaying from '../components/now-playing.svelte';
 
 	let { data } = $props();
 </script>
@@ -41,7 +40,7 @@
 		<section class="text-md px-0 py-6 sm:py-8">
 			<div class="mt-2 text-base font-light text-neutral-300 sm:text-xl">
 				<p class="text-xl tracking-tight">
-					software and infrastructure engineer. very keen to tinker with electronics.
+					software and infrastructure guy. very keen to tinker with electronics.
 				</p>
 				<p class="mt-2 text-xl tracking-tight">
 					If you ever feel like giving up, remember it's only the beginning.
