@@ -1,10 +1,10 @@
 <script lang="ts">
-	import BlogPostLink from '../../components/blog-post-link.svelte';
-	import Content from '../../components/content.svelte';
 	import { SearchIcon } from '@lucide/svelte';
 	import Fuse from 'fuse.js';
-	import { fade, fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
+	import { fade, fly } from 'svelte/transition';
+	import BlogPostLink from '../../components/blog-post-link.svelte';
+	import Content from '../../components/content.svelte';
 
 	let { data } = $props();
 
@@ -29,7 +29,7 @@
 	<title>blog - aelpxy</title>
 	<meta
 		name="description"
-		content="thoughts and writings about software engineering, infrastructure, and electronics"
+		content="thoughts and writings about software guying, infrastructure, and electronics"
 	/>
 
 	<!-- Open Graph / Facebook -->
@@ -38,7 +38,7 @@
 	<meta property="og:title" content="blog - aelpxy" />
 	<meta
 		property="og:description"
-		content="thoughts and writings about software engineering, infrastructure, and electronics"
+		content="thoughts and writings about software guying, infrastructure, and electronics"
 	/>
 	<meta property="og:site_name" content="aelpxy" />
 
@@ -48,7 +48,7 @@
 	<meta name="twitter:title" content="blog - aelpxy" />
 	<meta
 		name="twitter:description"
-		content="thoughts and writings about software engineering, infrastructure, and electronics"
+		content="thoughts and writings about software guying, infrastructure, and electronics"
 	/>
 
 	<!-- Additional Meta Tags -->

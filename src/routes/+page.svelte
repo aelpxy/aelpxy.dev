@@ -10,7 +10,7 @@
 	<title>aelpxy</title>
 	<meta
 		name="description"
-		content="software and infrastructure engineer passionate about tinkering with electronics"
+		content="software and infrastructure guy passionate about tinkering with electronics"
 	/>
 
 	<!-- Open Graph / Facebook -->
@@ -19,7 +19,7 @@
 	<meta property="og:title" content="aelpxy" />
 	<meta
 		property="og:description"
-		content="software and infrastructure engineer passionate about tinkering with electronics"
+		content="software and infrastructure guy passionate about tinkering with electronics"
 	/>
 	<meta property="og:site_name" content="aelpxy" />
 
@@ -29,7 +29,7 @@
 	<meta name="twitter:title" content="aelpxy" />
 	<meta
 		name="twitter:description"
-		content="software and infrastructure engineer passionate about tinkering with electronics"
+		content="software and infrastructure guy passionate about tinkering with electronics"
 	/>
 
 	<link rel="canonical" href="https://aelpxy.dev/" />
