@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { GithubIcon, MailIcon, TwitterIcon } from '@lucide/svelte';
+	import { GithubIcon, MailIcon } from '@lucide/svelte';
 
 	const socialLinks = [
-		{ href: 'mailto:hey@aelpxy.dev', label: 'Email', icon: MailIcon },
-		{ href: 'https://twitter.com/aelpxy', label: 'Twitter', icon: TwitterIcon },
+		{ href: 'mailto:hi@aelpxy.dev', label: 'Email', icon: MailIcon },
 		{ href: 'https://github.com/aelpxy', label: 'GitHub', icon: GithubIcon }
 	];
 </script>
