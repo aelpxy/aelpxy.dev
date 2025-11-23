@@ -55,11 +55,11 @@
 					← go home
 				</a>
 				<a
-					href="/blog"
+					href="/thoughts"
 					data-sveltekit-preload-data="tap"
 					class="rounded-lg border border-neutral-700 bg-neutral-900 px-4 py-2 text-neutral-300 transition-all duration-300 hover:bg-neutral-800 hover:text-neutral-100"
 				>
-					read blog
+					read thoughts
 				</a>
 			</div>
 		</div>

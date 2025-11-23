@@ -7,12 +7,8 @@
 			href: '/'
 		},
 		{
-			name: 'blog',
-			href: '/blog'
-		},
-		{
-			name: 'fleet',
-			href: '/fleet'
+			name: 'thoughts',
+			href: '/thoughts'
 		}
 	];
 </script>

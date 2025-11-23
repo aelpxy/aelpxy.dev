@@ -42,9 +42,6 @@
 				<p class="text-xl tracking-tight">
 					software and infrastructure guy. very keen to tinker with electronics.
 				</p>
-				<p class="mt-2 text-xl tracking-tight">
-					If you ever feel like giving up, remember it's only the beginning.
-				</p>
 			</div>
 
 			<!-- <div class="mt-10">
@@ -87,7 +84,7 @@
 					<BlogPostLink {post} />
 				{/each}
 			</div>
-			<a href="/blog" data-sveltekit-preload-data>
+			<a href="/thoughts" data-sveltekit-preload-data>
 				<span
 					class="text-md ml-2 truncate tracking-tighter text-neutral-300 decoration-wavy hover:underline"
 				>

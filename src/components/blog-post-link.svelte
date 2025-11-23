@@ -6,7 +6,7 @@
 </script>
 
 <a
-	href="/blog/{post.slug}"
+	href="/thoughts/{post.slug}"
 	class="group mb-4 flex flex-col space-y-1 rounded-xs transition-all duration-200 hover:bg-neutral-900/50"
 	data-sveltekit-preload-data="tap"
 >

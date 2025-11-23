@@ -10,7 +10,7 @@
 	const readingTime = getReadingTime(post.content);
 
 	async function sharePost() {
-		const url = `https://aelpxy.dev/blog/${post.slug}`;
+		const url = `https://aelpxy.dev/thoughts/${post.slug}`;
 		const title = post.metadata.title;
 
 		if (navigator.share) {
@@ -58,7 +58,7 @@
 
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://aelpxy.dev/blog/{post.slug}" />
+	<meta property="og:url" content="https://aelpxy.dev/thoughts/{post.slug}" />
 	<meta property="og:title" content={post.metadata.title} />
 	<meta property="og:description" content={post.metadata.summary} />
 	<meta property="og:site_name" content="aelpxy" />
@@ -66,13 +66,13 @@
 
 	<!-- Twitter -->
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:url" content="https://aelpxy.dev/blog/{post.slug}" />
+	<meta name="twitter:url" content="https://aelpxy.dev/thoughts/{post.slug}" />
 	<meta name="twitter:title" content={post.metadata.title} />
 	<meta name="twitter:description" content={post.metadata.summary} />
 
 	<!-- Additional Meta Tags -->
 	<meta name="author" content="aelpxy" />
-	<link rel="canonical" href="https://aelpxy.dev/blog/{post.slug}" />
+	<link rel="canonical" href="https://aelpxy.dev/thoughts/{post.slug}" />
 </svelte:head>
 
 <section class="px-6">
@@ -82,7 +82,7 @@
 		{:else}
 			<div class="mb-4">
 				<a
-					href="/blog"
+					href="/thoughts"
 					class="inline-flex items-center gap-2 text-sm text-neutral-400 transition-colors hover:text-neutral-100"
 					data-sveltekit-preload-data
 				>

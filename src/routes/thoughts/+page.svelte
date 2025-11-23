@@ -26,39 +26,36 @@
 </script>
 
 <svelte:head>
-	<title>blog - aelpxy</title>
-	<meta
-		name="description"
-		content="thoughts and writings about software guying, infrastructure, and electronics"
-	/>
+	<title>thoughts - aelpxy</title>
+	<meta name="description" content="thoughts about software, infrastructure, and electronics" />
 
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://aelpxy.dev/blog" />
-	<meta property="og:title" content="blog - aelpxy" />
+	<meta property="og:url" content="https://aelpxy.dev/thoughts" />
+	<meta property="og:title" content="thoughts - aelpxy" />
 	<meta
 		property="og:description"
-		content="thoughts and writings about software guying, infrastructure, and electronics"
+		content="thoughts about software, infrastructure, and electronics"
 	/>
 	<meta property="og:site_name" content="aelpxy" />
 
 	<!-- Twitter -->
 	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:url" content="https://aelpxy.dev/blog" />
-	<meta name="twitter:title" content="blog - aelpxy" />
+	<meta name="twitter:url" content="https://aelpxy.dev/thoughts" />
+	<meta name="twitter:title" content="thoughts - aelpxy" />
 	<meta
 		name="twitter:description"
-		content="thoughts and writings about software guying, infrastructure, and electronics"
+		content="thoughts about software, infrastructure, and electronics"
 	/>
 
 	<!-- Additional Meta Tags -->
 	<meta name="author" content="aelpxy" />
-	<link rel="canonical" href="https://aelpxy.dev/blog" />
+	<link rel="canonical" href="https://aelpxy.dev/thoughts" />
 </svelte:head>
 
 <main>
-	<Content title="blog">
-		<h1 class="py-6 text-2xl text-neutral-300">opinionated thoughts</h1>
+	<Content title="thoughts">
+		<h1 class="py-6 text-2xl text-neutral-300">opinionated thoughts (whatever comes to my mind)</h1>
 
 		<div class="relative mb-6">
 			<div class="relative">
