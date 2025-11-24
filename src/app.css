@@ -20,8 +20,8 @@ pre,
 kbd,
 samp {
 	font-family:
-		'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro',
-		Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+		'Inconsolata Variable', 'Inconsolata', ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo,
+		Consolas, 'DejaVu Sans Mono', monospace;
 }
 
 /* Only apply color to inline code, not code blocks */
@@ -48,9 +48,8 @@ code:not(pre code) {
 	text-wrap: balance;
 }
 
-@utility font-baskerville {
-	font-family:
-		Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif;
+@utility font-garamond {
+	font-family: 'EB Garamond Variable', serif;
 }
 
 @layer utilities {
@@ -68,8 +67,7 @@ code:not(pre code) {
 		min-height: 100vh;
 		/* -webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale; */
-		font-family:
-			Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif;
+		font-family: 'EB Garamond Variable', serif;
 	}
 }
 
@@ -183,8 +181,7 @@ code:not(pre code) {
 
 /* prose styles for markdown content */
 .prose {
-	font-family:
-		Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif;
+	font-family: 'EB Garamond Variable', serif;
 	max-width: 100ch;
 	margin-left: auto;
 	margin-right: auto;
@@ -219,15 +216,15 @@ code:not(pre code) {
 .prose pre {
 	@apply overflow-x-auto rounded-lg px-3 py-2 text-sm;
 	font-family:
-		'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro',
-		Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+		'Inconsolata Variable', 'Inconsolata', ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo,
+		Consolas, 'DejaVu Sans Mono', monospace;
 }
 
 .prose code {
 	@apply rounded-lg px-1 py-0.5;
 	font-family:
-		'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro',
-		Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+		'Inconsolata Variable', 'Inconsolata', ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo,
+		Consolas, 'DejaVu Sans Mono', monospace;
 }
 
 .prose pre code {

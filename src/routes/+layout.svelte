@@ -1,10 +1,13 @@
 <script lang="ts">
-	import '@fontsource/inter';
-	import '@fontsource-variable/jetbrains-mono';
-	import '../app.css';
-	import Navbar from '../components/navbar.svelte';
-	import Footer from '../components/footer.svelte';
 	import { onNavigate } from '$app/navigation';
+
+	import '@fontsource-variable/eb-garamond';
+	import '@fontsource-variable/inconsolata';
+
+	import '../app.css';
+
+	import Footer from '../components/footer.svelte';
+	import Navbar from '../components/navbar.svelte';
 
 	let { children } = $props();
 

@@ -39,6 +39,8 @@
 		"vite": "^7.2.4"
 	},
 	"dependencies": {
+		"@fontsource-variable/eb-garamond": "^5.2.7",
+		"@fontsource-variable/inconsolata": "^5.2.8",
 		"@fontsource-variable/jetbrains-mono": "^5.2.8",
 		"@fontsource/inter": "^5.2.8",
 		"@lucide/svelte": "^0.554.0",

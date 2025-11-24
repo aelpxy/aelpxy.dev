@@ -41,7 +41,7 @@
 				{#each navData as link (link.name)}
 					<a href={link.href} class="px-2.5" data-sveltekit-preload-data>
 						<span
-							class="px-1.5 py-1 font-baskerville text-xl transition-all ease-in-out {page.url
+							class="px-1.5 py-1 font-garamond text-xl transition-all ease-in-out {page.url
 								.pathname === link.href
 								? 'text-neutral-100 underline '
 								: 'text-neutral-400 decoration-wavy hover:underline'}"
