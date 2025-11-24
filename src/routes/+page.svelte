@@ -22,17 +22,33 @@
 		content="software and infrastructure guy passionate about tinkering with electronics"
 	/>
 	<meta property="og:site_name" content="aelpxy" />
+	<meta property="og:image" content="https://aelpxy.dev/og-image.png" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
 
 	<!-- Twitter -->
-	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:url" content="https://aelpxy.dev/" />
 	<meta name="twitter:title" content="aelpxy" />
 	<meta
 		name="twitter:description"
 		content="software and infrastructure guy passionate about tinkering with electronics"
 	/>
+	<meta name="twitter:image" content="https://aelpxy.dev/og-image.png" />
 
 	<link rel="canonical" href="https://aelpxy.dev/" />
+
+	<!-- JSON-LD Structured Data -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'Person',
+		name: 'aelpxy',
+		url: 'https://aelpxy.dev',
+		image: 'https://aelpxy.dev/og-image.png',
+		sameAs: ['https://github.com/aelpxy', 'https://twitter.com/aelpxy'],
+		jobTitle: 'Software Engineer',
+		description: 'software and infrastructure guy passionate about tinkering with electronics'
+	})}</script>`}
 </svelte:head>
 
 <main>

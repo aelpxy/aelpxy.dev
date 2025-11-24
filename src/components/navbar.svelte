@@ -27,7 +27,7 @@
 							<img
 								class="h-12 w-auto border-neutral-600"
 								src="/favicon.png"
-								alt="Icon"
+								alt="aelpxy - Home"
 								width="96"
 								height="96"
 								loading="eager"

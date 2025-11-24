@@ -17,9 +17,9 @@ async function highlightCode(code: string, lang: string): Promise<string> {
 	try {
 		const html = await codeToHtml(code, {
 			lang,
-			theme: 'vitesse-dark'
+			theme: 'dark-plus'
 		});
-		return `<div class="border border-neutral-800/50 rounded-sm">${html}</div>`;
+		return html;
 	} catch (error) {
 		console.warn(`failed to highlight code with lang "${lang}":`, error);
 		return `<pre><code class="language-${lang}">${code}</code></pre>`;

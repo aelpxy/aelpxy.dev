@@ -40,13 +40,19 @@
 	<meta property="og:site_name" content="aelpxy" />
 
 	<!-- Twitter -->
-	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:url" content="https://aelpxy.dev/thoughts" />
 	<meta name="twitter:title" content="thoughts - aelpxy" />
 	<meta
 		name="twitter:description"
 		content="thoughts about software, infrastructure, and electronics"
 	/>
+	<meta name="twitter:image" content="https://aelpxy.dev/og-image.png" />
+
+	<!-- Open Graph Image -->
+	<meta property="og:image" content="https://aelpxy.dev/og-image.png" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
 
 	<!-- Additional Meta Tags -->
 	<meta name="author" content="aelpxy" />

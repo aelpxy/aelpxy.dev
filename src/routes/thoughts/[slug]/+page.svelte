@@ -69,10 +69,36 @@
 	<meta name="twitter:url" content="https://aelpxy.dev/thoughts/{post.slug}" />
 	<meta name="twitter:title" content={post.metadata.title} />
 	<meta name="twitter:description" content={post.metadata.summary} />
+	<meta name="twitter:image" content="https://aelpxy.dev/og/{post.slug}.png" />
+
+	<!-- Open Graph Image -->
+	<meta property="og:image" content="https://aelpxy.dev/og/{post.slug}.png" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
 
 	<!-- Additional Meta Tags -->
 	<meta name="author" content="aelpxy" />
 	<link rel="canonical" href="https://aelpxy.dev/thoughts/{post.slug}" />
+
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BlogPosting',
+		headline: post.metadata.title,
+		description: post.metadata.summary,
+		image: `https://aelpxy.dev/og/${post.slug}.png`,
+		author: {
+			'@type': 'Person',
+			name: 'aelpxy',
+			url: 'https://aelpxy.dev'
+		},
+		datePublished: post.metadata.publishedAt,
+		url: `https://aelpxy.dev/thoughts/${post.slug}`,
+		publisher: {
+			'@type': 'Person',
+			name: 'aelpxy',
+			url: 'https://aelpxy.dev'
+		}
+	})}</script>`}
 </svelte:head>
 
 <section class="px-6">
