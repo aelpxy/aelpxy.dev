@@ -8,6 +8,7 @@
 
 	import Footer from '../components/footer.svelte';
 	import Navbar from '../components/navbar.svelte';
+	import CommandPalette from '../components/command-palette.svelte';
 
 	let { children } = $props();
 
@@ -32,6 +33,7 @@
 	<meta name="author" content="aelpxy" />
 </svelte:head>
 
+<CommandPalette />
 <Navbar />
 <div style="view-transition-name: main-content;">
 	{@render children()}
