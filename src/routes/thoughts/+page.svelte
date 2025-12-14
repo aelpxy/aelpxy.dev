@@ -10,15 +10,17 @@
 
 	let searchQuery = $state('');
 
-	const fuse = new Fuse(data.posts, {
-		keys: [
-			{ name: 'metadata.title', weight: 2 },
-			{ name: 'metadata.summary', weight: 1 }
-		],
-		threshold: 0.3,
-		ignoreLocation: true,
-		minMatchCharLength: 1
-	});
+	let fuse = $derived(
+		new Fuse(data.posts, {
+			keys: [
+				{ name: 'metadata.title', weight: 2 },
+				{ name: 'metadata.summary', weight: 1 }
+			],
+			threshold: 0.3,
+			ignoreLocation: true,
+			minMatchCharLength: 1
+		})
+	);
 
 	let filteredPosts = $derived(
 		searchQuery.trim() === '' ? data.posts : fuse.search(searchQuery).map((result) => result.item)

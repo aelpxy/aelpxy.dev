@@ -4,10 +4,10 @@
 	import { ArrowLeftIcon, CheckIcon, ClockIcon, Share2Icon } from '@lucide/svelte';
 
 	let { data } = $props();
-	const { post } = data;
 
 	let copied = $state(false);
-	const readingTime = getReadingTime(post.content);
+	let post = $derived(data.post);
+	let readingTime = $derived(getReadingTime(post.content));
 
 	async function sharePost() {
 		const url = `https://aelpxy.dev/thoughts/${post.slug}`;
