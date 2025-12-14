@@ -105,12 +105,27 @@ Topic: ${topic}`
 	return content;
 }
 
+function sanitizeText(text: string): string {
+	return text
+		.replace(/[\u0000-\u001F\u007F-\u009F]/g, '')
+		.replace(/[\u2000-\u206F]/g, ' ')
+		.replace(/[\u2300-\u23FF]/g, '')
+		.replace(/[\uFFF0-\uFFFF]/g, '')
+		.trim();
+}
+
 export async function generateArticle(topic: string): Promise<Article> {
 	const metadata = await generateMetadata(topic);
 	const content = await generateContent(topic, metadata.title, metadata.summary);
 
 	return {
-		...metadata,
+		title: sanitizeText(metadata.title),
+		summary: sanitizeText(metadata.summary),
+		relatedTopics: metadata.relatedTopics.map(sanitizeText),
+		infobox: metadata.infobox.map((item) => ({
+			label: sanitizeText(item.label),
+			value: sanitizeText(item.value)
+		})),
 		content
 	};
 }
