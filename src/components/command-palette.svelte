@@ -8,7 +8,8 @@
 		InfoIcon,
 		PenLineIcon,
 		SearchIcon,
-		BookMarkedIcon
+		BookMarkedIcon,
+		SparklesIcon
 	} from '@lucide/svelte';
 	import Fuse from 'fuse.js';
 
@@ -24,7 +25,13 @@
 		{ name: 'Music', href: '/music', icon: MusicIcon, keywords: 'spotify listening' },
 		{ name: 'Uses', href: '/uses', icon: WrenchIcon, keywords: 'tools software setup' },
 		{ name: 'Fleet', href: '/fleet', icon: ServerIcon, keywords: 'hardware machines servers' },
-		{ name: 'Colophon', href: '/colophon', icon: InfoIcon, keywords: 'about site built with' }
+		{ name: 'Colophon', href: '/colophon', icon: InfoIcon, keywords: 'about site built with' },
+		{
+			name: 'Explore',
+			href: '/explore',
+			icon: SparklesIcon,
+			keywords: 'ai wikipedia infinite explore topics learn'
+		}
 	];
 
 	const fuse = new Fuse(commands, {
@@ -32,9 +39,7 @@
 		threshold: 0.4
 	});
 
-	let filteredCommands = $derived(
-		search ? fuse.search(search).map((r) => r.item) : commands
-	);
+	let filteredCommands = $derived(search ? fuse.search(search).map((r) => r.item) : commands);
 
 	function handleKeydown(e: KeyboardEvent) {
 		if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
@@ -104,11 +109,9 @@
 					bind:value={search}
 					oninput={handleSearchInput}
 					placeholder="Search..."
-					class="w-full border-none bg-transparent text-base text-neutral-100 placeholder-neutral-500 shadow-none outline-none focus:border-none focus:outline-none focus:ring-0"
+					class="w-full border-none bg-transparent text-base text-neutral-100 placeholder-neutral-500 shadow-none outline-none focus:border-none focus:ring-0 focus:outline-none"
 				/>
-				<kbd
-					class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-xs text-neutral-500"
-				>
+				<kbd class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-xs text-neutral-500">
 					esc
 				</kbd>
 			</div>
@@ -120,7 +123,8 @@
 					{#each filteredCommands as command, i (command.href)}
 						{@const Icon = command.icon}
 						<button
-							class="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left transition-colors {i === selectedIndex
+							class="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left transition-colors {i ===
+							selectedIndex
 								? 'bg-neutral-800 text-neutral-100'
 								: 'text-neutral-400 hover:bg-neutral-800/50 hover:text-neutral-200'}"
 							onclick={() => navigate(command.href)}

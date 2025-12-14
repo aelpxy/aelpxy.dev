@@ -26,6 +26,9 @@ importers:
       '@notionhq/client':
         specifier: ^5.4.0
         version: 5.4.0
+      '@openrouter/sdk':
+        specifier: ^0.2.11
+        version: 0.2.11
       '@resvg/resvg-js':
         specifier: ^2.6.2
         version: 2.6.2
@@ -382,6 +385,9 @@ packages:
   '@notionhq/client@5.4.0':
     resolution: {integrity: sha512-SJsprS26S0Wi9CoTQp4vC8/nPpAIo1gMB4H7aJ2E/k0fWnNGIEAg984KwtzK6h9ZGaPcEaryVRSz1VVClJcVUw==}
     engines: {node: '>=18'}
+
+  '@openrouter/sdk@0.2.11':
+    resolution: {integrity: sha512-W6ji4J2O08RUkDmCBqDgiHkoH5ARb4xBZL/xTM98cDzes2iLBuGaF3z2PXMCC27UYTas2pyz+nn62iXjO+yQvg==}
 
   '@polka/url@1.0.0-next.29':
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
@@ -1946,6 +1952,9 @@ packages:
   zimmerframe@1.1.4:
     resolution: {integrity: sha512-B58NGBEoc8Y9MWWCQGl/gq9xBCe4IiKM0a2x7GZdQKOW5Exr8S1W24J6OgM1njK8xCRGvAJIL/MxXHf6SkmQKQ==}
 
+  zod@4.1.13:
+    resolution: {integrity: sha512-AvvthqfqrAhNH9dnfmrfKzX5upOdjUVJYFqNSlkmGf64gRaTzlPwz99IHYnVs28qYAybvAlBV+H7pn0saFY4Ig==}
+
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
@@ -2128,6 +2137,10 @@ snapshots:
       svelte: 5.46.0
 
   '@notionhq/client@5.4.0': {}
+
+  '@openrouter/sdk@0.2.11':
+    dependencies:
+      zod: 4.1.13
 
   '@polka/url@1.0.0-next.29': {}
 
@@ -3738,5 +3751,7 @@ snapshots:
   yoga-layout@3.2.1: {}
 
   zimmerframe@1.1.4: {}
+
+  zod@4.1.13: {}
 
   zwitch@2.0.4: {}

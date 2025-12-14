@@ -45,6 +45,7 @@
 		"@fontsource/inter": "^5.2.8",
 		"@lucide/svelte": "^0.554.0",
 		"@notionhq/client": "^5.4.0",
+		"@openrouter/sdk": "^0.2.11",
 		"@resvg/resvg-js": "^2.6.2",
 		"fuse.js": "^7.1.0",
 		"marked": "^17.0.1",

@@ -52,7 +52,10 @@
 		{
 			name: 'browser',
 			icon: GlobeIcon,
-			items: [{ name: 'Helium', description: 'minimal floating browser' }]
+			items: [
+				{ name: 'Safari', description: 'primary browser' },
+				{ name: 'Helium', description: 'minimal browser' }
+			]
 		},
 		{
 			name: 'apps',

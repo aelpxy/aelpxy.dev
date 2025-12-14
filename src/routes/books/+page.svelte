@@ -186,9 +186,7 @@
 					<div class="space-y-3">
 						{#each category.items as book}
 							<div class="group flex gap-4">
-								<div
-									class="h-20 w-14 shrink-0 overflow-hidden rounded-sm bg-neutral-800"
-								>
+								<div class="h-20 w-14 shrink-0 overflow-hidden rounded-sm bg-neutral-800">
 									<img
 										src={getCoverUrl(book.isbn)}
 										alt={book.title}
