@@ -24,7 +24,6 @@
 		{ name: 'Books', href: '/books', icon: BookMarkedIcon, keywords: 'reading list library' },
 		{ name: 'Music', href: '/music', icon: MusicIcon, keywords: 'spotify listening' },
 		{ name: 'Uses', href: '/uses', icon: WrenchIcon, keywords: 'tools software setup' },
-		{ name: 'Fleet', href: '/fleet', icon: ServerIcon, keywords: 'hardware machines servers' },
 		{ name: 'Colophon', href: '/colophon', icon: InfoIcon, keywords: 'about site built with' },
 		{
 			name: 'Explore',

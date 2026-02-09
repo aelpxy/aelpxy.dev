@@ -123,15 +123,5 @@
 				</div>
 			{/each}
 		</div>
-
-		<div class="mt-8 border-t border-neutral-800 pt-6">
-			<p class="text-sm text-neutral-500">
-				For hardware specs, check out <a
-					href="/fleet"
-					class="text-neutral-400 underline decoration-neutral-600 underline-offset-2 transition-colors hover:text-neutral-300"
-					>my fleet</a
-				>.
-			</p>
-		</div>
 	</section>
 </Content>
