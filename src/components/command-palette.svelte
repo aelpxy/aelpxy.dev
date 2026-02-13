@@ -1,16 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import {
-		HouseIcon,
-		MusicIcon,
-		WrenchIcon,
-		ServerIcon,
-		InfoIcon,
-		PenLineIcon,
-		SearchIcon,
-		BookMarkedIcon,
-		SparklesIcon
-	} from '@lucide/svelte';
+	import { HouseIcon, PenLineIcon, SearchIcon } from '@lucide/svelte';
 	import Fuse from 'fuse.js';
 
 	let open = $state(false);
@@ -20,17 +10,7 @@
 
 	const commands = [
 		{ name: 'Home', href: '/', icon: HouseIcon, keywords: 'about index main' },
-		{ name: 'Thoughts', href: '/thoughts', icon: PenLineIcon, keywords: 'blog posts articles' },
-		{ name: 'Books', href: '/books', icon: BookMarkedIcon, keywords: 'reading list library' },
-		{ name: 'Music', href: '/music', icon: MusicIcon, keywords: 'spotify listening' },
-		{ name: 'Uses', href: '/uses', icon: WrenchIcon, keywords: 'tools software setup' },
-		{ name: 'Colophon', href: '/colophon', icon: InfoIcon, keywords: 'about site built with' },
-		{
-			name: 'Explore',
-			href: '/explore',
-			icon: SparklesIcon,
-			keywords: 'ai wikipedia infinite explore topics learn'
-		}
+		{ name: 'Thoughts', href: '/thoughts', icon: PenLineIcon, keywords: 'blog posts articles' }
 	];
 
 	const fuse = new Fuse(commands, {

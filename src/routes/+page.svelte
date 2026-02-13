@@ -56,7 +56,7 @@
 		<section class="text-md px-0 py-6 sm:py-8">
 			<div class="mt-2 text-base font-light text-neutral-300 sm:text-xl">
 				<p class="text-xl tracking-tight">
-					software and infrastructure guy. very keen to tinker with electronics.
+					software and infrastructure guy. very keen to tinker with electronics and servers.
 				</p>
 			</div>
 
