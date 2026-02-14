@@ -4,10 +4,8 @@
 
 @theme {
 	--background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
-	--background-image-gradient-conic: conic-gradient(
-		from 180deg at 50% 50%,
-		var(--tw-gradient-stops)
-	);
+	--background-image-gradient-conic: conic-gradient(from 180deg at 50% 50%,
+			var(--tw-gradient-stops));
 }
 
 html {
@@ -35,6 +33,7 @@ code:not(pre code) {
   looks the same as it did with Tailwind CSS v3.
 */
 @layer base {
+
 	*,
 	::after,
 	::before,
@@ -130,6 +129,7 @@ code:not(pre code) {
 	from {
 		filter: blur(8px);
 	}
+
 	to {
 		filter: blur(0);
 	}
@@ -139,6 +139,7 @@ code:not(pre code) {
 	from {
 		filter: blur(0);
 	}
+
 	to {
 		filter: blur(8px);
 	}
@@ -209,7 +210,7 @@ code:not(pre code) {
 	content: '#';
 }
 
-.prose *:hover > .anchor {
+.prose *:hover>.anchor {
 	@apply visible;
 }
 
@@ -285,7 +286,7 @@ code:not(pre code) {
 	@apply text-neutral-100;
 }
 
-.prose > :first-child {
+.prose> :first-child {
 	margin-top: 1.25em !important;
 	margin-bottom: 1.25em !important;
 }
