@@ -1,16 +1,12 @@
 <script lang="ts">
 	let { data } = $props();
-
-	const experience = [
-		{ role: 'Co-founder', org: 'Pandabase', period: '2023 — Present' }
-	];
 </script>
 
 <svelte:head>
 	<title>aelpxy</title>
 	<meta
 		name="description"
-		content="i write software and tinker with electronics"
+		content="i write software, mostly working on pandabase"
 	/>
 
 	<meta property="og:type" content="website" />
@@ -18,7 +14,7 @@
 	<meta property="og:title" content="aelpxy" />
 	<meta
 		property="og:description"
-		content="i write software and tinker with electronics"
+		content="i write software, mostly working on pandabase"
 	/>
 	<meta property="og:site_name" content="aelpxy" />
 	<meta property="og:image" content="https://aelpxy.dev/og-image.png" />
@@ -30,7 +26,7 @@
 	<meta name="twitter:title" content="aelpxy" />
 	<meta
 		name="twitter:description"
-		content="i write software and tinker with electronics"
+		content="i write software, mostly working on pandabase"
 	/>
 	<meta name="twitter:image" content="https://aelpxy.dev/og-image.png" />
 
@@ -44,64 +40,40 @@
 		image: 'https://aelpxy.dev/og-image.png',
 		sameAs: ['https://github.com/aelpxy', 'https://twitter.com/aelpxy'],
 		jobTitle: 'Software Engineer',
-		description: 'i write software and tinker with electronics'
+		description: 'i write software, mostly working on pandabase'
 	})}</script>`}
 </svelte:head>
 
 <main class="mx-auto max-w-xl px-6 pt-16 pb-8 sm:pt-20">
 	<!-- intro -->
 	<section class="qm-rise" style="animation-delay: 40ms;">
-		<h1 class="text-[34px] font-semibold tracking-[-0.025em] text-neutral-900 leading-[1.1]">
-			Hey, I'm <span
-				class="qm-tilt italic font-medium cursor-default"
-				style="font-family: 'EB Garamond Variable', serif;"
-				>aelpxy</span
-			><span class="qm-caret" aria-hidden="true"></span>
+		<h1 class="text-[34px] font-semibold tracking-tight text-neutral-900 leading-[1.1]">
+			Hey, there!
 		</h1>
 
 		<p class="mt-6 text-[15.5px] leading-[1.7] text-neutral-600">
-			I write software for a living and tinker with electronics and small
-			servers on the side. Mostly working on
+			I work on software. Right now that's
 			<a
 				href="https://pandabase.io"
 				target="_blank"
 				rel="noreferrer noopener"
 				class="qm-link text-neutral-900 font-medium"
 				>Pandabase</a
-			> these days.
+			>, a small payments company I work at. Outside of work I'm usually
+			fighting a server somewhere, and losing more often than I'd like to
+			admit.
 		</p>
 
 		<p class="mt-4 text-[15.5px] leading-[1.7] text-neutral-600">
-			Still learning. Always happy to chat.
+			Been writing code since I was 14, not that any of it was good. Most of
+			my days now are in
+			<span class="text-neutral-900 font-medium">TypeScript</span> and
+			<span class="text-neutral-900 font-medium">Go</span>.
 		</p>
 	</section>
 
-	<!-- work -->
-	<section class="mt-16 qm-rise" style="animation-delay: 120ms;">
-		<h2 class="text-[13px] font-medium tracking-tight text-neutral-500">Work</h2>
-
-		<ul class="mt-5 space-y-1">
-			{#each experience as job (job.role + job.org)}
-				<li
-					class="qm-row flex items-baseline justify-between gap-4 px-2 py-2.5 -mx-2"
-				>
-					<span class="text-[14.5px] tracking-tight text-neutral-900">
-						{job.role}
-						<span class="mx-1 text-neutral-400">·</span>
-						<span class="text-neutral-600">{job.org}</span>
-					</span>
-					<span
-						class="text-[12.5px] tabular-nums text-neutral-500 whitespace-nowrap font-mono tracking-tight"
-					>
-						{job.period}
-					</span>
-				</li>
-			{/each}
-		</ul>
-	</section>
-
 	<!-- projects -->
-	<section class="mt-16 qm-rise" style="animation-delay: 200ms;">
+	<section class="mt-16 qm-rise" style="animation-delay: 120ms;">
 		<h2 class="text-[13px] font-medium tracking-tight text-neutral-500">Projects</h2>
 
 		<ul class="mt-5 space-y-1">
@@ -143,7 +115,7 @@
 	</section>
 
 	<!-- contact -->
-	<section class="mt-16 qm-rise" style="animation-delay: 280ms;">
+	<section class="mt-16 qm-rise" style="animation-delay: 200ms;">
 		<h2 class="text-[13px] font-medium tracking-tight text-neutral-500">Contact</h2>
 
 		<p class="mt-5 text-[15.5px] leading-[1.7] text-neutral-600">
