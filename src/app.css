@@ -158,9 +158,12 @@ code:not(pre code) {
 	border-radius: 1px;
 }
 
-/* magnetic lift — subtle translate up on hover */
+/* magnetic lift — subtle translate up on hover.
+   inline-flex so icon+text rows stay on one line; align-items keeps text-only
+   anchors visually identical to inline-block. */
 .qm-magnetic {
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
 	transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
 		color 200ms ease, opacity 200ms ease;
 	will-change: transform;
