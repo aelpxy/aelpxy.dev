@@ -1,10 +1,23 @@
 <script lang="ts">
-	let { title, children }: { title: string; children: any } = $props();
+	let {
+		title,
+		subtitle,
+		children
+	}: { title?: string; subtitle?: string; children: any } = $props();
 </script>
 
-<section class="mx-auto max-w-240 px-12 py-12 sm:px-20 sm:py-16 lg:px-40 lg:py-20">
-	<h1 class="font-garamond text-2xl text-neutral-50 sm:text-3xl lg:text-3xl">
-		{title}
-	</h1>
+<main class="mx-auto max-w-xl px-6 pt-16 pb-8 sm:pt-20">
+	{#if title}
+		<header class="qm-rise" style="animation-delay: 40ms;">
+			<h1 class="text-[34px] font-semibold tracking-[-0.025em] text-neutral-900 leading-[1.1]">
+				{title}
+			</h1>
+			{#if subtitle}
+				<p class="mt-4 text-[15.5px] leading-[1.65] text-neutral-500">
+					{subtitle}
+				</p>
+			{/if}
+		</header>
+	{/if}
 	{@render children()}
-</section>
+</main>

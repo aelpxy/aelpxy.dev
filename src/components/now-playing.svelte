@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { MusicIcon } from '@lucide/svelte';
 	import type { SpotifyCurrentlyPlaying } from '$lib/spotify';
 
 	type Props = {
@@ -10,39 +9,46 @@
 </script>
 
 <div
-	class="rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition-all duration-300 hover:border-neutral-700"
+	class="qm-lift rounded-lg border border-neutral-200 bg-white p-4 hover:border-neutral-300"
 >
 	{#if initialData?.isPlaying && initialData.name}
 		<a
 			href={initialData.songUrl}
 			target="_blank"
 			rel="noopener noreferrer"
-			class="flex items-center gap-4"
+			class="group flex items-center gap-4"
 		>
 			{#if initialData.albumArt}
 				<img
 					src={initialData.albumArt}
 					alt={initialData.name}
-					class="h-16 w-16 rounded"
-					width="64"
-					height="64"
+					class="h-14 w-14 rounded shrink-0"
+					width="56"
+					height="56"
 				/>
 			{/if}
 			<div class="min-w-0 flex-1">
-				<div class="mb-1 flex items-center gap-2">
-					<MusicIcon size={16} class="text-neutral-500" />
-					<span class="text-xs text-neutral-400">now playing</span>
+				<div class="flex items-center gap-2">
+					<span class="relative flex h-1.5 w-1.5">
+						<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-60"></span>
+						<span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+					</span>
+					<span class="text-[11px] font-medium uppercase tracking-[0.1em] text-neutral-500">
+						Now playing
+					</span>
 				</div>
-				<p class="truncate text-sm font-medium text-neutral-100">
+				<p class="mt-1 truncate text-[14.5px] tracking-tight text-neutral-900 group-hover:underline underline-offset-2 decoration-neutral-300">
 					{initialData.name}
 				</p>
-				<p class="truncate text-xs text-neutral-400">{initialData.artist}</p>
+				<p class="truncate text-[13px] text-neutral-500">
+					{initialData.artist}
+				</p>
 			</div>
 		</a>
 	{:else}
 		<div class="flex items-center gap-3">
-			<MusicIcon size={16} class="text-neutral-500" />
-			<span class="text-sm text-neutral-400">not playing anything</span>
+			<span class="h-1.5 w-1.5 rounded-full bg-neutral-300"></span>
+			<span class="text-[13px] text-neutral-500">Not playing anything right now.</span>
 		</div>
 	{/if}
 </div>

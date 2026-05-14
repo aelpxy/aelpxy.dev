@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { formatDate } from '$lib/date';
 	import { getReadingTime } from '$lib/reading-time';
-	import { ArrowLeftIcon, CheckIcon, ClockIcon, Share2Icon } from '@lucide/svelte';
+	import { ArrowLeftIcon, CheckIcon, LinkIcon } from '@lucide/svelte';
 
 	let { data } = $props();
 
@@ -53,10 +53,9 @@
 </script>
 
 <svelte:head>
-	<title>{post.metadata.title} - aelpxy</title>
+	<title>{post.metadata.title} — aelpxy</title>
 	<meta name="description" content={post.metadata.summary} />
 
-	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content="https://aelpxy.dev/thoughts/{post.slug}" />
 	<meta property="og:title" content={post.metadata.title} />
@@ -64,19 +63,16 @@
 	<meta property="og:site_name" content="aelpxy" />
 	<meta property="article:published_time" content={post.metadata.publishedAt} />
 
-	<!-- Twitter -->
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:url" content="https://aelpxy.dev/thoughts/{post.slug}" />
 	<meta name="twitter:title" content={post.metadata.title} />
 	<meta name="twitter:description" content={post.metadata.summary} />
 	<meta name="twitter:image" content="https://aelpxy.dev/og/{post.slug}.png" />
 
-	<!-- Open Graph Image -->
 	<meta property="og:image" content="https://aelpxy.dev/og/{post.slug}.png" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
 
-	<!-- Additional Meta Tags -->
 	<meta name="author" content="aelpxy" />
 	<link rel="canonical" href="https://aelpxy.dev/thoughts/{post.slug}" />
 
@@ -101,55 +97,73 @@
 	})}</script>`}
 </svelte:head>
 
-<section class="px-6">
-	<article class="prose">
+<main class="mx-auto max-w-xl px-6 pt-12 pb-8 sm:pt-16">
+	<a
+		href="/thoughts"
+		data-sveltekit-preload-data
+		class="qm-link-arrow qm-magnetic inline-flex items-center gap-1.5 text-[13px] text-neutral-500 transition-colors hover:text-neutral-900 qm-rise"
+		style="animation-delay: 20ms;"
+	>
+		<ArrowLeftIcon size={13} strokeWidth={2} />
+		<span>Thoughts</span>
+	</a>
+
+	<article class="mt-10">
 		{#if post.metadata.isDraft}
-			<blockquote>This article is still a work in progress.</blockquote>
+			<blockquote
+				class="rounded-md border border-amber-200 bg-amber-50 px-4 py-3 text-[13.5px] text-amber-900"
+			>
+				This article is still a work in progress.
+			</blockquote>
 		{:else}
-			<div class="mb-4">
-				<a
-					href="/thoughts"
-					class="inline-flex items-center gap-2 text-sm text-neutral-400 transition-colors hover:text-neutral-100"
-					data-sveltekit-preload-data
+			<header class="qm-rise" style="animation-delay: 80ms;">
+				<h1
+					class="text-[32px] sm:text-[34px] font-semibold tracking-[-0.025em] text-neutral-900 leading-[1.15] title"
 				>
-					<ArrowLeftIcon size={16} />
-					<span>back</span>
-				</a>
-			</div>
-			<div class="mb-8">
-				<div class="flex items-center justify-between gap-4">
-					<div class="flex-1">
-						<h1 class="text-3xl">
-							{post.metadata.title}
-						</h1>
-						<div class="flex items-center gap-3 text-sm text-neutral-400">
-							<span>{formatDate(post.metadata.publishedAt)}</span>
-							<span>•</span>
-							<span class="flex items-center gap-1">
-								<ClockIcon size={14} />
-								{readingTime.text}
-							</span>
-						</div>
+					{post.metadata.title}
+				</h1>
+
+				<div
+					class="mt-4 flex items-center justify-between gap-4 text-[12.5px] text-neutral-500 font-mono tracking-tight"
+				>
+					<div class="flex items-center gap-2.5">
+						<time datetime={post.metadata.publishedAt}>
+							{formatDate(post.metadata.publishedAt)}
+						</time>
+						<span class="text-neutral-300">·</span>
+						<span class="tabular-nums">{readingTime.text}</span>
 					</div>
+
 					<button
 						onclick={sharePost}
-						class="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-neutral-100"
-						aria-label="Share post"
+						class="qm-link-arrow qm-magnetic inline-flex items-center gap-1.5 text-neutral-500 transition-colors hover:text-neutral-900"
+						aria-label={copied ? 'Link copied' : 'Copy link to post'}
 					>
 						{#if copied}
-							<CheckIcon size={16} />
-							<span>copied!</span>
+							<CheckIcon size={12.5} strokeWidth={2.25} />
+							<span>Copied</span>
 						{:else}
-							<Share2Icon size={16} />
-							<span>share</span>
+							<LinkIcon size={12.5} strokeWidth={2.25} />
+							<span>Copy link</span>
 						{/if}
 					</button>
 				</div>
+			</header>
+
+			<div class="mt-10 prose qm-rise" style="animation-delay: 160ms;">
+				{@html post.content}
 			</div>
 
-			<div class="markdown-content">
-				{@html post.content}
+			<div class="mt-16 border-t border-neutral-200 pt-6">
+				<a
+					href="/thoughts"
+					data-sveltekit-preload-data
+					class="qm-link-arrow qm-magnetic inline-flex items-center gap-1.5 text-[13px] text-neutral-500 transition-colors hover:text-neutral-900"
+				>
+					<ArrowLeftIcon size={13} strokeWidth={2} />
+					<span>All thoughts</span>
+				</a>
 			</div>
 		{/if}
 	</article>
-</section>
+</main>

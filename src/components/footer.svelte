@@ -1,40 +1,30 @@
 <script lang="ts">
-	import { GithubIcon, MailboxIcon, TwitterIcon } from '@lucide/svelte';
+	const year = new Date().getFullYear();
 
-	const socialLinks = [
-		{ href: 'mailto:hi@aelpxy.dev', label: 'Email', icon: MailboxIcon },
-		{ href: 'https://github.com/aelpxy', label: 'GitHub', icon: GithubIcon },
-		{ href: 'https://twitter.com/aelpxy', label: 'Twitter', icon: TwitterIcon }
+	const links = [
+		{ href: 'mailto:hi@aelpxy.dev', label: 'Email' },
+		{ href: 'https://github.com/aelpxy', label: 'GitHub' },
+		{ href: 'https://twitter.com/aelpxy', label: 'Twitter' }
 	];
 </script>
 
-<footer
-	class="mx-auto mt-2 mb-2 max-w-280 px-6 py-10 sm:px-12 sm:py-16 lg:px-32"
-	style="view-transition-name: footer;"
->
+<footer class="mx-auto mt-24 mb-12 max-w-xl px-6 sm:mt-32" style="view-transition-name: footer;">
 	<div
-		class="flex flex-col items-center justify-between space-y-4 border-t border-neutral-800 pt-6 sm:flex-row sm:space-y-0 sm:space-x-4 sm:pt-10"
+		class="flex flex-col items-start justify-between gap-3 border-t border-neutral-200 pt-6 sm:flex-row sm:items-center"
 	>
-		<a
-			rel="noreferrer noopener"
-			target="_blank"
-			href="https://creativecommons.org/licenses/by-sa/4.0/deed.en"
-			title="https://creativecommons.org/licenses/by-sa/4.0/deed.en"
-			class="mr-0 text-sm text-neutral-300 transition-transform duration-300 ease-in-out hover:text-neutral-400 sm:text-base"
-		>
-			© {new Date().getFullYear()} CC BY-SA 4.0 - aelpxy.dev
-		</a>
+		<span class="text-[13px] text-neutral-500">
+			© {year} aelpxy
+		</span>
 
-		<div class="flex items-center space-x-4">
-			{#each socialLinks as { href, label, icon: Icon } (label)}
+		<div class="flex items-center gap-5">
+			{#each links as { href, label } (label)}
 				<a
 					{href}
 					rel="noreferrer noopener"
-					target="_blank"
-					aria-label={label}
-					class="text-neutral-400 transition-all ease-in-out hover:text-neutral-100"
+					target={href.startsWith('http') ? '_blank' : undefined}
+					class="qm-link qm-magnetic text-[13px] text-neutral-500 hover:text-neutral-900"
 				>
-					<Icon size={18} />
+					{label}
 				</a>
 			{/each}
 		</div>

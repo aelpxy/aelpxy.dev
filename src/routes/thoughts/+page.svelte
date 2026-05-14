@@ -28,79 +28,76 @@
 </script>
 
 <svelte:head>
-	<title>thoughts - aelpxy</title>
+	<title>thoughts — aelpxy</title>
 	<meta name="description" content="thoughts about software, infrastructure, and electronics" />
 
-	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://aelpxy.dev/thoughts" />
-	<meta property="og:title" content="thoughts - aelpxy" />
+	<meta property="og:title" content="thoughts — aelpxy" />
 	<meta
 		property="og:description"
 		content="thoughts about software, infrastructure, and electronics"
 	/>
 	<meta property="og:site_name" content="aelpxy" />
 
-	<!-- Twitter -->
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:url" content="https://aelpxy.dev/thoughts" />
-	<meta name="twitter:title" content="thoughts - aelpxy" />
+	<meta name="twitter:title" content="thoughts — aelpxy" />
 	<meta
 		name="twitter:description"
 		content="thoughts about software, infrastructure, and electronics"
 	/>
 	<meta name="twitter:image" content="https://aelpxy.dev/og-image.png" />
 
-	<!-- Open Graph Image -->
 	<meta property="og:image" content="https://aelpxy.dev/og-image.png" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
 
-	<!-- Additional Meta Tags -->
 	<meta name="author" content="aelpxy" />
 	<link rel="canonical" href="https://aelpxy.dev/thoughts" />
 </svelte:head>
 
-<main>
-	<Content title="thoughts">
-		<h1 class="py-6 text-2xl text-neutral-300">opinionated thoughts (whatever comes to my mind)</h1>
-
-		<div class="relative mb-6">
-			<div class="relative">
-				<SearchIcon size={18} class="absolute top-1/2 left-3 -translate-y-1/2 text-neutral-500" />
-				<input
-					type="text"
-					bind:value={searchQuery}
-					placeholder="search posts..."
-					class="w-full rounded-lg border border-neutral-800 bg-neutral-900/50 py-2.5 pr-4 pl-10 text-sm text-neutral-300 placeholder-neutral-600 transition-colors focus:border-neutral-700 focus:ring-1 focus:ring-neutral-700 focus:outline-none"
-				/>
-			</div>
-			{#if searchQuery.trim() !== ''}
-				<p class="mt-2 text-sm text-neutral-500">
-					{filteredPosts.length} post{filteredPosts.length !== 1 ? 's' : ''} found
-				</p>
-			{/if}
+<Content title="Thoughts" subtitle="Notes on software, infrastructure, and electronics.">
+	<!-- search -->
+	<div class="mt-10 qm-rise" style="animation-delay: 120ms;">
+		<div class="qm-search relative border-b border-neutral-200 focus-within:border-neutral-900 transition-colors">
+			<SearchIcon
+				size={15}
+				class="qm-search-icon pointer-events-none absolute top-1/2 left-0 -translate-y-1/2 text-neutral-400"
+			/>
+			<input
+				type="text"
+				bind:value={searchQuery}
+				placeholder="Search posts"
+				class="qm-input w-full bg-transparent py-2.5 pl-7 pr-2 text-[14px] text-neutral-900 placeholder-neutral-400"
+			/>
 		</div>
+		{#if searchQuery.trim() !== ''}
+			<p class="mt-2 text-[12px] text-neutral-500 font-mono tracking-tight">
+				{filteredPosts.length} result{filteredPosts.length !== 1 ? 's' : ''}
+			</p>
+		{/if}
+	</div>
 
-		<section class="py-6">
-			<div class="flex flex-col gap-y-4">
-				{#if filteredPosts.length === 0}
-					<div in:fade={{ duration: 150 }} out:fade={{ duration: 100 }}>
-						<span class="py-6 text-2xl">
-							{searchQuery.trim() === '' ? 'nothing yet' : 'no posts found'}
-						</span>
-					</div>
-				{:else}
-					{#each filteredPosts as post, i (post.slug)}
-						<div
-							in:fly={{ y: 15, duration: 250, delay: i * 30, easing: cubicOut }}
-							out:fly={{ y: -10, duration: 150, easing: cubicOut }}
-						>
-							<BlogPostLink {post} />
-						</div>
-					{/each}
-				{/if}
-			</div>
-		</section>
-	</Content>
-</main>
+	<!-- list -->
+	<section class="mt-8 qm-rise" style="animation-delay: 200ms;">
+		<ul class="space-y-1">
+			{#if filteredPosts.length === 0}
+				<li in:fade={{ duration: 150 }} out:fade={{ duration: 100 }}>
+					<p class="px-2 py-3 text-[14px] text-neutral-500">
+						{searchQuery.trim() === '' ? 'Nothing here yet.' : 'No posts match that.'}
+					</p>
+				</li>
+			{:else}
+				{#each filteredPosts as post, i (post.slug)}
+					<li
+						in:fly={{ y: 8, duration: 220, delay: i * 25, easing: cubicOut }}
+						out:fly={{ y: -6, duration: 130, easing: cubicOut }}
+					>
+						<BlogPostLink {post} />
+					</li>
+				{/each}
+			{/if}
+		</ul>
+	</section>
+</Content>
