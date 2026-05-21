@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import ThemeToggle from './theme-toggle.svelte';
 
 	const links = [
-		{ href: '/thoughts', label: 'Thoughts' },
-		{ href: '/music', label: 'Music' }
+		{ href: '/thoughts', label: 'Thoughts' }
 	];
 
 	function isActive(href: string) {
@@ -17,18 +17,18 @@
 			<a
 				href="/"
 				data-sveltekit-preload-data
-				class="qm-magnetic text-[14px] font-medium tracking-tight text-neutral-900 hover:opacity-80"
+				class="inline-block transition duration-200 ease-out hover:-translate-y-px hover:opacity-80"
 				aria-label="aelpxy — home"
 			>
-				aelpxy
+				<img src="/favicon.png" alt="aelpxy" class="h-8 w-8" width="32" height="32" />
 			</a>
 
-			<div class="flex items-center gap-7">
+			<div class="flex items-center gap-6">
 				{#each links as { href, label } (href)}
 					<a
 						{href}
 						data-active={isActive(href)}
-						class="qm-active-dot qm-magnetic text-[13.5px] tracking-tight transition-colors {isActive(
+						class="relative inline-block text-[13.5px] tracking-tight transition duration-200 ease-out hover:-translate-y-px before:absolute before:-left-2.5 before:top-1/2 before:h-1 before:w-1 before:-translate-y-1/2 before:rounded-full before:bg-current before:opacity-0 before:transition-opacity before:duration-200 data-[active=true]:before:opacity-100 {isActive(
 							href
 						)
 							? 'text-neutral-900'
@@ -37,6 +37,7 @@
 						{label}
 					</a>
 				{/each}
+				<ThemeToggle />
 			</div>
 		</nav>
 	</div>

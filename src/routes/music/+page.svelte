@@ -45,12 +45,12 @@
 </svelte:head>
 
 <Content title="Music" subtitle="A look at what's been on rotation lately, pulled live from Spotify.">
-	<div class="mt-10 qm-rise" style="animation-delay: 120ms;">
+	<div class="mt-10">
 		<NowPlaying initialData={data.nowPlaying} />
 	</div>
 
 	{#if data.topTracks && data.topTracks.length > 0}
-		<section class="mt-12 qm-rise" style="animation-delay: 200ms;">
+		<section class="mt-12">
 			<div class="flex items-baseline justify-between">
 				<h2 class="text-[13px] font-medium tracking-tight text-neutral-500">Top tracks</h2>
 				<span class="text-[12px] text-neutral-400 font-mono tracking-tight">last 4 weeks</span>
@@ -63,7 +63,7 @@
 							href={track.songUrl ?? '#'}
 							target={track.songUrl ? '_blank' : undefined}
 							rel="noopener noreferrer"
-							class="qm-row group flex items-center gap-3 px-2 py-2 -mx-2"
+							class="group flex items-center gap-3 px-2 py-2 -mx-2 rounded-md transition-colors duration-200 ease-out hover:bg-[rgb(var(--hover))]"
 						>
 							<span
 								class="w-5 shrink-0 text-right text-[11.5px] tabular-nums text-neutral-400 font-mono"
@@ -82,7 +82,7 @@
 							<div class="min-w-0 flex-1">
 								<p class="truncate text-[14px] tracking-tight text-neutral-900">
 									{track.name}
-									<span class="qm-arrow ml-0.5 text-neutral-400">↗</span>
+									<span class="ml-0.5 inline-block -translate-x-1.5 -rotate-6 opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:rotate-0 group-hover:opacity-100 text-neutral-400">↗</span>
 								</p>
 								<p class="truncate text-[12.5px] text-neutral-500">
 									{track.artist}
@@ -96,12 +96,12 @@
 	{/if}
 
 	{#if data.recentTracks && data.recentTracks.length > 0}
-		<section class="mt-12 qm-rise" style="animation-delay: 280ms;">
+		<section class="mt-12">
 			<h2 class="text-[13px] font-medium tracking-tight text-neutral-500">Recently played</h2>
 
 			<ul class="mt-5 space-y-0.5">
 				{#each data.recentTracks as track, i (i)}
-					<li class="qm-row group flex items-center gap-3 px-2 py-2 -mx-2">
+					<li class="group flex items-center gap-3 px-2 py-2 -mx-2 rounded-md transition-colors duration-200 ease-out hover:bg-[rgb(var(--hover))]">
 						{#if track.albumArt}
 							<img
 								src={track.albumArt}

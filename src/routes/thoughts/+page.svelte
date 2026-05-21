@@ -59,17 +59,17 @@
 
 <Content title="Thoughts" subtitle="Notes on software, infrastructure, and electronics.">
 	<!-- search -->
-	<div class="mt-10 qm-rise" style="animation-delay: 120ms;">
-		<div class="qm-search relative border-b border-neutral-200 focus-within:border-neutral-900 transition-colors">
+	<div class="mt-10">
+		<div class="relative border-b border-neutral-200 focus-within:border-neutral-900 transition-colors">
 			<SearchIcon
 				size={15}
-				class="qm-search-icon pointer-events-none absolute top-1/2 left-0 -translate-y-1/2 text-neutral-400"
+				class="pointer-events-none absolute top-1/2 left-0 -translate-y-1/2 text-neutral-400"
 			/>
 			<input
 				type="text"
 				bind:value={searchQuery}
 				placeholder="Search posts"
-				class="qm-input w-full bg-transparent py-2.5 pl-7 pr-2 text-[14px] text-neutral-900 placeholder-neutral-400"
+				class="input-bare w-full bg-transparent py-2.5 pl-7 pr-2 text-[14px] text-neutral-900 placeholder-neutral-400"
 			/>
 		</div>
 		{#if searchQuery.trim() !== ''}
@@ -80,7 +80,7 @@
 	</div>
 
 	<!-- list -->
-	<section class="mt-8 qm-rise" style="animation-delay: 200ms;">
+	<section class="mt-8">
 		<ul class="space-y-1">
 			{#if filteredPosts.length === 0}
 				<li in:fade={{ duration: 150 }} out:fade={{ duration: 100 }}>

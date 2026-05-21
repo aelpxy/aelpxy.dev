@@ -17,7 +17,11 @@ async function highlightCode(code: string, lang: string): Promise<string> {
 	try {
 		const html = await codeToHtml(code, {
 			lang,
-			theme: 'vitesse-light'
+			themes: {
+				light: 'vitesse-light',
+				dark: 'vitesse-dark'
+			},
+			defaultColor: 'light'
 		});
 		return html;
 	} catch (error) {

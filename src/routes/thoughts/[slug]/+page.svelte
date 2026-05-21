@@ -101,8 +101,7 @@
 	<a
 		href="/thoughts"
 		data-sveltekit-preload-data
-		class="qm-link-arrow qm-magnetic inline-flex items-center gap-1.5 text-[13px] text-neutral-500 transition-colors hover:text-neutral-900 qm-rise"
-		style="animation-delay: 20ms;"
+		class="inline-flex items-center gap-1.5 text-[13px] text-neutral-500 transition duration-200 ease-out hover:-translate-y-px hover:text-neutral-900"
 	>
 		<ArrowLeftIcon size={13} strokeWidth={2} />
 		<span>Thoughts</span>
@@ -116,7 +115,7 @@
 				This article is still a work in progress.
 			</blockquote>
 		{:else}
-			<header class="qm-rise" style="animation-delay: 80ms;">
+			<header>
 				<h1
 					class="text-[32px] sm:text-[34px] font-semibold tracking-[-0.025em] text-neutral-900 leading-[1.15] title"
 				>
@@ -136,7 +135,7 @@
 
 					<button
 						onclick={sharePost}
-						class="qm-link-arrow qm-magnetic inline-flex items-center gap-1.5 text-neutral-500 transition-colors hover:text-neutral-900"
+						class="inline-flex items-center gap-1.5 text-neutral-500 transition duration-200 ease-out hover:-translate-y-px hover:text-neutral-900"
 						aria-label={copied ? 'Link copied' : 'Copy link to post'}
 					>
 						{#if copied}
@@ -150,7 +149,7 @@
 				</div>
 			</header>
 
-			<div class="mt-10 prose qm-rise" style="animation-delay: 160ms;">
+			<div class="mt-10 prose">
 				{@html post.content}
 			</div>
 
@@ -158,7 +157,7 @@
 				<a
 					href="/thoughts"
 					data-sveltekit-preload-data
-					class="qm-link-arrow qm-magnetic inline-flex items-center gap-1.5 text-[13px] text-neutral-500 transition-colors hover:text-neutral-900"
+					class="inline-flex items-center gap-1.5 text-[13px] text-neutral-500 transition duration-200 ease-out hover:-translate-y-px hover:text-neutral-900"
 				>
 					<ArrowLeftIcon size={13} strokeWidth={2} />
 					<span>All thoughts</span>

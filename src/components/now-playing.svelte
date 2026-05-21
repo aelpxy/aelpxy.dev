@@ -9,7 +9,7 @@
 </script>
 
 <div
-	class="qm-lift rounded-lg border border-neutral-200 bg-white p-4 hover:border-neutral-300"
+	class="rounded-lg border border-neutral-200 bg-[rgb(var(--bg-elev))] p-4 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-neutral-300"
 >
 	{#if initialData?.isPlaying && initialData.name}
 		<a

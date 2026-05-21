@@ -22,7 +22,7 @@
 					{href}
 					rel="noreferrer noopener"
 					target={href.startsWith('http') ? '_blank' : undefined}
-					class="qm-link qm-magnetic text-[13px] text-neutral-500 hover:text-neutral-900"
+					class="link-underline inline-block text-[13px] text-neutral-500 transition duration-200 ease-out hover:-translate-y-px hover:text-neutral-900"
 				>
 					{label}
 				</a>
