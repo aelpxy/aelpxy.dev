@@ -42,7 +42,14 @@ async function fetchAll(): Promise<CloudinaryResource[]> {
 		cursor = data.next_cursor;
 	} while (cursor);
 
-	return resources;
+	// dedupe: same public_id should only ever render once,
+	// no matter what the API returns (pagination overlap, folder weirdness, etc).
+	const seen = new Set<string>();
+	return resources.filter((r) => {
+		if (seen.has(r.public_id)) return false;
+		seen.add(r.public_id);
+		return true;
+	});
 }
 
 function titleCase(s: string) {
