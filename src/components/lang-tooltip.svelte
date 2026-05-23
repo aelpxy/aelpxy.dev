@@ -90,7 +90,7 @@
 					{/if}
 				</span>
 				<div class="min-w-0">
-					<p class="text-[13px] font-semibold leading-tight text-neutral-900">{lang.name}</p>
+					<p class="text-[13px] leading-tight font-semibold text-neutral-900">{lang.name}</p>
 					<p class="mt-0.5 text-[11px] text-neutral-500">{lang.type}</p>
 				</div>
 			</div>
@@ -102,7 +102,7 @@
 				</div>
 				<div class="flex items-baseline justify-between gap-3">
 					<dt class="text-neutral-500">First appeared</dt>
-					<dd class="text-right tabular-nums text-neutral-900">{lang.firstAppeared}</dd>
+					<dd class="text-right text-neutral-900 tabular-nums">{lang.firstAppeared}</dd>
 				</div>
 				<div class="flex items-baseline justify-between gap-3">
 					<dt class="text-neutral-500">Paradigm</dt>
@@ -111,7 +111,7 @@
 			</dl>
 
 			<p
-				class="mt-2.5 border-t border-neutral-200 pt-2 font-mono text-[10.5px] italic leading-snug text-neutral-600"
+				class="mt-2.5 border-t border-neutral-200 pt-2 font-mono text-[10.5px] leading-snug text-neutral-600 italic"
 			>
 				&ldquo;{lang.funFact}&rdquo;
 			</p>

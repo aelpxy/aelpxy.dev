@@ -60,7 +60,9 @@
 <Content title="Thoughts" subtitle="Notes on software, infrastructure, and electronics.">
 	<!-- search -->
 	<div class="mt-10">
-		<div class="relative border-b border-neutral-200 focus-within:border-neutral-900 transition-colors">
+		<div
+			class="relative border-b border-neutral-200 transition-colors focus-within:border-neutral-900"
+		>
 			<SearchIcon
 				size={15}
 				class="pointer-events-none absolute top-1/2 left-0 -translate-y-1/2 text-neutral-400"
@@ -69,11 +71,11 @@
 				type="text"
 				bind:value={searchQuery}
 				placeholder="Search posts"
-				class="input-bare w-full bg-transparent py-2.5 pl-7 pr-2 text-[14px] text-neutral-900 placeholder-neutral-400"
+				class="w-full input-bare bg-transparent py-2.5 pr-2 pl-7 text-[14px] text-neutral-900 placeholder-neutral-400"
 			/>
 		</div>
 		{#if searchQuery.trim() !== ''}
-			<p class="mt-2 text-[12px] text-neutral-500 font-mono tracking-tight">
+			<p class="mt-2 font-mono text-[12px] tracking-tight text-neutral-500">
 				{filteredPosts.length} result{filteredPosts.length !== 1 ? 's' : ''}
 			</p>
 		{/if}

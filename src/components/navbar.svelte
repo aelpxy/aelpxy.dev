@@ -3,7 +3,9 @@
 	import ThemeToggle from './theme-toggle.svelte';
 
 	const links = [
-		{ href: '/thoughts', label: 'Thoughts' }
+		{ href: '/thoughts', label: 'Thoughts' },
+		{ href: '/photos', label: 'Photos' },
+		{ href: '/uses', label: 'Uses' }
 	];
 
 	function isActive(href: string) {
@@ -28,7 +30,7 @@
 					<a
 						{href}
 						data-active={isActive(href)}
-						class="relative inline-block text-[13.5px] tracking-tight transition duration-200 ease-out hover:-translate-y-px before:absolute before:-left-2.5 before:top-1/2 before:h-1 before:w-1 before:-translate-y-1/2 before:rounded-full before:bg-current before:opacity-0 before:transition-opacity before:duration-200 data-[active=true]:before:opacity-100 {isActive(
+						class="relative inline-block text-[13.5px] tracking-tight transition duration-200 ease-out before:absolute before:top-1/2 before:-left-2.5 before:h-1 before:w-1 before:-translate-y-1/2 before:rounded-full before:bg-current before:opacity-0 before:transition-opacity before:duration-200 hover:-translate-y-px data-[active=true]:before:opacity-100 {isActive(
 							href
 						)
 							? 'text-neutral-900'

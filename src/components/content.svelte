@@ -1,15 +1,12 @@
 <script lang="ts">
-	let {
-		title,
-		subtitle,
-		children
-	}: { title?: string; subtitle?: string; children: any } = $props();
+	let { title, subtitle, children }: { title?: string; subtitle?: string; children: any } =
+		$props();
 </script>
 
 <main class="mx-auto max-w-xl px-6 pt-16 pb-8 sm:pt-20">
 	{#if title}
 		<header>
-			<h1 class="text-[34px] font-semibold tracking-[-0.025em] text-neutral-900 leading-[1.1]">
+			<h1 class="text-[34px] leading-[1.1] font-semibold tracking-[-0.025em] text-neutral-900">
 				{title}
 			</h1>
 			{#if subtitle}

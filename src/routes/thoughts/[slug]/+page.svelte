@@ -117,13 +117,13 @@
 		{:else}
 			<header>
 				<h1
-					class="text-[32px] sm:text-[34px] font-semibold tracking-[-0.025em] text-neutral-900 leading-[1.15] title"
+					class="title text-[32px] leading-[1.15] font-semibold tracking-[-0.025em] text-neutral-900 sm:text-[34px]"
 				>
 					{post.metadata.title}
 				</h1>
 
 				<div
-					class="mt-4 flex items-center justify-between gap-4 text-[12.5px] text-neutral-500 font-mono tracking-tight"
+					class="mt-4 flex items-center justify-between gap-4 font-mono text-[12.5px] tracking-tight text-neutral-500"
 				>
 					<div class="flex items-center gap-2.5">
 						<time datetime={post.metadata.publishedAt}>
@@ -149,7 +149,7 @@
 				</div>
 			</header>
 
-			<div class="mt-10 prose">
+			<div class="prose mt-10">
 				{@html post.content}
 			</div>
 

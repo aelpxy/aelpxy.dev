@@ -22,7 +22,7 @@
 				<img
 					src={initialData.albumArt}
 					alt={initialData.name}
-					class="h-14 w-14 rounded shrink-0"
+					class="h-14 w-14 shrink-0 rounded"
 					width="56"
 					height="56"
 				/>
@@ -30,14 +30,18 @@
 			<div class="min-w-0 flex-1">
 				<div class="flex items-center gap-2">
 					<span class="relative flex h-1.5 w-1.5">
-						<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-60"></span>
+						<span
+							class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-60"
+						></span>
 						<span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
 					</span>
-					<span class="text-[11px] font-medium uppercase tracking-[0.1em] text-neutral-500">
+					<span class="text-[11px] font-medium tracking-[0.1em] text-neutral-500 uppercase">
 						Now playing
 					</span>
 				</div>
-				<p class="mt-1 truncate text-[14.5px] tracking-tight text-neutral-900 group-hover:underline underline-offset-2 decoration-neutral-300">
+				<p
+					class="mt-1 truncate text-[14.5px] tracking-tight text-neutral-900 decoration-neutral-300 underline-offset-2 group-hover:underline"
+				>
 					{initialData.name}
 				</p>
 				<p class="truncate text-[13px] text-neutral-500">
