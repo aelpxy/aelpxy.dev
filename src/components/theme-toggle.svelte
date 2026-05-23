@@ -27,6 +27,13 @@
 			localStorage.setItem('theme', 'light');
 		}
 
+		// Boot script in app.html sets inline html styles for first paint.
+		// Update them on toggle so any area outside body (overscroll, ::backdrop)
+		// reflects the new theme.
+		root.style.backgroundColor = isDark ? 'rgb(18, 17, 16)' : 'rgb(250, 249, 246)';
+		root.style.color = isDark ? 'rgb(242, 240, 234)' : 'rgb(28, 27, 25)';
+		root.style.colorScheme = isDark ? 'dark' : 'light';
+
 		transitionTimer = setTimeout(() => {
 			root.classList.remove('theme-transitioning');
 		}, 350);

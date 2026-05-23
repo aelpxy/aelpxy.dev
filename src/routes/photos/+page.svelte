@@ -1,7 +1,6 @@
 <script lang="ts">
-	import Content from '../../components/content.svelte';
 	import Lightbox from '../../components/lightbox.svelte';
-	import JustifiedGrid from '../../components/justified-grid.svelte';
+	import PhotoStream from '../../components/photo-stream.svelte';
 	import type { Photo } from '$lib/photos';
 
 	let { data } = $props();
@@ -41,19 +40,28 @@
 	<link rel="canonical" href="https://aelpxy.dev/photos" />
 </svelte:head>
 
-<Content title="Photos" subtitle="Trips, places, and the occasional good shot.">
-	<div class="mt-12 space-y-20">
+<main class="mx-auto max-w-xl px-6 pt-16 pb-16 sm:pt-20">
+	<header>
+		<h1 class="text-[34px] font-semibold tracking-[-0.025em] text-neutral-900 leading-[1.1]">
+			Photos
+		</h1>
+		<p class="mt-4 text-[15.5px] leading-[1.65] text-neutral-500">
+			Trips, places, and the occasional good shot.
+		</p>
+	</header>
+
+	<div class="mt-16 space-y-24">
 		{#each data.years as group (group.year)}
 			<section>
 				<h2 class="text-[13px] font-medium tracking-tight text-neutral-500">
 					{group.year}
 				</h2>
 
-				<div class="mt-6 space-y-12">
+				<div class="mt-6 space-y-16">
 					{#each group.albums as album (album.slug)}
 						<div>
 							<header class="flex items-baseline justify-between gap-4">
-								<h3 class="text-[18px] font-semibold tracking-tight text-neutral-900">
+								<h3 class="text-[22px] font-semibold tracking-tight text-neutral-900">
 									{album.title}
 								</h3>
 								{#if album.location}
@@ -63,8 +71,8 @@
 								{/if}
 							</header>
 
-							<div class="mt-5">
-								<JustifiedGrid photos={album.photos} onOpen={(i) => open(album.photos, i)} />
+							<div class="mt-6">
+								<PhotoStream photos={album.photos} onOpen={(i) => open(album.photos, i)} />
 							</div>
 						</div>
 					{/each}
@@ -76,6 +84,6 @@
 			<p class="text-[14px] text-neutral-500">Nothing here yet.</p>
 		{/if}
 	</div>
-</Content>
+</main>
 
 <Lightbox photos={activePhotos} bind:index={activeIndex} onClose={close} />
