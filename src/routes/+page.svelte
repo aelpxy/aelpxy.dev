@@ -88,7 +88,7 @@
 		/>
 	</span>
 
-	Software engineer working remotely at
+	Co-founder and CTO of
 	<a
 		href="https://pandabase.io"
 		target="_blank"
@@ -153,7 +153,7 @@
 		<p class="mt-5 text-[15.5px] leading-[1.7] text-neutral-600">
 			You can get in touch with me via email at
 			<a
-				href="mailto:hi@aelpxy.dev"
+				href="mailto:hey@aelpxy.dev"
 				class="link-underline inline-block font-medium text-neutral-900 transition duration-200 ease-out hover:-translate-y-px"
 				>hey@aelpxy.dev</a
 			>. <br>
