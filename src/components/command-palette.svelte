@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { HouseIcon, ImageIcon, PenLineIcon, SearchIcon, WrenchIcon } from '@lucide/svelte';
+	import { fade, scale } from 'svelte/transition';
+	import { appleEase } from '$lib/transitions';
 	import Fuse from 'fuse.js';
 
 	let open = $state(false);
@@ -87,12 +89,15 @@
 			class="absolute inset-0 bg-black/60 backdrop-blur-sm"
 			onclick={() => (open = false)}
 			aria-label="Close command palette"
+			transition:fade={{ duration: 180 }}
 		></button>
 
 		<div
-			class="relative w-full max-w-md overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900 shadow-2xl"
+			class="relative w-full max-w-md overflow-hidden rounded-2xl border border-white/10 bg-neutral-900/70 shadow-2xl ring-1 shadow-black/60 ring-white/5 backdrop-blur-2xl"
+			in:scale={{ start: 0.96, opacity: 0, duration: 260, easing: appleEase }}
+			out:scale={{ start: 0.98, opacity: 0, duration: 140, easing: appleEase }}
 		>
-			<div class="flex items-center gap-3 border-b border-neutral-800 px-4 py-3">
+			<div class="flex items-center gap-3 border-b border-white/5 px-4 py-3.5">
 				<SearchIcon size={18} class="text-neutral-500" />
 				<input
 					type="text"
@@ -102,7 +107,7 @@
 					placeholder="Search..."
 					class="w-full border-none bg-transparent text-base text-neutral-100 placeholder-neutral-500 shadow-none outline-none focus:border-none focus:ring-0 focus:outline-none"
 				/>
-				<kbd class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-xs text-neutral-500">
+				<kbd class="rounded-md bg-white/10 px-1.5 py-0.5 font-mono text-xs text-neutral-400">
 					esc
 				</kbd>
 			</div>
@@ -114,30 +119,39 @@
 					{#each filteredCommands as command, i (command.href)}
 						{@const Icon = command.icon}
 						<button
-							class="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left transition-colors {i ===
+							class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-all duration-150 ease-out {i ===
 							selectedIndex
-								? 'bg-neutral-800 text-neutral-100'
-								: 'text-neutral-400 hover:bg-neutral-800/50 hover:text-neutral-200'}"
+								? 'bg-white/10 text-neutral-100 shadow-sm'
+								: 'text-neutral-400 hover:bg-white/5 hover:text-neutral-200'}"
 							onclick={() => navigate(command.href)}
 							onmouseenter={() => (selectedIndex = i)}
 						>
-							<Icon size={18} />
+							<Icon
+								size={18}
+								class="transition-colors {i === selectedIndex ? 'text-neutral-100' : ''}"
+							/>
 							<span class="text-sm">{command.name}</span>
+							<span
+								class="ml-auto text-neutral-500 transition-all duration-200 ease-out {i ===
+								selectedIndex
+									? 'translate-x-0 opacity-100'
+									: '-translate-x-1 opacity-0'}">↵</span
+							>
 						</button>
 					{/each}
 				{/if}
 			</div>
 
 			<div
-				class="flex items-center justify-between border-t border-neutral-800 px-4 py-2 text-xs text-neutral-600"
+				class="flex items-center justify-between border-t border-white/5 px-4 py-2.5 text-xs text-neutral-600"
 			>
 				<div class="flex items-center gap-2">
-					<kbd class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono">↑</kbd>
-					<kbd class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono">↓</kbd>
+					<kbd class="rounded-md bg-white/10 px-1.5 py-0.5 font-mono">↑</kbd>
+					<kbd class="rounded-md bg-white/10 px-1.5 py-0.5 font-mono">↓</kbd>
 					<span>navigate</span>
 				</div>
 				<div class="flex items-center gap-2">
-					<kbd class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono">↵</kbd>
+					<kbd class="rounded-md bg-white/10 px-1.5 py-0.5 font-mono">↵</kbd>
 					<span>select</span>
 				</div>
 			</div>

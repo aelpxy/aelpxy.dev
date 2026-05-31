@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { MapPinIcon } from '@lucide/svelte';
 	import LangTooltip from '../components/lang-tooltip.svelte';
+	import { rise } from '$lib/transitions';
 
 	let { data } = $props();
 
@@ -73,7 +74,7 @@
 
 <main class="mx-auto max-w-xl px-6 pt-16 pb-8 sm:pt-20">
 	<!-- intro -->
-	<section>
+	<section in:rise={{ delay: 40 }}>
 		<h1 class="text-[34px] leading-[1.1] font-semibold tracking-tight text-neutral-900">
 			Hey, there!
 		</h1>
@@ -107,12 +108,12 @@
 		</p>
 	</section>
 	<!-- projects -->
-	<section class="mt-16">
+	<section class="mt-16" in:rise={{ delay: 140 }}>
 		<h2 class="text-[13px] font-medium tracking-tight text-neutral-500">Projects</h2>
 
 		<ul class="mt-5 space-y-1">
-			{#each data.repos as repo (repo.id)}
-				<li>
+			{#each data.repos as repo, i (repo.id)}
+				<li in:rise={{ delay: 220 + i * 55, y: 10, blur: 4 }}>
 					<a
 						href={repo.html_url}
 						target="_blank"
@@ -150,7 +151,7 @@
 	</section>
 
 	<!-- contact -->
-	<section class="mt-16">
+	<section class="mt-16" in:rise={{ delay: 320 }}>
 		<h2 class="text-[13px] font-medium tracking-tight text-neutral-500">Get in touch</h2>
 
 		<p class="mt-5 text-[15.5px] leading-[1.7] text-neutral-600">

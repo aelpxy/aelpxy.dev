@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { SearchIcon } from '@lucide/svelte';
 	import Fuse from 'fuse.js';
-	import { cubicOut } from 'svelte/easing';
-	import { fade, fly } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
+	import { rise } from '$lib/transitions';
 	import BlogPostLink from '../../components/blog-post-link.svelte';
 	import Content from '../../components/content.svelte';
 
@@ -93,8 +93,8 @@
 			{:else}
 				{#each filteredPosts as post, i (post.slug)}
 					<li
-						in:fly={{ y: 8, duration: 220, delay: i * 25, easing: cubicOut }}
-						out:fly={{ y: -6, duration: 130, easing: cubicOut }}
+						in:rise={{ y: 8, blur: 3, duration: 420, delay: i * 30 }}
+						out:rise={{ y: -6, blur: 2, scale: 1, duration: 140 }}
 					>
 						<BlogPostLink {post} />
 					</li>

@@ -42,7 +42,7 @@
 
 <main class="mx-auto max-w-xl px-6 pt-16 pb-16 sm:pt-20">
 	<header>
-		<h1 class="text-[34px] font-semibold tracking-[-0.025em] text-neutral-900 leading-[1.1]">
+		<h1 class="text-[34px] leading-[1.1] font-semibold tracking-[-0.025em] text-neutral-900">
 			Photos
 		</h1>
 		<p class="mt-4 text-[15.5px] leading-[1.65] text-neutral-500">

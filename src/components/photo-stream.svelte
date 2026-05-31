@@ -145,8 +145,10 @@
 	<button
 		type="button"
 		onclick={() => onOpen(item.index)}
-		style="aspect-ratio: {item.p.width}/{item.p.height}; background-image: url({cldBlur(item.p.id)});"
-		class="group relative block w-full cursor-zoom-in overflow-hidden bg-cover bg-center [content-visibility:auto] [contain-intrinsic-size:auto_400px] {tallOnDesktop
+		style="aspect-ratio: {item.p.width}/{item.p.height}; background-image: url({cldBlur(
+			item.p.id
+		)});"
+		class="group relative block w-full cursor-zoom-in overflow-hidden bg-cover bg-center [contain-intrinsic-size:auto_400px] [content-visibility:auto] {tallOnDesktop
 			? 'md:aspect-auto! md:h-full'
 			: ''}"
 		aria-label={item.p.alt || `Open photo ${item.index + 1}`}

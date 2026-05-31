@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { ChevronLeftIcon, ChevronRightIcon, XIcon } from '@lucide/svelte';
-	import { fade } from 'svelte/transition';
+	import { fade, scale } from 'svelte/transition';
+	import { appleEase } from '$lib/transitions';
 	import type { Photo } from '$lib/photos';
 	import { cld, cldSrcset, cldBlur } from '$lib/cloudinary';
 	import { loadedFade } from '$lib/actions/loaded-fade';
@@ -96,7 +97,11 @@
 			</button>
 		{/if}
 
-		<div class="pointer-events-none relative flex h-[90vh] w-[92vw] items-center justify-center">
+		<div
+			class="pointer-events-none relative flex h-[90vh] w-[92vw] items-center justify-center"
+			in:scale={{ start: 0.92, opacity: 0, duration: 320, easing: appleEase }}
+			out:scale={{ start: 0.96, opacity: 0, duration: 180, easing: appleEase }}
+		>
 			{#key index}
 				<div class="relative" in:fade={{ duration: 220 }} out:fade={{ duration: 160 }}>
 					<img

@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
+	import { scale } from 'svelte/transition';
+	import { appleEase } from '$lib/transitions';
 
 	type Lang = {
 		name: string;
@@ -69,52 +70,58 @@
 
 	{#if open}
 		<div
-			id={tipId}
-			role="tooltip"
-			transition:fade={{ duration: 140 }}
+			class="absolute bottom-full left-1/2 z-40 mb-2 w-64 -translate-x-1/2"
 			onmouseenter={show}
 			onmouseleave={hideWithDelay}
-			class="absolute bottom-full left-1/2 z-40 mb-2 w-64 -translate-x-1/2 rounded-lg border border-neutral-200 bg-[rgb(var(--bg-elev))] p-3 text-left shadow-lg shadow-black/5"
+			role="presentation"
 		>
-			<div class="flex items-center gap-2.5 border-b border-neutral-200 pb-2.5">
-				<span
-					class="flex h-10 w-10 shrink-0 items-center justify-center rounded"
-					style="background-color: {lang.accent}"
-				>
-					{#if logoIsImage}
-						<img src={lang.logo} alt="{lang.name} logo" class="h-6 w-6" />
-					{:else}
-						<span class="font-mono text-[11px] font-semibold tracking-tight text-white">
-							{lang.logo}
-						</span>
-					{/if}
-				</span>
-				<div class="min-w-0">
-					<p class="text-[13px] leading-tight font-semibold text-neutral-900">{lang.name}</p>
-					<p class="mt-0.5 text-[11px] text-neutral-500">{lang.type}</p>
-				</div>
-			</div>
-
-			<dl class="mt-2.5 space-y-1.5 text-[11.5px]">
-				<div class="flex items-baseline justify-between gap-3">
-					<dt class="text-neutral-500">Designed by</dt>
-					<dd class="text-right text-neutral-900">{lang.designer}</dd>
-				</div>
-				<div class="flex items-baseline justify-between gap-3">
-					<dt class="text-neutral-500">First appeared</dt>
-					<dd class="text-right text-neutral-900 tabular-nums">{lang.firstAppeared}</dd>
-				</div>
-				<div class="flex items-baseline justify-between gap-3">
-					<dt class="text-neutral-500">Paradigm</dt>
-					<dd class="text-right text-neutral-900">{lang.paradigm}</dd>
-				</div>
-			</dl>
-
-			<p
-				class="mt-2.5 border-t border-neutral-200 pt-2 font-mono text-[10.5px] leading-snug text-neutral-600 italic"
+			<div
+				id={tipId}
+				role="tooltip"
+				transition:scale={{ start: 0.95, opacity: 0, duration: 180, easing: appleEase }}
+				style="transform-origin: bottom center;"
+				class="rounded-lg border border-neutral-200 bg-[rgb(var(--bg-elev))] p-3 text-left shadow-lg shadow-black/5"
 			>
-				&ldquo;{lang.funFact}&rdquo;
-			</p>
+				<div class="flex items-center gap-2.5 border-b border-neutral-200 pb-2.5">
+					<span
+						class="flex h-10 w-10 shrink-0 items-center justify-center rounded"
+						style="background-color: {lang.accent}"
+					>
+						{#if logoIsImage}
+							<img src={lang.logo} alt="{lang.name} logo" class="h-6 w-6" />
+						{:else}
+							<span class="font-mono text-[11px] font-semibold tracking-tight text-white">
+								{lang.logo}
+							</span>
+						{/if}
+					</span>
+					<div class="min-w-0">
+						<p class="text-[13px] leading-tight font-semibold text-neutral-900">{lang.name}</p>
+						<p class="mt-0.5 text-[11px] text-neutral-500">{lang.type}</p>
+					</div>
+				</div>
+
+				<dl class="mt-2.5 space-y-1.5 text-[11.5px]">
+					<div class="flex items-baseline justify-between gap-3">
+						<dt class="text-neutral-500">Designed by</dt>
+						<dd class="text-right text-neutral-900">{lang.designer}</dd>
+					</div>
+					<div class="flex items-baseline justify-between gap-3">
+						<dt class="text-neutral-500">First appeared</dt>
+						<dd class="text-right text-neutral-900 tabular-nums">{lang.firstAppeared}</dd>
+					</div>
+					<div class="flex items-baseline justify-between gap-3">
+						<dt class="text-neutral-500">Paradigm</dt>
+						<dd class="text-right text-neutral-900">{lang.paradigm}</dd>
+					</div>
+				</dl>
+
+				<p
+					class="mt-2.5 border-t border-neutral-200 pt-2 font-mono text-[10.5px] leading-snug text-neutral-600 italic"
+				>
+					&ldquo;{lang.funFact}&rdquo;
+				</p>
+			</div>
 		</div>
 	{/if}
 </span>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import ThemeToggle from './theme-toggle.svelte';
+	import { rise } from '$lib/transitions';
 
 	const links = [
 		{ href: '/thoughts', label: 'Thoughts' },
@@ -15,7 +16,7 @@
 
 <header class="select-none" style="view-transition-name: navbar;">
 	<div class="mx-auto max-w-xl px-6 pt-10 sm:pt-14">
-		<nav class="flex items-center justify-between">
+		<nav class="flex items-center justify-between" in:rise={{ y: -8, blur: 4, duration: 500 }}>
 			<a
 				href="/"
 				data-sveltekit-preload-data
