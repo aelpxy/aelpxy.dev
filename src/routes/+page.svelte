@@ -3,8 +3,6 @@
 	import LangTooltip from '../components/lang-tooltip.svelte';
 	import { rise } from '$lib/transitions';
 
-	let { data } = $props();
-
 	const typescript = {
 		name: 'TypeScript',
 		type: 'Programming language',
@@ -36,6 +34,17 @@
 		funFact: "There's no place like ::1.",
 		logo: '::1',
 		accent: '#27272a'
+	};
+
+	const camera = {
+		name: 'Canon EOS R50',
+		type: 'Mirrorless camera',
+		designer: 'Canon',
+		firstAppeared: '2023',
+		paradigm: 'APS-C, 24.2MP',
+		funFact: '24 megapixels of me pretending I know what I am doing.',
+		logo: 'R50',
+		accent: '#cc0000'
 	};
 </script>
 
@@ -78,6 +87,9 @@
 		<h1 class="text-[34px] leading-[1.1] font-semibold tracking-tight text-neutral-900">
 			Hey, there!
 		</h1>
+		<p class="mt-2 text-[15.5px] text-neutral-500">
+			Full-time software engineer and hobbyist photographer.
+		</p>
 
 		<p class="mt-6 text-[15.5px] leading-[1.7] text-neutral-600">
 			<span class="mb-4 flex items-center gap-1.5">
@@ -89,7 +101,7 @@
 				/>
 			</span>
 
-			Co-founder and CTO of
+			I help run
 			<a
 				href="https://pandabase.io"
 				target="_blank"
@@ -97,59 +109,20 @@
 				class="link-underline font-medium text-neutral-900"
 			>
 				Pandabase
-			</a>, where we build payment infrastructure. Off the clock, I'm usually fighting a server
-			somewhere. Winning sometimes, losing more often.
+			</a>, where we build the payment infrastructure that moves money safely from one place to
+			another. Most days that means distributed systems, reliability, and a lot of staring at logs.
 		</p>
 		<p class="mt-4 text-[15.5px] leading-[1.7] text-neutral-600">
-			Favorite languages are
-			<LangTooltip lang={typescript} label="TypeScript" /> and
-			<LangTooltip lang={go} label="Go" />. Been writing both for 5+ years and most of what I do is
-			in distributed systems.
+			I mostly write <LangTooltip lang={typescript} label="TypeScript" /> and
+			<LangTooltip lang={go} label="Go" />, and I've been at this long enough that it stopped being
+			a hobby and turned into work. I still love it the same either way.
+		</p>
+		<p class="mt-4 text-[15.5px] leading-[1.7] text-neutral-600">
+			When I'm away from the keyboard I'm off traveling somewhere, shooting photos on my
+			<LangTooltip lang={camera} label="camera" />, soldering something, or breaking my homelab and
+			pretending it was on purpose.
 		</p>
 	</section>
-	<!-- projects -->
-	<section class="mt-16" in:rise={{ delay: 140 }}>
-		<h2 class="text-[13px] font-medium tracking-tight text-neutral-500">Projects</h2>
-
-		<ul class="mt-5 space-y-1">
-			{#each data.repos as repo, i (repo.id)}
-				<li in:rise={{ delay: 220 + i * 55, y: 10, blur: 4 }}>
-					<a
-						href={repo.html_url}
-						target="_blank"
-						rel="noopener noreferrer"
-						class="group -mx-2 flex items-baseline justify-between gap-4 rounded-md px-2 py-2.5 transition-colors duration-200 ease-out hover:bg-[rgb(var(--hover))]"
-					>
-						<span class="min-w-0 flex-1">
-							<span class="text-[14.5px] tracking-tight text-neutral-900">
-								{repo.name}
-								<span
-									class="ml-1 inline-block -translate-x-1.5 -rotate-6 text-neutral-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:rotate-0 group-hover:opacity-100"
-									>→</span
-								>
-							</span>
-							{#if repo.description}
-								<span class="mt-1 block truncate text-[13px] leading-snug text-neutral-500">
-									{repo.description}
-								</span>
-							{/if}
-						</span>
-						<span
-							class="flex items-center gap-3 font-mono text-[12.5px] tracking-tight whitespace-nowrap text-neutral-500"
-						>
-							{#if repo.language}
-								<span>{repo.language}</span>
-							{/if}
-							{#if repo.stargazers_count > 0}
-								<span class="tabular-nums">{repo.stargazers_count}★</span>
-							{/if}
-						</span>
-					</a>
-				</li>
-			{/each}
-		</ul>
-	</section>
-
 	<!-- contact -->
 	<section class="mt-16" in:rise={{ delay: 320 }}>
 		<h2 class="text-[13px] font-medium tracking-tight text-neutral-500">Get in touch</h2>

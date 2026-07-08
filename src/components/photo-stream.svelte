@@ -169,7 +169,9 @@
 <div class="flex flex-col gap-1">
 	{#each blocks as block, bi (bi)}
 		{#if block.kind === 'solo'}
-			{@render tile(block.photo)}
+			<div class="mx-auto w-full max-w-5xl">
+				{@render tile(block.photo)}
+			</div>
 		{:else if block.kind === 'pair'}
 			<div class="grid grid-cols-1 gap-1 md:grid-cols-2">
 				{@render tile(block.photos[0])}
