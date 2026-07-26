@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { CameraIcon } from '@lucide/svelte';
 	import type { Photo } from '$lib/photos';
 	import { cld, cldSrcset, cldBlur } from '$lib/cloudinary';
 	import { loadedFade } from '$lib/actions/loaded-fade';
@@ -163,6 +164,14 @@
 			decoding="async"
 			class="block h-full w-full object-cover opacity-0 transition-opacity duration-700 ease-out [&.loaded]:opacity-100"
 		/>
+		{#if item.p.exif?.camera}
+			<span
+				class="pointer-events-none absolute bottom-2.5 left-2.5 flex items-center gap-1.5 rounded-full border border-white/10 bg-black/40 px-2.5 py-1 text-[11px] font-medium tracking-tight text-white/90 backdrop-blur-md"
+			>
+				<CameraIcon size={12} class="text-white/50" />
+				{item.p.exif.camera}
+			</span>
+		{/if}
 	</button>
 {/snippet}
 

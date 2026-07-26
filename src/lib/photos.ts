@@ -1,8 +1,18 @@
+export type PhotoExif = {
+	camera?: string;
+	lens?: string;
+	focalLength?: string;
+	aperture?: string;
+	shutter?: string;
+	iso?: string;
+};
+
 export type Photo = {
 	id: string;
 	width: number;
 	height: number;
 	alt?: string;
+	exif?: PhotoExif;
 };
 
 export type Album = {

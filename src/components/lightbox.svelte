@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ChevronLeftIcon, ChevronRightIcon, XIcon } from '@lucide/svelte';
+	import { CameraIcon, ChevronLeftIcon, ChevronRightIcon, XIcon } from '@lucide/svelte';
 	import { fade, scale } from 'svelte/transition';
 	import { appleEase } from '$lib/transitions';
 	import type { Photo } from '$lib/photos';
@@ -65,6 +65,8 @@
 
 {#if open && index !== null}
 	{@const photo = photos[index]}
+	{@const exif = photo.exif}
+	{@const settings = [exif?.focalLength, exif?.aperture, exif?.shutter, exif?.iso].filter(Boolean)}
 	<div
 		use:portal
 		class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md"
@@ -128,12 +130,39 @@
 			{/key}
 		</div>
 
-		{#if photos.length > 1}
-			<div
-				class="absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-[12px] tracking-tight text-white/60"
-			>
-				{index + 1} / {photos.length}
-			</div>
-		{/if}
+		<div
+			class="pointer-events-none absolute bottom-5 left-1/2 flex max-w-[92vw] -translate-x-1/2 flex-col items-center gap-2"
+		>
+			{#if exif?.camera || settings.length}
+				<div
+					class="flex flex-col items-center gap-1.5 rounded-2xl border border-white/10 bg-black/40 px-4 py-2.5 backdrop-blur-xl"
+				>
+					{#if exif?.camera}
+						<div class="flex items-center gap-2 text-[13px] tracking-tight">
+							<CameraIcon size={13} class="shrink-0 text-white/45" />
+							<span class="font-medium text-white/90">{exif.camera}</span>
+							{#if exif.lens}
+								<span class="text-white/40">{exif.lens}</span>
+							{/if}
+						</div>
+					{/if}
+					{#if settings.length}
+						<div class="flex items-center gap-2.5 font-mono text-[11.5px] text-white/65">
+							{#each settings as s, i (i)}
+								{#if i > 0}
+									<span class="h-2.5 w-px bg-white/20"></span>
+								{/if}
+								<span>{s}</span>
+							{/each}
+						</div>
+					{/if}
+				</div>
+			{/if}
+			{#if photos.length > 1}
+				<div class="font-mono text-[11px] tracking-tight text-white/40">
+					{index + 1} / {photos.length}
+				</div>
+			{/if}
+		</div>
 	</div>
 {/if}
