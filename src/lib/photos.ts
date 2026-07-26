@@ -13,6 +13,7 @@ export type Photo = {
 	height: number;
 	alt?: string;
 	exif?: PhotoExif;
+	takenAt?: string;
 };
 
 export type Album = {
@@ -20,7 +21,7 @@ export type Album = {
 	title: string;
 	year: string;
 	location?: string;
-	latestUpload: string;
+	newestAt: string;
 	photos: Photo[];
 };
 

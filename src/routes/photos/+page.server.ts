@@ -17,6 +17,8 @@ type CloudinaryResource = {
 
 type CloudinaryExif = Record<string, string | number | undefined>;
 
+type PhotoMeta = { exif?: PhotoExif; capturedAt?: number; takenAt?: string };
+
 type CloudinaryResponse = {
 	resources: CloudinaryResource[];
 	next_cursor?: string;
@@ -57,17 +59,68 @@ async function fetchAll(): Promise<CloudinaryResource[]> {
 
 // EXIF is only returned by the single-resource endpoint, not the list/search
 // endpoints, so we enrich each photo individually. Runs at build time.
-async function fetchExif(publicId: string): Promise<PhotoExif | undefined> {
+async function fetchMeta(publicId: string): Promise<PhotoMeta> {
 	const url = new URL(
 		`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/resources/image/upload/${encodeURIComponent(publicId)}`
 	);
 	url.searchParams.set('image_metadata', 'true');
 
 	const res = await fetch(url, { headers: { Authorization: authHeader } });
-	if (!res.ok) return undefined;
+	if (!res.ok) return {};
 
 	const data = (await res.json()) as { image_metadata?: CloudinaryExif };
-	return formatExif(data.image_metadata);
+	const m = data.image_metadata;
+	const raw = m?.DateTimeOriginal ?? m?.CreateDate ?? m?.DateTime;
+	return {
+		exif: formatExif(m),
+		capturedAt: parseExifDate(raw),
+		takenAt: formatTakenAt(raw)
+	};
+}
+
+const MONTHS = [
+	'January',
+	'February',
+	'March',
+	'April',
+	'May',
+	'June',
+	'July',
+	'August',
+	'September',
+	'October',
+	'November',
+	'December'
+];
+
+// EXIF timestamps look like "2026:07:21 21:40:45". We parse the fields directly
+// rather than through Date() so the displayed time stays as the camera recorded
+// it, with no server-timezone drift.
+function parseExifParts(v: string | number | undefined) {
+	if (v === undefined) return undefined;
+	const m = String(v).match(/^(\d{4}):(\d{2}):(\d{2})[ T](\d{2}):(\d{2}):(\d{2})/);
+	if (!m) return undefined;
+	const [, y, mo, d, h, mi, s] = m;
+	return { y: +y, mo: +mo, d: +d, h: +h, mi: +mi, s: +s };
+}
+
+function parseExifDate(v: string | number | undefined): number | undefined {
+	const p = parseExifParts(v);
+	if (!p) return undefined;
+	const t = Date.parse(
+		`${p.y}-${String(p.mo).padStart(2, '0')}-${String(p.d).padStart(2, '0')}T${String(p.h).padStart(2, '0')}:${String(p.mi).padStart(2, '0')}:${String(p.s).padStart(2, '0')}`
+	);
+	return Number.isNaN(t) ? undefined : t;
+}
+
+// -> "July 21, 2026 · 9:40 PM"
+function formatTakenAt(v: string | number | undefined): string | undefined {
+	const p = parseExifParts(v);
+	if (!p || p.mo < 1 || p.mo > 12) return undefined;
+	const ampm = p.h < 12 ? 'AM' : 'PM';
+	const hour12 = p.h % 12 || 12;
+	const min = String(p.mi).padStart(2, '0');
+	return `${MONTHS[p.mo - 1]} ${p.d}, ${p.y} · ${hour12}:${min} ${ampm}`;
 }
 
 function formatExif(m?: CloudinaryExif): PhotoExif | undefined {
@@ -130,7 +183,7 @@ function parseFolder(folder: string): { year: string; title: string } {
 	return { year: 'Undated', title: titleCase(folder) };
 }
 
-function buildAlbums(resources: CloudinaryResource[], exifById: Map<string, PhotoExif>): Album[] {
+function buildAlbums(resources: CloudinaryResource[], metaById: Map<string, PhotoMeta>): Album[] {
 	const groups = new Map<string, CloudinaryResource[]>();
 
 	for (const r of resources) {
@@ -140,9 +193,13 @@ function buildAlbums(resources: CloudinaryResource[], exifById: Map<string, Phot
 		groups.get(folder)!.push(r);
 	}
 
+	// When it was shot (EXIF), falling back to when it was uploaded.
+	const shotAt = (r: CloudinaryResource) =>
+		metaById.get(r.public_id)?.capturedAt ?? Date.parse(r.created_at);
+
 	const albums: Album[] = [];
 	for (const [folder, items] of groups) {
-		items.sort((a, b) => b.created_at.localeCompare(a.created_at));
+		items.sort((a, b) => shotAt(b) - shotAt(a));
 
 		const { year, title } = parseFolder(folder);
 
@@ -151,7 +208,8 @@ function buildAlbums(resources: CloudinaryResource[], exifById: Map<string, Phot
 			width: r.width,
 			height: r.height,
 			alt: r.context?.custom?.alt,
-			exif: exifById.get(r.public_id)
+			exif: metaById.get(r.public_id)?.exif,
+			takenAt: metaById.get(r.public_id)?.takenAt
 		}));
 
 		albums.push({
@@ -159,7 +217,7 @@ function buildAlbums(resources: CloudinaryResource[], exifById: Map<string, Phot
 			title,
 			year,
 			location: items[0]?.context?.custom?.location,
-			latestUpload: items[0]?.created_at ?? '',
+			newestAt: items[0] ? new Date(shotAt(items[0])).toISOString() : '',
 			photos
 		});
 	}
@@ -174,9 +232,9 @@ function groupByYear(albums: Album[]): AlbumYear[] {
 		byYear.get(a.year)!.push(a);
 	}
 
-	// Albums within a year: newest upload first.
+	// Albums within a year: newest photo first (by capture time).
 	for (const list of byYear.values()) {
-		list.sort((a, b) => b.latestUpload.localeCompare(a.latestUpload));
+		list.sort((a, b) => b.newestAt.localeCompare(a.newestAt));
 	}
 
 	// Years: numeric desc, with "Undated" pinned to the bottom.
@@ -194,13 +252,10 @@ export const prerender = true;
 export const load: PageServerLoad = async () => {
 	const resources = await fetchAll();
 
-	const exifById = new Map<string, PhotoExif>();
-	const exifResults = await mapLimit(resources, 8, (r) => fetchExif(r.public_id));
-	resources.forEach((r, i) => {
-		const exif = exifResults[i];
-		if (exif) exifById.set(r.public_id, exif);
-	});
+	const metaById = new Map<string, PhotoMeta>();
+	const metas = await mapLimit(resources, 8, (r) => fetchMeta(r.public_id));
+	resources.forEach((r, i) => metaById.set(r.public_id, metas[i]));
 
-	const albums = buildAlbums(resources, exifById);
+	const albums = buildAlbums(resources, metaById);
 	return { years: groupByYear(albums) };
 };

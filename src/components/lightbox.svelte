@@ -133,7 +133,7 @@
 		<div
 			class="pointer-events-none absolute bottom-5 left-1/2 flex max-w-[92vw] -translate-x-1/2 flex-col items-center gap-2"
 		>
-			{#if exif?.camera || settings.length}
+			{#if exif?.camera || settings.length || photo.takenAt}
 				<div
 					class="flex flex-col items-center gap-1.5 rounded-2xl border border-white/10 bg-black/40 px-4 py-2.5 backdrop-blur-xl"
 				>
@@ -155,6 +155,9 @@
 								<span>{s}</span>
 							{/each}
 						</div>
+					{/if}
+					{#if photo.takenAt}
+						<div class="text-[11px] tracking-tight text-white/40">{photo.takenAt}</div>
 					{/if}
 				</div>
 			{/if}
