@@ -2,7 +2,7 @@
 	const year = new Date().getFullYear();
 
 	const links = [
-		{ href: 'mailto:hi@aelpxy.dev', label: 'Email' },
+		{ href: 'mailto:hey@aelpxy.dev', label: 'Email' },
 		{ href: 'https://github.com/aelpxy', label: 'GitHub' },
 		{ href: 'https://twitter.com/aelpxy', label: 'Twitter' }
 	];

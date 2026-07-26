@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { MapPinIcon } from '@lucide/svelte';
 	import LangTooltip from '../components/lang-tooltip.svelte';
 	import { rise } from '$lib/transitions';
 
@@ -23,17 +22,6 @@
 		funFact: 'C, but with feelings.',
 		logo: '/logos/go.svg',
 		accent: '#00add8'
-	};
-
-	const localhost = {
-		name: '::1',
-		type: 'IPv6 loopback address',
-		designer: 'IETF',
-		firstAppeared: '1995',
-		paradigm: 'Loopback',
-		funFact: "There's no place like ::1.",
-		logo: '::1',
-		accent: '#27272a'
 	};
 
 	const camera = {
@@ -92,35 +80,15 @@
 		</p>
 
 		<p class="mt-6 text-[15.5px] leading-[1.7] text-neutral-600">
-			<span class="mb-4 flex items-center gap-1.5">
-				<MapPinIcon class="h-4 w-4 text-neutral-500" />
-				<LangTooltip
-					lang={localhost}
-					label="::1"
-					triggerClass="cursor-help font-mono text-[13px] tracking-tight text-neutral-500 underline decoration-dotted decoration-neutral-400 underline-offset-4 transition-colors hover:text-neutral-700 hover:decoration-neutral-700"
-				/>
-			</span>
-
-			I help run
-			<a
-				href="https://pandabase.io"
-				target="_blank"
-				rel="noreferrer noopener"
-				class="link-underline font-medium text-neutral-900"
-			>
-				Pandabase
-			</a>, where we build the payment infrastructure that moves money safely from one place to
-			another. Most days that means distributed systems, reliability, and a lot of staring at logs.
-		</p>
-		<p class="mt-4 text-[15.5px] leading-[1.7] text-neutral-600">
 			I mostly write <LangTooltip lang={typescript} label="TypeScript" /> and
 			<LangTooltip lang={go} label="Go" />, and I've been at this long enough that it stopped being
 			a hobby and turned into work. I still love it the same either way.
 		</p>
 		<p class="mt-4 text-[15.5px] leading-[1.7] text-neutral-600">
-			When I'm away from the keyboard I'm off traveling somewhere, shooting photos on my
-			<LangTooltip lang={camera} label="camera" />, soldering something, or breaking my homelab and
-			pretending it was on purpose.
+			Mostly though, I love traveling, enough that you could call me a bit of a digital nomad. When
+			I'm away from the keyboard I'm usually off somewhere new, shooting photos on my
+			<LangTooltip lang={camera} label="camera" />. You can find some of my shots over in
+			<a href="/photos" class="link-underline font-medium text-neutral-900">photos</a>.
 		</p>
 	</section>
 	<!-- contact -->
