@@ -1,6 +1,5 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
-@plugin '@tailwindcss/typography';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -283,156 +282,6 @@ code:not(pre code) {
 		280ms cubic-bezier(0.4, 0, 0.2, 1) 80ms both slide-from-right;
 }
 
-/* prose */
-.prose {
-	font-family:
-		'Inter',
-		ui-sans-serif,
-		-apple-system,
-		BlinkMacSystemFont,
-		sans-serif;
-	max-width: none;
-	font-size: 15.5px;
-	line-height: 1.75;
-	color: rgb(var(--ink-700));
-}
-
-.prose .anchor {
-	@apply invisible absolute no-underline;
-	margin-left: -1em;
-	padding-right: 0.5em;
-	width: 80%;
-	max-width: 700px;
-	cursor: pointer;
-}
-
-.anchor:hover {
-	@apply visible;
-}
-
-.prose a {
-	@apply underline decoration-neutral-300 decoration-[0.05em] underline-offset-[3px] transition-all;
-	color: rgb(var(--ink));
-}
-
-.prose a:hover {
-	@apply decoration-neutral-700;
-}
-
-.prose .anchor:after {
-	@apply text-neutral-400;
-	content: '#';
-}
-
-.prose *:hover > .anchor {
-	@apply visible;
-}
-
-.prose pre {
-	overflow-x: auto;
-	background: rgb(var(--bg-elev)) !important;
-	color: rgb(var(--ink));
-	border: 1px solid rgb(var(--rule));
-	border-radius: 8px;
-	padding: 14px 16px;
-	font-size: 12.75px;
-	line-height: 1.65;
-	font-family: 'JetBrains Mono Variable', ui-monospace, monospace;
-	margin-top: 1.5em;
-	margin-bottom: 1.5em;
-}
-
-.prose pre code {
-	background: transparent !important;
-}
-
-/* shiki dual-theme: swap on .dark */
-.dark .shiki,
-.dark .shiki span {
-	color: var(--shiki-dark) !important;
-	background-color: var(--shiki-dark-bg) !important;
-	font-style: var(--shiki-dark-font-style) !important;
-	font-weight: var(--shiki-dark-font-weight) !important;
-	text-decoration: var(--shiki-dark-text-decoration) !important;
-}
-
-/* shiki line padding */
-.prose pre .line {
-	min-height: 1em;
-}
-
-.prose code {
-	@apply rounded px-1 py-0.5;
-	font-family: 'JetBrains Mono Variable', ui-monospace, monospace;
-}
-
-.prose pre code {
-	@apply p-0;
-	border: initial;
-	background: transparent;
-	line-height: 1.6;
-}
-
-.prose img {
-	@apply m-0;
-}
-
-.prose p {
-	margin-top: 1em;
-	margin-bottom: 1em;
-	color: rgb(var(--ink-700));
-	line-height: 1.78;
-}
-
-.prose h1 {
-	@apply mt-12 mb-3 text-[26px] font-semibold tracking-tight;
-	color: rgb(var(--ink));
-}
-.prose h2 {
-	@apply mt-10 mb-2.5 text-[20px] font-semibold tracking-tight;
-	color: rgb(var(--ink));
-}
-.prose h3 {
-	@apply mt-9 mb-2 text-[17px] font-semibold tracking-tight;
-	color: rgb(var(--ink));
-}
-.prose h4 {
-	@apply mt-8 mb-2 text-[15px] font-semibold tracking-tight;
-	color: rgb(var(--ink));
-}
-
-.prose strong {
-	@apply font-semibold;
-	color: rgb(var(--ink));
-}
-.prose ul {
-	@apply list-disc pl-6;
-}
-.prose ol {
-	@apply list-decimal pl-6;
-}
-.prose li {
-	color: rgb(var(--ink-700));
-	margin-top: 0.35em;
-	margin-bottom: 0.35em;
-}
-.prose blockquote {
-	border-left: 2px solid rgb(var(--rule));
-	padding-left: 1em;
-	color: rgb(var(--ink-600));
-	font-style: italic;
-	margin: 1.25em 0;
-}
-.prose hr {
-	border: 0;
-	border-top: 1px solid rgb(var(--rule));
-	margin: 2em 0;
-}
-
-.prose > :first-child {
-	margin-top: 0 !important;
-}
-
 pre::-webkit-scrollbar {
 	display: none;
 }
@@ -453,8 +302,4 @@ table {
 	max-width: fit-content;
 	overflow-x: auto;
 	white-space: nowrap;
-}
-
-.title {
-	text-wrap: balance;
 }

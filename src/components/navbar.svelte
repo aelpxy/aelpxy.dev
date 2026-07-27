@@ -3,10 +3,7 @@
 	import ThemeToggle from './theme-toggle.svelte';
 	import { rise } from '$lib/transitions';
 
-	const links = [
-		{ href: '/thoughts', label: 'Thoughts' },
-		{ href: '/photos', label: 'Photos' }
-	];
+	const links = [{ href: '/photos', label: 'Photos' }];
 
 	function isActive(href: string) {
 		return page.url.pathname === href || page.url.pathname.startsWith(href + '/');

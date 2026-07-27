@@ -20,14 +20,12 @@
 		"@sveltejs/kit": "^2.69.1",
 		"@sveltejs/vite-plugin-svelte": "^7.1.4",
 		"@tailwindcss/forms": "^0.5.11",
-		"@tailwindcss/typography": "^0.5.20",
 		"@tailwindcss/vite": "^4.3.2",
 		"@types/node": "^26.1.0",
 		"eslint": "^10.6.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.20.0",
 		"globals": "^17.7.0",
-		"mdsvex": "^0.12.7",
 		"prettier": "^3.9.4",
 		"prettier-plugin-svelte": "^4.1.1",
 		"prettier-plugin-tailwindcss": "^0.8.0",
@@ -44,14 +42,8 @@
 		"@fontsource-variable/jetbrains-mono": "^5.2.8",
 		"@fontsource/inter": "^5.2.8",
 		"@lucide/svelte": "^1.23.0",
-		"@notionhq/client": "^5.22.0",
 		"@resvg/resvg-js": "^2.6.2",
 		"fuse.js": "^7.4.2",
-		"marked": "^18.0.5",
-		"notion-to-md": "^3.1.9",
-		"rehype-katex": "^7.0.1",
-		"remark-math": "^6.0.0",
-		"satori": "^0.26.0",
-		"shiki": "^4.3.1"
+		"satori": "^0.26.0"
 	}
 }
