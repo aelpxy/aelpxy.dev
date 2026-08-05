@@ -1,305 +1,36 @@
 @import 'tailwindcss';
-@plugin '@tailwindcss/forms';
 
-@custom-variant dark (&:where(.dark, .dark *));
-
-@theme {
-	--background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
-	--background-image-gradient-conic: conic-gradient(
-		from 180deg at 50% 50%,
-		var(--tw-gradient-stops)
-	);
+:root {
+	--bg: #fafaf9;
+	--fg: #1c1b19;
+	--muted: #7d7972;
+	color-scheme: light dark;
 }
 
-html {
-	scroll-behavior: smooth;
-	min-width: 360px;
-}
-
-code,
-pre,
-kbd,
-samp {
-	font-family:
-		'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro',
-		Menlo, Consolas, monospace;
-}
-
-code:not(pre code) {
-	color: rgb(var(--ink));
-	background: rgb(var(--ink) / 0.06);
-	padding: 0.1em 0.4em;
-	border-radius: 4px;
-	font-size: 0.88em;
-	font-variant-ligatures: none;
-}
-
-@layer base {
-	*,
-	::after,
-	::before,
-	::backdrop,
-	::file-selector-button {
-		border-color: rgb(var(--rule));
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg: #121110;
+		--fg: #f2f0ea;
+		--muted: #8c8780;
 	}
 }
 
-@utility text-balance {
-	text-wrap: balance;
-}
-
-@utility font-garamond {
-	font-family: 'EB Garamond Variable', serif;
-}
-
-@utility font-sans-tight {
+body {
+	background: var(--bg);
+	color: var(--fg);
 	font-family:
 		'Inter',
-		ui-sans-serif,
+		system-ui,
 		-apple-system,
-		BlinkMacSystemFont,
 		'Segoe UI',
 		sans-serif;
 	font-feature-settings: 'ss01', 'cv11';
-}
-
-@utility font-mono {
-	font-family: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
-	font-feature-settings: 'zero', 'ss01';
-}
-
-/* strip @tailwindcss/forms styling from bare inputs (no border, no focus ring) */
-@utility input-bare {
-	outline: none;
-	box-shadow: none;
-	border-color: transparent;
-	border-width: 0;
-
-	&:focus {
-		outline: none;
-		box-shadow: none;
-		border-color: transparent;
-		--tw-ring-shadow: 0 0 #0000;
-		--tw-ring-offset-shadow: 0 0 #0000;
-	}
-}
-
-/* animated underline — relative parent + ::after that scales from 0 to 1 on hover */
-@utility link-underline {
-	position: relative;
-
-	&::after {
-		content: '';
-		position: absolute;
-		left: 0;
-		right: 0;
-		bottom: -2px;
-		height: 1px;
-		background: currentColor;
-		transform: scaleX(0);
-		transform-origin: left center;
-		transition: transform 300ms ease-out;
-	}
-
-	&:hover::after {
-		transform: scaleX(1);
-	}
-}
-
-@layer utilities {
-	/* light theme (default) */
-	:root {
-		--bg: 250, 249, 246;
-		--bg-elev: 255, 254, 251;
-		--ink: 28, 27, 25;
-		--ink-700: 70, 68, 64;
-		--ink-600: 95, 92, 87;
-		--ink-500: 125, 121, 114;
-		--ink-400: 168, 164, 156;
-		--ink-300: 200, 196, 188;
-		--rule: 230, 227, 220;
-		--rule-strong: 214, 210, 202;
-		--hover: 244, 242, 236;
-		--accent: 34, 139, 90;
-	}
-
-	/* dark theme — applied when html has .dark */
-	.dark {
-		--bg: 18, 17, 16;
-		--bg-elev: 28, 26, 24;
-		--ink: 242, 240, 234;
-		--ink-700: 200, 196, 188;
-		--ink-600: 170, 165, 158;
-		--ink-500: 140, 135, 128;
-		--ink-400: 110, 106, 100;
-		--ink-300: 80, 76, 70;
-		--rule: 48, 45, 41;
-		--rule-strong: 68, 64, 58;
-		--hover: 36, 33, 30;
-		--accent: 90, 200, 140;
-	}
-
-	body {
-		color: rgb(var(--ink));
-		background: rgb(var(--bg));
-		min-height: 100vh;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-		font-family:
-			'Inter',
-			ui-sans-serif,
-			-apple-system,
-			BlinkMacSystemFont,
-			'Segoe UI',
-			sans-serif;
-		font-feature-settings: 'ss01', 'cv11';
-		letter-spacing: -0.003em;
-		text-rendering: optimizeLegibility;
-	}
-}
-
-/* scrollbar */
-* {
-	scrollbar-width: thin;
-	scrollbar-color: rgb(var(--ink-300)) transparent;
-}
-
-*::-webkit-scrollbar {
-	width: 10px;
-}
-*::-webkit-scrollbar-track {
-	background: transparent;
-}
-*::-webkit-scrollbar-thumb {
-	background-color: rgb(var(--ink-300));
-	border-radius: 8px;
-	border: 2px solid rgb(var(--bg));
-}
-*::-webkit-scrollbar-thumb:hover {
-	background-color: rgb(var(--ink-400));
+	letter-spacing: -0.003em;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-	background-color: rgb(var(--ink));
-	color: rgb(var(--bg));
-}
-
-/* tailwind neutral overrides routed through CSS vars so they swap in dark mode */
-.text-neutral-900 {
-	color: rgb(var(--ink)) !important;
-}
-.text-neutral-800 {
-	color: rgb(var(--ink-700)) !important;
-}
-.text-neutral-700 {
-	color: rgb(var(--ink-700)) !important;
-}
-.text-neutral-600 {
-	color: rgb(var(--ink-600)) !important;
-}
-.text-neutral-500 {
-	color: rgb(var(--ink-500)) !important;
-}
-.text-neutral-400 {
-	color: rgb(var(--ink-400)) !important;
-}
-.text-neutral-300 {
-	color: rgb(var(--ink-300)) !important;
-}
-
-.border-neutral-200 {
-	border-color: rgb(var(--rule)) !important;
-}
-.border-neutral-300 {
-	border-color: rgb(var(--rule-strong)) !important;
-}
-
-/* smooth theme swap — applied briefly while toggling so colors crossfade
-   instead of snapping. uses !important to win over component-level transitions
-   for the duration of the swap. */
-.theme-transitioning,
-.theme-transitioning *,
-.theme-transitioning *::before,
-.theme-transitioning *::after {
-	transition:
-		background-color 300ms ease,
-		color 300ms ease,
-		border-color 300ms ease,
-		fill 300ms ease,
-		stroke 300ms ease !important;
-}
-
-/* honor reduced motion */
-@media (prefers-reduced-motion: reduce) {
-	*,
-	*::before,
-	*::after {
-		animation-duration: 0.001ms !important;
-		animation-iteration-count: 1 !important;
-		transition-duration: 0.001ms !important;
-		scroll-behavior: auto !important;
-	}
-}
-
-/* View Transitions */
-@keyframes fade-in {
-	from {
-		opacity: 0;
-	}
-}
-@keyframes fade-out {
-	to {
-		opacity: 0;
-	}
-}
-@keyframes slide-from-right {
-	from {
-		transform: translateY(12px);
-	}
-}
-@keyframes slide-to-left {
-	to {
-		transform: translateY(-12px);
-	}
-}
-
-::view-transition-old(navbar),
-::view-transition-new(navbar),
-::view-transition-old(footer),
-::view-transition-new(footer) {
-	animation: none;
-}
-
-::view-transition-old(main-content) {
-	animation:
-		180ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
-		180ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
-}
-
-::view-transition-new(main-content) {
-	animation:
-		280ms cubic-bezier(0, 0, 0.2, 1) 80ms both fade-in,
-		280ms cubic-bezier(0.4, 0, 0.2, 1) 80ms both slide-from-right;
-}
-
-pre::-webkit-scrollbar {
-	display: none;
-}
-pre {
-	-ms-overflow-style: none;
-	scrollbar-width: none;
-}
-
-input[type='text'],
-input[type='email'] {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-}
-
-table {
-	display: block;
-	max-width: fit-content;
-	overflow-x: auto;
-	white-space: nowrap;
+	background: var(--fg);
+	color: var(--bg);
 }
