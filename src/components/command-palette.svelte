@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { HouseIcon, ImageIcon, PenLineIcon, SearchIcon, WrenchIcon } from '@lucide/svelte';
+	import { HouseIcon, PenLineIcon, SearchIcon } from '@lucide/svelte';
 	import { fade, scale } from 'svelte/transition';
 	import { appleEase } from '$lib/transitions';
 	import Fuse from 'fuse.js';
@@ -12,19 +12,7 @@
 
 	const commands = [
 		{ name: 'Home', href: '/', icon: HouseIcon, keywords: 'about index main' },
-		{ name: 'Thoughts', href: '/thoughts', icon: PenLineIcon, keywords: 'blog posts articles' },
-		{
-			name: 'Photos',
-			href: '/photos',
-			icon: ImageIcon,
-			keywords: 'pictures gallery travel trips albums'
-		},
-		{
-			name: 'Uses',
-			href: '/uses',
-			icon: WrenchIcon,
-			keywords: 'gear hardware software setup tools'
-		}
+		{ name: 'Thoughts', href: '/thoughts', icon: PenLineIcon, keywords: 'blog posts articles' }
 	];
 
 	const fuse = new Fuse(commands, {

@@ -87,8 +87,7 @@
 		<p class="mt-4 text-[15.5px] leading-[1.7] text-neutral-600">
 			Mostly though, I love traveling, enough that you could call me a bit of a digital nomad. When
 			I'm away from the keyboard I'm usually off somewhere new, shooting photos on my
-			<LangTooltip lang={camera} label="camera" />. You can find some of my shots over in
-			<a href="/photos" class="link-underline font-medium text-neutral-900">photos</a>.
+			<LangTooltip lang={camera} label="camera" />.
 		</p>
 	</section>
 	<!-- contact -->
