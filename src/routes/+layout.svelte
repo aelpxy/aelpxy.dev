@@ -1,10 +1,34 @@
 <script lang="ts">
+	import { onNavigate } from '$app/navigation';
+
 	import '@fontsource/inter/400.css';
+	import '@fontsource/inter/500.css';
 	import '@fontsource/inter/600.css';
+	import '@fontsource-variable/eb-garamond';
+	import '@fontsource-variable/jetbrains-mono';
 
 	import '../app.css';
 
+	import Footer from '../components/footer.svelte';
+	import Navbar from '../components/navbar.svelte';
+	import CommandPalette from '../components/command-palette.svelte';
+
 	let { children } = $props();
+
+	onNavigate((navigation) => {
+		if (navigation.from?.url.pathname === navigation.to?.url.pathname) {
+			return;
+		}
+
+		if (!document.startViewTransition) return;
+
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
+	});
 </script>
 
 <svelte:head>
@@ -12,4 +36,9 @@
 	<meta name="author" content="aelpxy" />
 </svelte:head>
 
-{@render children()}
+<CommandPalette />
+<Navbar />
+<div style="view-transition-name: main-content;">
+	{@render children()}
+</div>
+<Footer />
