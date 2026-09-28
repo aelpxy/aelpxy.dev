@@ -1,0 +1,9 @@
+---
+import { getCollection } from 'astro:content';
+import PostIndex from '../../components/post-index.astro';
+import { pageMeta } from '../../lib/site';
+
+const posts = await getCollection('posts', ({ data }) => data.raw);
+---
+
+<PostIndex title={pageMeta.scratchpad.title} subtitle={pageMeta.scratchpad.description} basePath="/scratchpad" posts={posts} />

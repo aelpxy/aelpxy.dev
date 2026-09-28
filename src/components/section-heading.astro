@@ -1,0 +1,15 @@
+---
+import { ui } from '../lib/styles';
+
+interface Props {
+	title: string;
+	note?: string;
+}
+
+const { title, note } = Astro.props;
+---
+
+<div class="flex items-baseline justify-between gap-4">
+	<h2 class={ui.sectionHeading}>{title}</h2>
+	{note && <span class={ui.meta}>{note}</span>}
+</div>

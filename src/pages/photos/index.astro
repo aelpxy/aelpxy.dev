@@ -1,0 +1,75 @@
+---
+import Lightbox from '../../components/lightbox.astro';
+import PageHeader from '../../components/page-header.astro';
+import BaseLayout from '../../layouts/base-layout.astro';
+import { formatDate } from '../../lib/date';
+import { getPhotoPlaceholder, getPhotos } from '../../lib/immich';
+import { justifyRows } from '../../lib/justify';
+import { pageMeta } from '../../lib/site';
+import { ui } from '../../lib/styles';
+
+const photos = await Promise.all(
+	(await getPhotos()).map(async (photo) => ({ ...photo, placeholder: await getPhotoPlaceholder(photo.id) }))
+);
+
+// content column width on desktop: max-w-4xl minus the nav column and padding
+const rows = justifyRows(photos, { containerWidth: 672, targetHeight: 200 });
+---
+
+<BaseLayout title="photos — aelpxy" description={pageMeta.photos.description}>
+	<PageHeader title={pageMeta.photos.title} subtitle={pageMeta.photos.description} />
+
+	<section class="mt-12">
+		{
+			photos.length === 0 ? (
+				<p>Nothing here yet.</p>
+			) : (
+				<div class="flex flex-col gap-1">
+					{rows.map(({ items, fill }) => (
+						<ul class="flex flex-col gap-1 sm:flex-row">
+							{items.map(({ id, takenAt, width, height, camera, placeholder }) => (
+								<li style={`--ratio: ${width / height}`} class="sm:flex-[var(--ratio)_1_0%]">
+									<a
+										href={`/photos/${id}.webp`}
+										target="_blank"
+										rel="noopener"
+										data-lightbox
+										data-caption={[camera, formatDate(takenAt)].filter(Boolean).join(' · ')}
+										class="group relative block overflow-hidden"
+									>
+										<figure>
+											<img
+												src={`/photos/thumb/${id}.webp`}
+												alt={`Photo taken ${formatDate(takenAt)}`}
+												width={width}
+												height={height}
+												loading="lazy"
+												decoding="async"
+												style={`background-image: url(${placeholder})`}
+												class="h-auto w-full bg-neutral-200 bg-cover bg-center transition-transform duration-500 ease-out group-hover:scale-[1.02] dark:bg-neutral-800"
+											/>
+											<figcaption
+												class:list={[
+													ui.meta,
+													'absolute inset-x-0 bottom-0 flex justify-between gap-4 bg-linear-to-t from-black/60 px-3 pt-8 pb-2 text-white/90 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100 [@media(hover:none)]:opacity-100'
+												]}
+											>
+												<span class="truncate">{camera}</span>
+												<time datetime={takenAt.toISOString().slice(0, 10)} class="shrink-0">
+													{formatDate(takenAt)}
+												</time>
+											</figcaption>
+										</figure>
+									</a>
+								</li>
+							))}
+							{fill > 0 && <li aria-hidden="true" style={`--ratio: ${fill}`} class="hidden sm:block sm:flex-[var(--ratio)_1_0%]" />}
+						</ul>
+					))}
+				</div>
+			)
+		}
+	</section>
+
+	<Lightbox />
+</BaseLayout>

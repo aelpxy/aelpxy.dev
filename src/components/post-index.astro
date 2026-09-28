@@ -1,0 +1,45 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../layouts/base-layout.astro';
+import { formatDate } from '../lib/date';
+import { ui } from '../lib/styles';
+import PageHeader from './page-header.astro';
+
+interface Props {
+	title: string;
+	subtitle: string;
+	basePath: string;
+	posts: CollectionEntry<'posts'>[];
+}
+
+const { title, subtitle, basePath, posts } = Astro.props;
+const sorted = posts.toSorted((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+---
+
+<BaseLayout title={`${title.toLowerCase()} — aelpxy`} description={subtitle}>
+	<PageHeader title={title} subtitle={subtitle} />
+
+	<section class="mt-12">
+		{
+			sorted.length === 0 ? (
+				<p>Nothing here yet.</p>
+			) : (
+				<ul class={ui.dividedList}>
+					{sorted.map((post) => (
+						<li>
+							<a href={`${basePath}/${post.id}`} class:list={['group py-3', ui.labelColumn]}>
+								<time datetime={post.data.publishedAt.toISOString()} class={ui.meta}>
+									{formatDate(post.data.publishedAt)}
+								</time>
+								<div class="min-w-0">
+									<p class={ui.rowLink}>{post.data.title}</p>
+									{post.data.summary && <p class="mt-1 text-[14px]">{post.data.summary}</p>}
+								</div>
+							</a>
+						</li>
+					))}
+				</ul>
+			)
+		}
+	</section>
+</BaseLayout>

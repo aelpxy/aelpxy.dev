@@ -1,0 +1,79 @@
+---
+import { ChevronLeft, ChevronRight, X } from '@lucide/astro';
+import { ui } from '../lib/styles';
+
+const buttonClass = 'p-2 text-white/70 transition-colors hover:text-white';
+---
+
+<dialog
+	id="lightbox"
+	aria-label="Photo viewer"
+	class="m-0 h-dvh max-h-none w-screen max-w-none bg-transparent p-0 backdrop:bg-black/90 open:flex open:flex-col"
+>
+	<div class="flex justify-end p-3">
+		<button type="button" data-close aria-label="Close" class={buttonClass}><X class="size-5" /></button>
+	</div>
+	<div class="flex min-h-0 flex-1 items-center justify-center gap-2 px-2">
+		<button type="button" data-prev aria-label="Previous photo" class={buttonClass}><ChevronLeft class="size-6" /></button>
+		<img alt="" class="h-full min-w-0 flex-1 object-contain" />
+		<button type="button" data-next aria-label="Next photo" class={buttonClass}><ChevronRight class="size-6" /></button>
+	</div>
+	<p data-caption class:list={[ui.meta, 'p-4 text-center text-white/70']}></p>
+</dialog>
+
+<script>
+	// delegated on document so it survives client router page swaps
+	let index = 0;
+
+	const dialog = () => document.querySelector<HTMLDialogElement>('#lightbox');
+	const links = () => [...document.querySelectorAll<HTMLAnchorElement>('a[data-lightbox]')];
+
+	function show(i: number) {
+		const all = links();
+		const box = dialog();
+		if (!box || all.length === 0) return;
+
+		index = (i + all.length) % all.length;
+		const current = index;
+		const link = all[index];
+		const thumb = link.querySelector('img');
+		const image = box.querySelector('img')!;
+
+		// show the already-loaded thumbnail instantly, then swap in the full image once it's ready
+		image.style.opacity = '0';
+		image.onload = () => (image.style.opacity = '1');
+		image.src = thumb?.getAttribute('src') ?? link.href;
+		image.alt = thumb?.alt ?? '';
+		const full = new Image();
+		full.src = link.href;
+		full.decode().then(
+			() => current === index && (image.src = link.href),
+			() => {}
+		);
+		box.querySelector('[data-caption]')!.textContent = link.dataset.caption ?? '';
+		if (!box.open) box.showModal();
+	}
+
+	document.addEventListener('click', (event) => {
+		const target = event.target as HTMLElement;
+		const link = target.closest<HTMLAnchorElement>('a[data-lightbox]');
+
+		if (link) {
+			event.preventDefault();
+			show(links().indexOf(link));
+			return;
+		}
+
+		const box = dialog();
+		if (!box?.open) return;
+		if (target.closest('[data-prev]')) show(index - 1);
+		else if (target.closest('[data-next]')) show(index + 1);
+		else if (!target.closest('button') || target.closest('[data-close]')) box.close();
+	});
+
+	document.addEventListener('keydown', (event) => {
+		if (!dialog()?.open) return;
+		if (event.key === 'ArrowLeft') show(index - 1);
+		if (event.key === 'ArrowRight') show(index + 1);
+	});
+</script>

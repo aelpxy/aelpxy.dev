@@ -1,149 +1,65 @@
-import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
-import type { SatoriOptions } from 'satori';
+import { readFile } from 'node:fs/promises';
+import { createRequire } from 'node:module';
+import satori from 'satori';
 
-const FONT_URL =
-	'https://cdn.jsdelivr.net/fontsource/fonts/eb-garamond@latest/latin-400-normal.ttf';
+const require = createRequire(import.meta.url);
 
-let fontData: ArrayBuffer | null = null;
+// satori can't read woff2 or variable fonts, so these are the static woff files
+const fonts = Promise.all([
+	readFile(require.resolve('@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff')),
+	readFile(require.resolve('@fontsource/geist/files/geist-latin-400-normal.woff'))
+]);
 
-async function loadFont(): Promise<ArrayBuffer> {
-	if (fontData) return fontData;
-	const response = await fetch(FONT_URL);
-	fontData = await response.arrayBuffer();
-	return fontData;
-}
+type Node = { type: string; props: { style?: Record<string, unknown>; children?: unknown } };
 
-interface OGImageOptions {
-	title: string;
-	subtitle?: string;
-	date?: string;
-}
+const h = (style: Record<string, unknown>, children?: unknown): Node => ({
+	type: 'div',
+	props: { style: { display: 'flex', ...style }, children }
+});
 
-export async function generateOGImage(options: OGImageOptions): Promise<Uint8Array> {
-	const { title, subtitle, date } = options;
+export async function renderOgImage({ title, description, label }: { title: string; description?: string; label?: string }) {
+	const [serif, sans] = await fonts;
 
-	const font = await loadFont();
-
-	const satoriOptions: SatoriOptions = {
-		width: 1200,
-		height: 630,
-		fonts: [
+	const svg = await satori(
+		h(
 			{
-				name: 'EB Garamond',
-				data: font,
-				weight: 400,
-				style: 'normal'
-			}
-		]
-	};
-
-	// Build the element structure for satori
-	const element = {
-		type: 'div',
-		props: {
-			style: {
-				height: '100%',
 				width: '100%',
-				display: 'flex',
+				height: '100%',
 				flexDirection: 'column',
 				justifyContent: 'space-between',
-				backgroundColor: '#121111',
-				padding: '60px 80px',
-				fontFamily: 'EB Garamond'
+				padding: '72px 80px',
+				backgroundColor: '#0a0a0a',
+				fontFamily: 'Geist',
+				borderRight: '2px solid #262626'
 			},
-			children: [
-				{
-					type: 'div',
-					props: {
-						style: {
-							display: 'flex',
-							flexDirection: 'column',
-							gap: '20px'
+			[
+				h({ fontSize: 26, color: '#737373' }, 'aelpxy.dev'),
+				h({ flexDirection: 'column', gap: 24 }, [
+					h(
+						{
+							fontFamily: 'Instrument Serif',
+							fontSize: title.length > 40 ? 76 : 96,
+							lineHeight: 1.05,
+							letterSpacing: '-0.02em',
+							color: '#fafafa'
 						},
-						children: [
-							{
-								type: 'div',
-								props: {
-									style: {
-										fontSize: '72px',
-										fontWeight: 400,
-										color: '#fafafa',
-										lineHeight: 1.2,
-										maxWidth: '1000px',
-										wordBreak: 'break-word'
-									},
-									children: title
-								}
-							},
-							subtitle
-								? {
-										type: 'div',
-										props: {
-											style: {
-												fontSize: '32px',
-												color: '#a3a3a3',
-												lineHeight: 1.4,
-												maxWidth: '900px'
-											},
-											children: subtitle
-										}
-									}
-								: null
-						].filter(Boolean)
-					}
-				},
-				{
-					type: 'div',
-					props: {
-						style: {
-							display: 'flex',
-							justifyContent: 'space-between',
-							alignItems: 'center',
-							width: '100%'
-						},
-						children: [
-							{
-								type: 'div',
-								props: {
-									style: {
-										fontSize: '28px',
-										color: '#737373'
-									},
-									children: 'aelpxy.dev'
-								}
-							},
-							date
-								? {
-										type: 'div',
-										props: {
-											style: {
-												fontSize: '28px',
-												color: '#737373'
-											},
-											children: date
-										}
-									}
-								: null
-						].filter(Boolean)
-					}
-				}
+						title
+					),
+					description ? h({ fontSize: 32, lineHeight: 1.4, color: '#a3a3a3', maxWidth: 960 }, description) : null
+				]),
+				h({ fontSize: 24, color: '#737373', height: 30 }, label ?? '')
+			]
+		) as never,
+		{
+			width: 1200,
+			height: 630,
+			fonts: [
+				{ name: 'Instrument Serif', data: serif, weight: 400, style: 'normal' },
+				{ name: 'Geist', data: sans, weight: 400, style: 'normal' }
 			]
 		}
-	};
+	);
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const svg = await satori(element as any, satoriOptions);
-
-	const resvg = new Resvg(svg, {
-		fitTo: {
-			mode: 'width',
-			value: 1200
-		}
-	});
-
-	const pngData = resvg.render();
-	const pngBuffer = pngData.asPng();
-
-	return new Uint8Array(pngBuffer);
+	return new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng();
 }

@@ -1,0 +1,203 @@
+---
+import PageHeader from "../components/page-header.astro";
+import SectionHeading from "../components/section-heading.astro";
+import Timeline from "../components/timeline.astro";
+import BaseLayout from "../layouts/base-layout.astro";
+import { pageMeta } from "../lib/site";
+import { ui } from "../lib/styles";
+
+const versions = [
+  { id: "bio-short", label: "tl;dr", checked: true },
+  { id: "bio-long", label: "full story", checked: false },
+];
+
+const career = [
+  {
+    period: "2023 — now",
+    title: "Engineering",
+    place: "Pandabase",
+    href: "https://pandabase.io",
+    summary: "I've had a hand in pretty much every part of Pandabase.",
+  },
+  {
+    period: "2022 — now",
+    title: "Software Engineer",
+    place: "Velta, LLC",
+    href: "https://velta.dev",
+    summary: "Velta is the company behind Pandabase.",
+  },
+  {
+    period: "2020 — 2022",
+    title: "Contract work",
+    summary: "I worked remotely on contract projects.",
+  },
+];
+
+const education = [
+  {
+    period: "someday",
+    title: "University",
+    summary:
+      "I'm planning to go to university, but I'm taking a long break first.",
+  },
+  {
+    period: "2022 — 2024",
+    title: "A Levels",
+    place: "British Council",
+    summary: "Mathematics, Further Mathematics, Computer Science, Physics.",
+  },
+  {
+    period: "2020 — 2022",
+    title: "IGCSE",
+    place: "British Council",
+    summary:
+      "Mathematics, Additional Mathematics, Computer Science, Physics, Chemistry, English, Geography.",
+  },
+];
+
+const stack = [
+  { label: "Languages", value: "TypeScript, Go, Rust" },
+  { label: "Frontend", value: "React (my first choice), Svelte" },
+  { label: "Backend", value: "NestJS, Fastify, Axum" },
+  { label: "Data", value: "Postgres, Valkey, SQLx, sqlc, Prisma" },
+  {
+    label: "Infra",
+    value: "Podman, Linode (now Akamai), Fly.io, GitHub Actions",
+  },
+];
+---
+
+<BaseLayout
+  title={pageMeta.index.title}
+  description={pageMeta.index.description}
+>
+  <section class="group">
+    <PageHeader title="Hey there!" subtitle={pageMeta.index.description} />
+
+    <fieldset class="mt-6 flex gap-3 text-[13px]">
+      <legend class="sr-only">Bio length</legend>
+      {
+        versions.map(({ id, label, checked }) => (
+          <label class="cursor-pointer transition-colors hover:text-neutral-900 has-checked:text-neutral-900 has-checked:underline has-checked:underline-offset-4 has-focus-visible:outline dark:hover:text-neutral-100 dark:has-checked:text-neutral-100">
+            <input
+              type="radio"
+              name="bio"
+              id={id}
+              checked={checked}
+              class="sr-only"
+            />
+            {label}
+          </label>
+        ))
+      }
+    </fieldset>
+    <script is:inline>
+      // block scope because the client router re-runs this on every visit
+      {
+        const saved = localStorage.getItem("bio");
+        if (saved) document.getElementById(saved)?.click();
+        document
+          .querySelectorAll('input[name="bio"]')
+          .forEach((input) =>
+            input.addEventListener("change", () =>
+              localStorage.setItem("bio", input.id),
+            ),
+          );
+      }
+    </script>
+
+    <div class="mt-4 group-has-[#bio-long:checked]:hidden">
+      <p>
+        I've been writing software since 2019. Mostly TypeScript and Go, with a
+        bit of Rust.
+      </p>
+      <p class="mt-4">
+        When I'm not writing code, I'm usually messing with my 3D printer, soldering
+        something, or tinkering with my homelab.
+      </p>
+    </div>
+
+    <div class="mt-4 hidden group-has-[#bio-long:checked]:block">
+      <p>
+        I can't remember what first got me into programming, but I was messing
+        around with HTML in 2018. I got into JavaScript in 2019, then picked up
+        Go the year after.
+      </p>
+      <p class="mt-4">
+        Now I mostly write TypeScript and Go, with some Rust here and there.
+        What started as a hobby became my job, and I still like doing it. These
+        days, most of that work goes into Pandabase.
+      </p>
+
+      <section class="mt-12">
+        <SectionHeading title="Career" />
+        <Timeline items={career} />
+      </section>
+
+      <section class="mt-12">
+        <SectionHeading title="Education" />
+        <Timeline items={education} />
+      </section>
+
+      <section class="mt-12">
+        <SectionHeading title="Stack" />
+        <dl class="mt-4 space-y-2">
+          {
+            stack.map(({ label, value }) => (
+              <div class={ui.labelColumn}>
+                <dt class={ui.meta}>{label}</dt>
+                <dd class={ui.strong}>{value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </section>
+
+      <section class="mt-12">
+        <SectionHeading title="Things I learned over the years" />
+        <ul class="mt-4 space-y-2">
+          {
+            [
+              "Get the basics right. Everything else is harder when you don't understand them.",
+              "Language debates aren't worth the time. Use what you like, but give other things a try.",
+              "Keep trying new tools. You don't have to stick with all of them.",
+              "I'd rather learn how to use AI well than ignore it and hope it goes away.",
+              "Keep learning, preferably about things you actually enjoy.",
+              "The whole 1% better every day thing feels like a lot. Even 0.1% adds up to about 44% over a year. Small steps count too.",
+              "Privacy is a human right, even if you don't think you need it.",
+              "Sometimes you have to push past limits and do things people don't expect of you.",
+              "Look after yourself. Your mental health matters more than any of this.",
+            ].map((lesson) => (
+              <li class="flex gap-3">
+                <span
+                  aria-hidden="true"
+                  class="text-neutral-300 dark:text-neutral-700"
+                >
+                  —
+                </span>
+                {lesson}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="mt-12">
+        <SectionHeading title="Outside work" />
+        <p class="mt-4">
+          I bounce between hobbies a lot. One day it's the 3D printer, the next
+          I'm soldering electronics or tinkering with my homelab. I also like
+          travelling with my camera.
+        </p>
+      </section>
+    </div>
+  </section>
+  <section class="mt-12">
+    <SectionHeading title="Get in touch" />
+    <p class="mt-4">
+      Email me at{" "}
+      <a href="mailto:hey@aelpxy.dev" class={ui.inlineLink}>hey@aelpxy.dev</a>, or
+      reach out on any of my socials. I usually reply within a couple of days.
+    </p>
+  </section>
+</BaseLayout>

@@ -1,0 +1,37 @@
+---
+import { ui } from '../lib/styles';
+
+interface Props {
+	items: { period: string; title: string; place?: string; href?: string; summary: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<ol class="mt-4 space-y-6">
+	{
+		items.map(({ period, title, place, href, summary }) => (
+			<li class={ui.labelColumn}>
+				<span class={ui.meta}>{period}</span>
+				<div>
+					<p class={ui.strong}>
+						{title}{' '}
+						{place && (
+							<span class="text-neutral-500 dark:text-neutral-400">
+								at{' '}
+								{href ? (
+									<a href={href} rel="noreferrer noopener" target="_blank" class={ui.inlineLink}>
+										{place}
+									</a>
+								) : (
+									place
+								)}
+							</span>
+						)}
+					</p>
+					<p class="mt-1">{summary}</p>
+				</div>
+			</li>
+		))
+	}
+</ol>

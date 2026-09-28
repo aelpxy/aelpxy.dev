@@ -1,0 +1,13 @@
+---
+import PageHeader from '../components/page-header.astro';
+import BaseLayout from '../layouts/base-layout.astro';
+import { ui } from '../lib/styles';
+---
+
+<BaseLayout title="404 — aelpxy" description="This page doesn't exist." noindex ogRoute="index">
+	<PageHeader eyebrow="404" title="Nothing here." />
+	<p class="mt-6">This page either never existed or wandered off somewhere. Probably travelling.</p>
+	<p class="mt-4">
+		<a href="/" class={ui.inlineLink}>Head back home</a>
+	</p>
+</BaseLayout>

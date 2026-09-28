@@ -1,0 +1,18 @@
+---
+import { ui } from '../lib/styles';
+
+interface Props {
+	title: string;
+	subtitle?: string;
+	eyebrow?: string;
+}
+
+const { title, subtitle, eyebrow } = Astro.props;
+---
+
+<header>
+	{eyebrow && <p class:list={[ui.meta, 'mb-2']}>{eyebrow}</p>}
+	<h1 class={ui.pageTitle}>{title}</h1>
+	{subtitle && <p class="mt-2">{subtitle}</p>}
+	<slot />
+</header>
