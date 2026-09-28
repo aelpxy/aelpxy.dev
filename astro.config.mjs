@@ -22,6 +22,7 @@ const externalLinks = {
 export default defineConfig({
   site: 'https://aelpxy.dev',
   trailingSlash: 'never',
+  build: { concurrency: 8 },
   integrations: [sitemap({ filter: (page) => !new URL(page).pathname.startsWith('/music') })],
   markdown: {
     processor: satteri({ hastPlugins: [externalLinks] }),

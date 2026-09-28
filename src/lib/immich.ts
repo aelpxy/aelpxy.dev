@@ -1,7 +1,10 @@
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import sharp from 'sharp';
 
 interface ImmichAsset {
 	id: string;
+	checksum: string;
 	localDateTime: string;
 	exifInfo?: {
 		model?: string | null;
@@ -64,9 +67,31 @@ export function getPhotos() {
 		body: JSON.stringify({ albumIds: [IMMICH_ALBUM_ID], type: 'IMAGE', withExif: true, size: 1000, order: 'desc' })
 	})
 		.then((response) => response.json())
-		.then(({ assets }) => assets.items.map(toPhoto));
+		.then(({ assets }) => {
+			for (const { id, checksum } of assets.items) checksums.set(id, checksum);
+			return assets.items.map(toPhoto);
+		});
 
 	return photos;
+}
+
+const checksums = new Map<string, string>();
+
+const CACHE_DIR = join(process.cwd(), 'node_modules/.astro/immich');
+
+async function cached(id: string, variant: string, produce: () => Promise<Buffer>) {
+	await getPhotos();
+	const key = `${id}-${(checksums.get(id) ?? '').replace(/[^a-zA-Z0-9]/g, '')}-${variant}`;
+	const file = join(CACHE_DIR, key);
+
+	try {
+		return await readFile(file);
+	} catch {
+		const data = await produce();
+		await mkdir(CACHE_DIR, { recursive: true });
+		await writeFile(file, data);
+		return data;
+	}
 }
 
 const previews = new Map<string, Promise<Buffer>>();
@@ -83,15 +108,19 @@ export function getPhotoPreview(id: string) {
 
 // re-encoding drops all exif, including gps
 export async function encodePhoto(id: string, { width, quality }: { width: number; quality: number }) {
-	const image = await sharp(await getPhotoPreview(id))
-		.rotate()
-		.resize({ width, withoutEnlargement: true })
-		.webp({ quality })
-		.toBuffer();
+	const image = await cached(id, `${width}w-q${quality}.webp`, async () =>
+		sharp(await getPhotoPreview(id))
+			.rotate()
+			.resize({ width, withoutEnlargement: true })
+			.webp({ quality })
+			.toBuffer()
+	);
 	return new Uint8Array(image);
 }
 
 export async function getPhotoPlaceholder(id: string) {
-	const tiny = await sharp(await getPhotoPreview(id)).rotate().resize(16).webp({ quality: 50 }).toBuffer();
+	const tiny = await cached(id, 'placeholder.webp', async () =>
+		sharp(await getPhotoPreview(id)).rotate().resize(16).webp({ quality: 50 }).toBuffer()
+	);
 	return `data:image/webp;base64,${tiny.toString('base64')}`;
 }
