@@ -126,18 +126,17 @@ const linkClass = 'transition-colors hover:text-neutral-900 dark:hover:text-neut
 					<slot />
 				</div>
 				<aside class="sticky top-0 z-10 order-first border-b border-neutral-200 bg-neutral-50/85 backdrop-blur-md sm:static sm:order-last sm:w-40 sm:border-b-0 sm:bg-transparent sm:backdrop-blur-none dark:border-neutral-800 dark:bg-neutral-950/85 sm:dark:bg-transparent">
-					<nav class="flex items-center gap-4 px-6 text-[13.5px] sm:sticky sm:top-0 sm:flex-col sm:items-start sm:gap-0 sm:pt-[4.6rem] sm:pb-5">
-						<a href="/" class="shrink-0 py-3 font-medium text-neutral-900 sm:mb-3 sm:py-0 dark:text-neutral-100">aelpxy</a>
-						<div class="-mr-6 flex min-w-0 flex-1 gap-4 overflow-x-auto pr-6 [scrollbar-width:none] sm:mr-0 sm:flex-col sm:gap-1 sm:overflow-visible sm:pr-0">
+					<nav class="flex flex-col px-6 text-[13.5px] sm:sticky sm:top-0 sm:pt-[4.6rem] sm:pb-5">
+						<a href="/" class="self-start pt-3 font-medium text-neutral-900 sm:mb-3 sm:pt-0 dark:text-neutral-100">aelpxy</a>
+						<div class="flex justify-between sm:flex-col sm:justify-start sm:gap-1">
 							{
-								pages.map(({ href, label }, i) => (
+								pages.map(({ href, label }) => (
 									<a
 										href={href}
 										aria-current={isActive(href) ? 'page' : undefined}
 										class:list={[
 											linkClass,
-											'shrink-0 py-3 whitespace-nowrap sm:py-0',
-											i === 0 && 'ms-auto sm:ms-0',
+											'py-2.5 whitespace-nowrap sm:py-0',
 											isActive(href) && 'text-neutral-900 dark:text-neutral-100'
 										]}
 									>
