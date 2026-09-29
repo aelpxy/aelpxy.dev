@@ -1,0 +1,40 @@
+---
+import { Star } from '@lucide/astro';
+import PageHeader from '../components/page-header.astro';
+import BaseLayout from '../layouts/base-layout.astro';
+import { getProjects } from '../lib/github';
+import { pageMeta } from '../lib/site';
+import { ui } from '../lib/styles';
+
+const projects = await getProjects('aelpxy', { exclude: ['aelpxy'] });
+---
+
+<BaseLayout title="projects — aelpxy" description={pageMeta.projects.description}>
+	<PageHeader title={pageMeta.projects.title} subtitle={pageMeta.projects.description} />
+
+	<section class="mt-12">
+		<ul class={ui.dividedList}>
+			{
+				projects.map(({ name, description, language, stars, url }) => (
+					<li>
+						<a href={url} rel="noreferrer noopener" target="_blank" class:list={['group py-3', ui.labelColumn]}>
+							<span class={ui.meta}>{language ?? '—'}</span>
+							<div class="min-w-0">
+								<p class="flex items-baseline justify-between gap-4">
+									<span class:list={[ui.rowLink, 'truncate']}>{name}</span>
+									{stars > 0 && (
+										<span class:list={[ui.meta, 'flex shrink-0 items-center gap-1']}>
+											<Star class="size-3" aria-hidden="true" />
+											{stars}
+										</span>
+									)}
+								</p>
+								{description && <p class="mt-1 text-[14px]">{description}</p>}
+							</div>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+</BaseLayout>
