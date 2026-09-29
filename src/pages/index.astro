@@ -33,28 +33,6 @@ const career = [
   },
 ];
 
-const education = [
-  {
-    period: "someday",
-    title: "University",
-    summary:
-      "I'm planning to go to university, but I'm taking a long break first.",
-  },
-  {
-    period: "2022 — 2024",
-    title: "A Levels",
-    place: "British Council",
-    summary: "Mathematics, Further Mathematics, Computer Science, Physics.",
-  },
-  {
-    period: "2020 — 2022",
-    title: "IGCSE",
-    place: "British Council",
-    summary:
-      "Mathematics, Additional Mathematics, Computer Science, Physics, Chemistry, English, Geography.",
-  },
-];
-
 const stack = [
   { label: "Languages", value: "TypeScript, Go, Rust" },
   { label: "Frontend", value: "React (my first choice), Svelte" },
@@ -120,8 +98,8 @@ const stack = [
     <div class="mt-4 hidden group-has-[#bio-long:checked]:block">
       <p>
         I can't remember what first got me into programming, but I was messing
-        around with HTML in 2018. I got into JavaScript in 2019, then picked up
-        Go the year after.
+        around with HTML toward the end of 2019. JavaScript came soon after, and
+        I picked up Go in 2020.
       </p>
       <p class="mt-4">
         Now I mostly write TypeScript and Go, with some Rust here and there.
@@ -132,11 +110,6 @@ const stack = [
       <section class="mt-12">
         <SectionHeading title="Career" />
         <Timeline items={career} />
-      </section>
-
-      <section class="mt-12">
-        <SectionHeading title="Education" />
-        <Timeline items={education} />
       </section>
 
       <section class="mt-12">
