@@ -11,13 +11,12 @@ export const getStaticPaths = (async () => {
 	}));
 
 	const posts = (await getCollection('posts')).map((post) => {
-		const section = post.data.raw ? 'scratchpad' : 'thoughts';
 		return {
-			params: { route: `${section}/${post.id}` },
+			params: { route: `thoughts/${post.id}` },
 			props: {
 				title: post.data.title,
 				description: post.data.summary || undefined,
-				label: `${section} · ${formatDate(post.data.publishedAt)}`
+				label: `thoughts · ${formatDate(post.data.publishedAt)}`
 			}
 		};
 	});

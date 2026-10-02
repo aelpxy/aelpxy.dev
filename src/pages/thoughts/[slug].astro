@@ -3,7 +3,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import PostPage from '../../components/post-page.astro';
 
 export async function getStaticPaths() {
-	const posts = await getCollection('posts', ({ data }) => !data.raw);
+	const posts = await getCollection('posts');
 	return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
 }
 

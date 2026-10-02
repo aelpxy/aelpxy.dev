@@ -9,7 +9,6 @@ interface NotionPage {
 		Slug: { rich_text: Array<{ plain_text: string }> };
 		Published: { date: { start: string } | null };
 		Summary: { rich_text: Array<{ plain_text: string }> };
-		isRawThought: { checkbox: boolean };
 	};
 }
 
@@ -30,7 +29,7 @@ export function notionLoader({ auth, dataSourceId }: { auth: string; dataSourceI
 
 			for (const result of response.results) {
 				const page = result as unknown as NotionPage;
-				const { Title, Slug, Published, Summary, isRawThought } = page.properties;
+				const { Title, Slug, Published, Summary } = page.properties;
 				const title = Title.title[0]?.plain_text || 'Untitled';
 				const id = Slug.rich_text[0]?.plain_text || title.toLowerCase().replace(/\s+/g, '-');
 
@@ -41,8 +40,7 @@ export function notionLoader({ auth, dataSourceId }: { auth: string; dataSourceI
 					data: {
 						title,
 						summary: Summary.rich_text[0]?.plain_text || '',
-						publishedAt: Published.date?.start || new Date().toISOString(),
-						raw: isRawThought.checkbox
+						publishedAt: Published.date?.start || new Date().toISOString()
 					}
 				});
 
