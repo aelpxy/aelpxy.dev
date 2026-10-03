@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import sharp from 'sharp';
 
@@ -23,6 +23,13 @@ export interface Photo {
 }
 
 const DISPLAY_WIDTH = 1600;
+
+export const variants = {
+	full: { width: 1600, quality: 90 },
+	thumb: { width: 800, quality: 80 }
+};
+
+const variantFiles = [...Object.values(variants).map(({ width, quality }) => `${width}w-q${quality}.webp`), 'placeholder.webp'];
 
 const { IMMICH_URL, IMMICH_API_KEY, IMMICH_ALBUM_ID } = import.meta.env;
 const baseUrl = IMMICH_URL && (/^https?:\/\//.test(IMMICH_URL) ? IMMICH_URL : `https://${IMMICH_URL}`);
@@ -62,27 +69,60 @@ export function getPhotos() {
 		return Promise.resolve([]);
 	}
 
-	photos ??= immich<{ assets: { items: ImmichAsset[] } }>('/api/search/metadata', {
-		method: 'POST',
-		body: JSON.stringify({ albumIds: [IMMICH_ALBUM_ID], type: 'IMAGE', withExif: true, size: 1000, order: 'desc' })
-	})
-		.then((response) => response.json())
-		.then(({ assets }) => {
-			for (const { id, checksum } of assets.items) checksums.set(id, checksum);
-			return assets.items.map(toPhoto);
-		});
-
+	photos ??= loadPhotos();
 	return photos;
 }
 
 const checksums = new Map<string, string>();
 
 const CACHE_DIR = join(process.cwd(), 'node_modules/.astro/immich');
+const ALBUM_CACHE = join(CACHE_DIR, 'album.json');
+
+const cacheFile = (id: string, variant: string) =>
+	join(CACHE_DIR, `${id}-${(checksums.get(id) ?? '').replace(/[^a-zA-Z0-9]/g, '')}-${variant}`);
+
+async function loadPhotos() {
+	let assets: ImmichAsset[];
+	let live = true;
+
+	try {
+		const response = await immich<{ assets: { items: ImmichAsset[] } }>('/api/search/metadata', {
+			method: 'POST',
+			body: JSON.stringify({ albumIds: [IMMICH_ALBUM_ID], type: 'IMAGE', withExif: true, size: 1000, order: 'desc' })
+		});
+		assets = (await response.json()).assets.items;
+		await mkdir(CACHE_DIR, { recursive: true });
+		await writeFile(ALBUM_CACHE, JSON.stringify(assets));
+	} catch (error) {
+		live = false;
+		console.warn(`[immich] ${error instanceof Error ? error.message : error}, falling back to cached photos`);
+		try {
+			assets = JSON.parse(await readFile(ALBUM_CACHE, 'utf8'));
+		} catch {
+			console.warn('[immich] no cached photos, skipping photos');
+			return [];
+		}
+	}
+
+	for (const { id, checksum } of assets) checksums.set(id, checksum);
+	const all = assets.map(toPhoto);
+	if (live) return all;
+
+	// offline, so only keep photos whose images were all encoded by a previous build
+	const available = await Promise.all(
+		all.map((photo) =>
+			Promise.all(variantFiles.map((variant) => access(cacheFile(photo.id, variant)))).then(
+				() => true,
+				() => false
+			)
+		)
+	);
+	return all.filter((_, i) => available[i]);
+}
 
 async function cached(id: string, variant: string, produce: () => Promise<Buffer>) {
 	await getPhotos();
-	const key = `${id}-${(checksums.get(id) ?? '').replace(/[^a-zA-Z0-9]/g, '')}-${variant}`;
-	const file = join(CACHE_DIR, key);
+	const file = cacheFile(id, variant);
 
 	try {
 		return await readFile(file);
@@ -107,7 +147,8 @@ export function getPhotoPreview(id: string) {
 }
 
 // re-encoding drops all exif, including gps
-export async function encodePhoto(id: string, { width, quality }: { width: number; quality: number }) {
+export async function encodePhoto(id: string, variant: keyof typeof variants) {
+	const { width, quality } = variants[variant];
 	const image = await cached(id, `${width}w-q${quality}.webp`, async () =>
 		sharp(await getPhotoPreview(id))
 			.rotate()
