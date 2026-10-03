@@ -6,9 +6,7 @@ export const site = {
 };
 
 export const pageMeta = {
-	index: { title: 'aelpxy', description: 'Co-founder and CTO at Pandabase.' },
-	projects: { title: 'Projects', description: "Things I've built and open-sourced." },
-	thoughts: { title: 'Thoughts', description: 'Writing on software, infrastructure, and electronics.' },
-	photos: { title: 'Photos', description: 'Photographs from my travels.' },
-	music: { title: 'Music', description: "What I've been listening to lately." }
+	index: { title: 'aelpxy', description: 'Self-taught software developer.' },
+	projects: { title: 'Projects', description: "Some things I've been working on." },
+	photos: { title: 'Photos', description: 'Photographs from my travels.' }
 };

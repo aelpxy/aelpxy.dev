@@ -1,9 +1,0 @@
----
-import { getCollection } from 'astro:content';
-import PostIndex from '../../components/post-index.astro';
-import { pageMeta } from '../../lib/site';
-
-const posts = await getCollection('posts');
----
-
-<PostIndex title={pageMeta.thoughts.title} subtitle={pageMeta.thoughts.description} basePath="/thoughts" posts={posts} />

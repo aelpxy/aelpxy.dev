@@ -1,7 +1,6 @@
 ---
 import PageHeader from "../components/page-header.astro";
 import SectionHeading from "../components/section-heading.astro";
-import Timeline from "../components/timeline.astro";
 import BaseLayout from "../layouts/base-layout.astro";
 import { pageMeta } from "../lib/site";
 import { ui } from "../lib/styles";
@@ -9,28 +8,6 @@ import { ui } from "../lib/styles";
 const versions = [
   { id: "bio-short", label: "tl;dr", checked: true },
   { id: "bio-long", label: "full story", checked: false },
-];
-
-const career = [
-  {
-    period: "2023 — now",
-    title: "Engineering",
-    place: "Pandabase",
-    href: "https://pandabase.io",
-    summary: "I've had a hand in pretty much every part of Pandabase.",
-  },
-  {
-    period: "2022 — now",
-    title: "Software Engineer",
-    place: "Velta, LLC",
-    href: "https://velta.dev",
-    summary: "Velta is the company behind Pandabase.",
-  },
-  {
-    period: "2020 — 2022",
-    title: "Contract work",
-    summary: "I worked remotely on contract projects.",
-  },
 ];
 
 const stack = [
@@ -86,12 +63,12 @@ const stack = [
 
     <div class="mt-4 group-has-[#bio-long:checked]:hidden">
       <p>
-        I've been writing software since 2019. Mostly TypeScript and Go, with a
-        bit of Rust.
+        I'm a self-taught software developer and I've been coding since 2019.
+        Mostly TypeScript and Go, with a bit of Rust.
       </p>
       <p class="mt-4">
-        When I'm not writing code, I'm usually messing with my 3D printer, soldering
-        something, or tinkering with my homelab.
+        When I'm not writing code, I'm usually messing with my 3D printer,
+        tinkering with my homelab, or playing around with AI.
       </p>
     </div>
 
@@ -103,14 +80,8 @@ const stack = [
       </p>
       <p class="mt-4">
         Now I mostly write TypeScript and Go, with some Rust here and there.
-        What started as a hobby became my job, and I still like doing it. These
-        days, most of that work goes into Pandabase.
+        What started as a hobby became my job, and I still like doing it.
       </p>
-
-      <section class="mt-12">
-        <SectionHeading title="Career" />
-        <Timeline items={career} />
-      </section>
 
       <section class="mt-12">
         <SectionHeading title="Stack" />
@@ -159,7 +130,7 @@ const stack = [
         <SectionHeading title="Outside work" />
         <p class="mt-4">
           I bounce between hobbies a lot. One day it's the 3D printer, the next
-          I'm soldering electronics or tinkering with my homelab. I also like
+          I'm tinkering with my homelab or playing around with AI. I also like
           travelling with my camera.
         </p>
       </section>
@@ -168,9 +139,10 @@ const stack = [
   <section class="mt-12">
     <SectionHeading title="Get in touch" />
     <p class="mt-4">
-      Email me at{" "}
-      <a href="mailto:hey@aelpxy.dev" class={ui.inlineLink}>hey@aelpxy.dev</a>, or
-      reach out on any of my socials. I usually reply within a couple of days.
+      You can reach me anytime at{" "}
+      <a href="mailto:aelpxy@protonmail.com" class={ui.inlineLink}>aelpxy@protonmail.com</a>{" "}
+      or{" "}
+      <a href="mailto:hey@aelpxy.dev" class={ui.inlineLink}>hey@aelpxy.dev</a>.
     </p>
   </section>
 </BaseLayout>

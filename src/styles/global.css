@@ -1,16 +1,7 @@
 @import 'tailwindcss';
-@plugin '@tailwindcss/typography';
 
 @theme {
 	--font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
 	--font-serif: 'Instrument Serif', ui-serif, Georgia, serif;
 	--font-mono: 'Geist Mono Variable', ui-monospace, monospace;
-}
-
-@media (prefers-color-scheme: dark) {
-	.astro-code,
-	.astro-code span {
-		color: var(--shiki-dark) !important;
-		background-color: var(--shiki-dark-bg) !important;
-	}
 }

@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /music
 
 Sitemap: https://aelpxy.dev/sitemap-index.xml

@@ -14,12 +14,11 @@ import '../styles/global.css';
 interface Props {
 	title: string;
 	description: string;
-	article?: { publishedAt: Date };
 	noindex?: boolean;
 	ogRoute?: string;
 }
 
-const { title, description, article, noindex = false } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 const canonical = new URL(pathname, site.url).href;
 const ogRoute = Astro.props.ogRoute ?? (pathname === '/' ? 'index' : pathname.slice(1));
@@ -27,18 +26,8 @@ const image = new URL(`/og/${ogRoute}.png`, site.url).href;
 const imageAlt = `${title} — ${description}`;
 
 const person = { '@type': 'Person', name: site.name, url: site.url, sameAs: ['https://github.com/aelpxy', 'https://x.com/aelpxy'] };
-const jsonLd = article
-	? {
-			'@context': 'https://schema.org',
-			'@type': 'BlogPosting',
-			headline: title.replace(/ — aelpxy$/, ''),
-			description,
-			image,
-			url: canonical,
-			datePublished: article.publishedAt.toISOString(),
-			author: person
-		}
-	: pathname === '/'
+const jsonLd =
+	pathname === '/'
 		? { '@context': 'https://schema.org', '@type': 'WebSite', name: site.name, url: site.url, author: person }
 		: null;
 
@@ -58,9 +47,7 @@ const brands = [
 
 const pages = [
 	{ href: '/projects', label: 'projects' },
-	{ href: '/thoughts', label: 'thoughts' },
-	{ href: '/photos', label: 'photos' },
-	{ href: '/music', label: 'music' }
+	{ href: '/photos', label: 'photos' }
 ];
 
 const isActive = (href: string) =>
@@ -86,7 +73,7 @@ const linkClass = 'transition-colors hover:text-neutral-900 dark:hover:text-neut
 		{!noindex && <link rel="canonical" href={canonical} />}
 		<link rel="sitemap" href="/sitemap-index.xml" />
 
-		<meta property="og:type" content={article ? 'article' : 'website'} />
+		<meta property="og:type" content="website" />
 		<meta property="og:url" content={canonical} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
@@ -97,14 +84,6 @@ const linkClass = 'transition-colors hover:text-neutral-900 dark:hover:text-neut
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
 		<meta property="og:image:alt" content={imageAlt} />
-		{
-			article && (
-				<>
-					<meta property="article:published_time" content={article.publishedAt.toISOString()} />
-					<meta property="article:author" content={site.url} />
-				</>
-			)
-		}
 
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:site" content={site.twitter} />
